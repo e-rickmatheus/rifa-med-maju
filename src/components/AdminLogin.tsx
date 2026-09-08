@@ -18,7 +18,7 @@ export default function AdminLogin({ onSuccess }: AdminLoginProps) {
     setLoading(true);
     setError(false);
 
-    const validPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "maju2027";
+    const validPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "Dra.MaJuGG";
 
     setTimeout(() => {
       if (password.trim() === validPassword) {
@@ -97,7 +97,7 @@ export default function AdminLogin({ onSuccess }: AdminLoginProps) {
 
           <div className="mt-6 pt-5 border-t border-navy-800 text-center">
             <p className="text-[11px] text-slate-500">
-              Senha padrão inicial: <code className="text-slate-300 font-mono">maju2027</code>
+              Senha de acesso: <code className="text-slate-300 font-mono">Dra.MaJuGG</code>
             </p>
           </div>
         </div>

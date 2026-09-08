@@ -55,3 +55,21 @@ export function formatDate(dateString?: string): string {
     return dateString;
   }
 }
+
+export function generateGoogleCalendarUrl(
+  title: string = "Sorteio Rifa Med Maju - Moto Honda Pop",
+  details: string = "Sorteio oficial da Ação Solidária RIFA MED MAJU (01 Moto Honda Pop 110i ES 0km). Transmissão ao vivo / WhatsApp (37) 99842-7884.",
+  location: string = "WhatsApp / Ao Vivo (37) 99842-7884"
+): string {
+  // 24/07/2027 das 19:00 às 20:00 (BRT = UTC-3 -> 22:00Z às 23:00Z)
+  const start = "20270724T220000Z";
+  const end = "20270724T230000Z";
+  const params = new URLSearchParams({
+    action: "TEMPLATE",
+    text: title,
+    dates: `${start}/${end}`,
+    details,
+    location,
+  });
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}

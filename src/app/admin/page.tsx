@@ -10,7 +10,9 @@ import {
   subscribeCotas,
   DEFAULT_SETTINGS,
   exportSalesCSV,
+  syncFromGoogleSheetsNow,
 } from "@/lib/raffleService";
+import { GOOGLE_SHEET_URL, APPS_SCRIPT_TEMPLATE } from "@/lib/googleSheetService";
 import { isFirebaseConfigured } from "@/lib/firebase";
 import { RaffleSettings, Cota } from "@/types/raffle";
 import { formatCurrency } from "@/lib/utils";
@@ -25,6 +27,10 @@ import {
   DollarSign,
   CloudOff,
   HelpCircle,
+  RefreshCw,
+  Copy,
+  Check,
+  Table,
 } from "lucide-react";
 
 export default function AdminPage() {
@@ -32,9 +38,11 @@ export default function AdminPage() {
   const [settings, setSettings] = useState<RaffleSettings>(DEFAULT_SETTINGS);
   const [cotasMap, setCotasMap] = useState<Record<string, Cota>>({});
   const [firebaseActive, setFirebaseActive] = useState(false);
+  const [syncingSheet, setSyncingSheet] = useState(false);
+  const [syncFeedback, setSyncFeedback] = useState<string | null>(null);
+  const [copiedScript, setCopiedScript] = useState(false);
 
   useEffect(() => {
-    // Checagem de autenticação no sessionStorage
     if (typeof window !== "undefined") {
       const auth = sessionStorage.getItem("rifa_admin_auth");
       setIsAuthenticated(auth === "true");
@@ -63,16 +71,34 @@ export default function AdminPage() {
     setIsAuthenticated(false);
   };
 
-  // Enquanto valida auth
+  const handleSyncGoogleSheet = async () => {
+    setSyncingSheet(true);
+    setSyncFeedback(null);
+    try {
+      const count = await syncFromGoogleSheetsNow(settings.total_numbers || 1000);
+      setSyncFeedback(`Sincronização concluída! ${count} registros verificados na planilha.`);
+      setTimeout(() => setSyncFeedback(null), 5000);
+    } catch {
+      setSyncFeedback("Erro ao sincronizar com o Google Sheets.");
+    } finally {
+      setSyncingSheet(false);
+    }
+  };
+
+  const handleCopyAppsScript = () => {
+    navigator.clipboard.writeText(APPS_SCRIPT_TEMPLATE);
+    setCopiedScript(true);
+    setTimeout(() => setCopiedScript(false), 3000);
+  };
+
   if (isAuthenticated === null) {
     return (
       <div className="min-h-screen bg-navy-950 flex items-center justify-center text-white">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gold-400" />
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-slate-300" />
       </div>
     );
   }
 
-  // Se não autenticado, mostra tela de login
   if (!isAuthenticated) {
     return <AdminLogin onSuccess={() => setIsAuthenticated(true)} />;
   }
@@ -130,42 +156,62 @@ export default function AdminPage() {
 
       {/* Conteúdo Principal do Painel */}
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-        {/* Banner de Status de Conexão */}
-        <div
-          className={`p-4 rounded-2xl border text-xs sm:text-sm font-medium flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 ${
-            firebaseActive
-              ? "bg-emerald-50 border-emerald-200 text-emerald-900"
-              : "bg-amber-50 border-amber-200 text-amber-900"
-          }`}
-        >
-          <div className="flex items-center gap-2.5">
-            {firebaseActive ? (
-              <span className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse" />
-            ) : (
-              <CloudOff className="w-5 h-5 text-amber-600 shrink-0" />
-            )}
-            <span>
-              {firebaseActive ? (
-                <>
-                  <strong>Firebase Firestore Conectado:</strong> As vendas e limites estão sendo gravados e sincronizados em tempo real na nuvem.
-                </>
-              ) : (
-                <>
-                  <strong>Modo Local / Simulação Ativo:</strong> As alterações estão salvas no armazenamento local deste navegador. Para conectar ao seu Firebase, preencha o <code>.env.local</code>.
-                </>
-              )}
-            </span>
+        {/* Banner de Integração com Google Sheets */}
+        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 shrink-0">
+              <Table className="w-5 h-5" />
+            </div>
+            <div>
+              <h4 className="text-sm font-bold text-navy-950 flex items-center gap-2">
+                <span>Google Planilha Oficial Conectada</span>
+                <span className="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                  Ao Vivo
+                </span>
+              </h4>
+              <p className="text-xs text-slate-500 mt-0.5">
+                Planilha oficial de vendas e controle de cotas da Maria Júlia
+              </p>
+            </div>
           </div>
 
-          {/* Botão de Exportação CSV em Destaque */}
-          <button
-            onClick={() => exportSalesCSV(cotasMap, totalNumbers)}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-sm transition-colors shrink-0"
-          >
-            <FileSpreadsheet className="w-4 h-4" />
-            <span>Exportar Planilha de Vendas (.CSV)</span>
-          </button>
+          <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+            <button
+              onClick={handleSyncGoogleSheet}
+              disabled={syncingSheet}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition-colors"
+              title="Puxar vendas atualizadas da planilha Google"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${syncingSheet ? "animate-spin" : ""}`} />
+              <span>{syncingSheet ? "Sincronizando..." : "Sincronizar da Planilha"}</span>
+            </button>
+
+            <a
+              href={GOOGLE_SHEET_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-semibold transition-colors"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              <span>Abrir no Google Sheets</span>
+            </a>
+
+            <button
+              onClick={() => exportSalesCSV(cotasMap, totalNumbers)}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-navy-950 hover:bg-navy-800 text-white text-xs font-semibold transition-colors"
+            >
+              <FileSpreadsheet className="w-3.5 h-3.5" />
+              <span>Baixar CSV</span>
+            </button>
+          </div>
         </div>
+
+        {syncFeedback && (
+          <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold rounded-xl flex items-center gap-2 animate-fadeIn">
+            <CheckCircle className="w-4 h-4 text-emerald-600" />
+            <span>{syncFeedback}</span>
+          </div>
+        )}
 
         {/* 4 Cards de Resumo Executivo */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -233,24 +279,34 @@ export default function AdminPage() {
           cotasMap={cotasMap}
         />
 
-        {/* Guia Rápido de Configuração do Firebase */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-6 text-xs text-slate-600 space-y-3">
-          <div className="flex items-center gap-2 text-sm font-bold text-navy-950">
-            <HelpCircle className="w-4 h-4 text-gold-600" />
-            <span>Instruções para Conectar o Firebase Firestore (Gratuito)</span>
+        {/* Guia de Webhook Automático do Google Sheets */}
+        <div className="bg-white rounded-2xl border border-slate-200 p-6 text-xs text-slate-600 space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 text-sm font-bold text-navy-950">
+              <HelpCircle className="w-4 h-4 text-slate-700" />
+              <span>Como salvar dados automaticamente na Planilha Google?</span>
+            </div>
+
+            <button
+              onClick={handleCopyAppsScript}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs border border-slate-200 transition-colors"
+            >
+              {copiedScript ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+              <span>{copiedScript ? "Código Copiado!" : "Copiar Código Apps Script"}</span>
+            </button>
           </div>
-          <p>
-            1. Acesse o <strong>Firebase Console</strong> (console.firebase.google.com) e crie um projeto gratuito.
-          </p>
-          <p>
-            2. No menu lateral, clique em <strong>Firestore Database</strong> e selecione &quot;Criar banco de dados&quot; (em modo de teste).
-          </p>
-          <p>
-            3. Em &quot;Configurações do Projeto&quot;, adicione um App Web e copie as credenciais para o arquivo <code>.env.local</code> na raiz do projeto.
-          </p>
-          <p>
-            4. As coleções <code>config</code> e <code>cotas</code> serão preenchidas automaticamente pelo sistema sob demanda!
-          </p>
+
+          <div className="space-y-2 text-slate-600">
+            <p>
+              1. Abra sua planilha no Google Sheets: <strong>Extensões &gt; Apps Script</strong>.
+            </p>
+            <p>
+              2. Cole o código copiado acima e clique em <strong>Implantar &gt; Nova Implantação &gt; Aplicativo da Web</strong> (selecione quem pode acessar: <em>Qualquer pessoa</em>).
+            </p>
+            <p>
+              3. Cole a URL gerada na variável <code>NEXT_PUBLIC_GOOGLE_SHEET_WEBHOOK_URL</code> no arquivo <code>.env.local</code>. Todas as vendas feitas pelo painel serão atualizadas na linha correspondente da planilha automaticamente!
+            </p>
+          </div>
         </div>
       </main>
     </div>

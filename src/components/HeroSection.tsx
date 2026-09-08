@@ -2,8 +2,8 @@
 
 import React from "react";
 import Image from "next/image";
-import { ArrowDown, Calendar, Phone } from "lucide-react";
-import { formatCurrency } from "@/lib/utils";
+import { ArrowDown, Calendar, CalendarPlus } from "lucide-react";
+import { formatCurrency, generateGoogleCalendarUrl } from "@/lib/utils";
 
 interface HeroSectionProps {
   price?: number;
@@ -16,11 +16,13 @@ export default function HeroSection({
   prize = "01 MOTO HONDA POP",
   drawDate = "24/07/2027",
 }: HeroSectionProps) {
+  const calendarUrl = generateGoogleCalendarUrl();
+
   return (
     <section className="relative overflow-hidden bg-navy-950 text-white pt-12 pb-20 sm:pt-16 sm:pb-24 border-b border-navy-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Texto Principal com a copy exata da imagem de referência */}
+          {/* Texto Principal com a copy da arte original */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
             <div className="inline-block px-3 py-1 rounded-full bg-navy-900 border border-navy-800 text-slate-300 text-xs font-semibold tracking-wider uppercase">
               Ação Solidária
@@ -52,9 +54,23 @@ export default function HeroSection({
                   <div className="text-2xl sm:text-3xl font-black font-display-luxury text-white tracking-wide">
                     {prize}
                   </div>
-                  <div className="flex items-center gap-2 mt-2 text-xs text-slate-400">
-                    <Calendar className="w-4 h-4 text-slate-400" />
-                    <span>Sorteio dia: <strong className="text-white">{drawDate}</strong></span>
+                  <div className="flex flex-wrap items-center gap-3 mt-2 text-xs text-slate-400">
+                    <div className="flex items-center gap-1.5">
+                      <Calendar className="w-4 h-4 text-slate-400" />
+                      <span>Sorteio dia: <strong className="text-white">{drawDate}</strong></span>
+                    </div>
+
+                    {/* Botão Google Calendário */}
+                    <a
+                      href={calendarUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-navy-800 hover:bg-navy-700 text-blue-200 hover:text-white border border-navy-700 transition-colors text-[11px] font-medium"
+                      title="Salvar lembrete na sua agenda"
+                    >
+                      <CalendarPlus className="w-3.5 h-3.5" />
+                      <span>Adicionar ao Google Agenda</span>
+                    </a>
                   </div>
                 </div>
 
@@ -88,26 +104,23 @@ export default function HeroSection({
             </div>
           </div>
 
-          {/* Foto 0 da Maria Júlia (Limpa, natural e autêntica) */}
+          {/* Foto que ela usou no STORIE como a foto de início */}
           <div className="lg:col-span-5 flex justify-center">
             <div className="relative w-full max-w-sm">
               <div className="relative rounded-2xl overflow-hidden border-2 border-navy-800 bg-navy-900 shadow-2xl">
-                <div className="relative aspect-[3/4] w-full bg-navy-950">
+                <div className="relative aspect-[9/16] w-full max-h-[560px] bg-navy-950 flex items-center justify-center">
                   <Image
-                    src="/images/foto-maju-0.jpg"
-                    alt="Maria Júlia Gomes Gabriel - Estudante de Medicina"
+                    src="/images/print-stories-rifa-maju.jpg"
+                    alt="Cartaz Oficial do Storie da Ação Solidária - Maria Júlia"
                     fill
                     sizes="(max-width: 768px) 100vw, 400px"
-                    className="object-cover object-top"
+                    className="object-contain"
                     priority
                   />
                 </div>
-                <div className="p-4 bg-navy-950/95 border-t border-navy-800 text-center">
-                  <p className="text-sm font-bold text-white font-serif-luxury">
-                    Maria Júlia Gomes Gabriel
-                  </p>
-                  <p className="text-xs text-slate-400 mt-0.5">
-                    Estudante de Medicina
+                <div className="p-3 bg-navy-950 border-t border-navy-800 text-center">
+                  <p className="text-xs font-semibold text-slate-300">
+                    Ação Solidária Oficial da Maria Júlia
                   </p>
                 </div>
               </div>

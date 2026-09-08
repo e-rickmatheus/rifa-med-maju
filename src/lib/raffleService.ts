@@ -4,12 +4,14 @@ import {
   onSnapshot,
   setDoc,
   deleteDoc,
-  getDoc,
-  getDocs,
 } from "firebase/firestore";
 import { db, isFirebaseConfigured } from "./firebase";
 import { Cota, RaffleSettings } from "@/types/raffle";
 import { formatCotaNumber } from "./utils";
+import {
+  fetchGoogleSheetSales,
+  pushSaleToGoogleSheet,
+} from "./googleSheetService";
 
 export const DEFAULT_SETTINGS: RaffleSettings = {
   total_numbers: 1000,
@@ -23,49 +25,27 @@ export const DEFAULT_SETTINGS: RaffleSettings = {
   subtitle: "Ação Solidária em prol da faculdade de Medicina",
 };
 
-// Dados de demonstração iniciais para modo local
+// Dados de demonstração iniciais sincronizados com a planilha oficial
 const INITIAL_DEMO_COTAS: Record<string, Cota> = {
-  "007": {
-    numero: "007",
+  "057": {
+    numero: "057",
     status: "vendido",
-    nome_comprador: "Lucas Silva Oliveira",
-    telefone: "37991234567",
-    data_compra: new Date(Date.now() - 3600000 * 24 * 3).toISOString(),
+    nome_comprador: "Erick Moraes",
+    telefone: "(31) 9 9295-5010",
+    data_compra: "08/03/2026 10:00:00",
   },
-  "042": {
-    numero: "042",
+  "57": {
+    numero: "057",
     status: "vendido",
-    nome_comprador: "Ana Beatriz Santos",
-    telefone: "37998765432",
-    data_compra: new Date(Date.now() - 3600000 * 24 * 2).toISOString(),
-  },
-  "123": {
-    numero: "123",
-    status: "vendido",
-    nome_comprador: "Carlos Eduardo Mendes",
-    telefone: "31988881234",
-    data_compra: new Date(Date.now() - 3600000 * 18).toISOString(),
-  },
-  "451": {
-    numero: "451",
-    status: "vendido",
-    nome_comprador: "Juliana Ferreira Lima",
-    telefone: "37999112233",
-    data_compra: new Date(Date.now() - 3600000 * 5).toISOString(),
-  },
-  "777": {
-    numero: "777",
-    status: "vendido",
-    nome_comprador: "Roberto de Almeida Costa",
-    telefone: "11977778899",
-    data_compra: new Date(Date.now() - 3600000 * 2).toISOString(),
+    nome_comprador: "Erick Moraes",
+    telefone: "(31) 9 9295-5010",
+    data_compra: "08/03/2026 10:00:00",
   },
 };
 
 const LOCAL_STORAGE_SETTINGS_KEY = "rifa_med_maju_settings";
 const LOCAL_STORAGE_COTAS_KEY = "rifa_med_maju_cotas";
 
-// Evento customizado para sincronizar abas e componentes em modo local
 const LOCAL_EVENT_NAME = "rifa_local_storage_change";
 
 function triggerLocalUpdate() {
@@ -117,7 +97,6 @@ export function subscribeRaffleSettings(
           const data = snapshot.data() as Partial<RaffleSettings>;
           callback({ ...DEFAULT_SETTINGS, ...data });
         } else {
-          // Se ainda não existir no Firestore, inicializa com os defaults
           setDoc(docRef, DEFAULT_SETTINGS, { merge: true }).catch(console.error);
           callback(DEFAULT_SETTINGS);
         }
@@ -152,6 +131,24 @@ export function subscribeRaffleSettings(
 export function subscribeCotas(
   callback: (cotasMap: Record<string, Cota>) => void
 ): () => void {
+  // Dispara busca na planilha Google em segundo plano para complementar
+  fetchGoogleSheetSales().then((sheetCotas) => {
+    if (Object.keys(sheetCotas).length > 0 && typeof window !== "undefined") {
+      const local = getLocalCotas();
+      let changed = false;
+      Object.keys(sheetCotas).forEach((k) => {
+        if (!local[k]) {
+          local[k] = sheetCotas[k];
+          changed = true;
+        }
+      });
+      if (changed) {
+        localStorage.setItem(LOCAL_STORAGE_COTAS_KEY, JSON.stringify(local));
+        triggerLocalUpdate();
+      }
+    }
+  }).catch(() => {});
+
   if (isFirebaseConfigured() && db) {
     const cotasCol = collection(db, "cotas");
     const unsubscribe = onSnapshot(
@@ -193,7 +190,7 @@ export function subscribeCotas(
 }
 
 // -------------------------------------------------------------
-// Atualização do Limite Total de Cotas (Escalabilidade)
+// Atualização do Limite Total de Cotas
 // -------------------------------------------------------------
 export async function updateTotalNumbers(newTotal: number): Promise<void> {
   if (newTotal < 1) throw new Error("O total de números deve ser maior que zero.");
@@ -204,7 +201,6 @@ export async function updateTotalNumbers(newTotal: number): Promise<void> {
     return;
   }
 
-  // Local fallback
   if (typeof window !== "undefined") {
     const current = getLocalSettings();
     current.total_numbers = newTotal;
@@ -214,7 +210,7 @@ export async function updateTotalNumbers(newTotal: number): Promise<void> {
 }
 
 // -------------------------------------------------------------
-// Registro / Edição de Venda de Cota
+// Registro / Edição de Venda de Cota (com Push para Google Sheets)
 // -------------------------------------------------------------
 export async function saveCotaSale(
   numero: string,
@@ -231,19 +227,33 @@ export async function saveCotaSale(
     updated_at: new Date().toISOString(),
   };
 
+  // 1. Salva no Firestore se configurado
   if (isFirebaseConfigured() && db) {
     const docRef = doc(db, "cotas", numero);
     await setDoc(docRef, cotaData, { merge: true });
-    return;
   }
 
-  // Local fallback
+  // 2. Salva no LocalStorage
   if (typeof window !== "undefined") {
     const cotas = getLocalCotas();
     cotas[numero] = cotaData;
+    // indexa também sem zeros à esquerda se numérico
+    const parsedInt = parseInt(numero, 10);
+    if (!isNaN(parsedInt)) {
+      cotas[String(parsedInt)] = cotaData;
+    }
     localStorage.setItem(LOCAL_STORAGE_COTAS_KEY, JSON.stringify(cotas));
     triggerLocalUpdate();
   }
+
+  // 3. Notifica a Planilha Google em segundo plano
+  pushSaleToGoogleSheet({
+    cota: numero,
+    nome: nome_comprador,
+    telefone,
+    status: "Vendido",
+    action: "sale",
+  }).catch((err) => console.warn("Erro ao enviar venda para planilha Google:", err));
 }
 
 // -------------------------------------------------------------
@@ -253,16 +263,46 @@ export async function releaseCota(numero: string): Promise<void> {
   if (isFirebaseConfigured() && db) {
     const docRef = doc(db, "cotas", numero);
     await deleteDoc(docRef);
-    return;
   }
 
-  // Local fallback
   if (typeof window !== "undefined") {
     const cotas = getLocalCotas();
     delete cotas[numero];
+    const parsedInt = parseInt(numero, 10);
+    if (!isNaN(parsedInt)) {
+      delete cotas[String(parsedInt)];
+    }
     localStorage.setItem(LOCAL_STORAGE_COTAS_KEY, JSON.stringify(cotas));
     triggerLocalUpdate();
   }
+
+  pushSaleToGoogleSheet({
+    cota: numero,
+    action: "release",
+    status: "Disponível",
+  }).catch((err) => console.warn("Erro ao atualizar cancelamento na planilha Google:", err));
+}
+
+// -------------------------------------------------------------
+// Sincronização Manual com Google Sheets
+// -------------------------------------------------------------
+export async function syncFromGoogleSheetsNow(totalNumbers: number = 1000): Promise<number> {
+  const sheetCotas = await fetchGoogleSheetSales(totalNumbers);
+  const keys = Object.keys(sheetCotas);
+  if (keys.length === 0) return 0;
+
+  if (typeof window !== "undefined") {
+    const local = getLocalCotas();
+    let count = 0;
+    keys.forEach((k) => {
+      local[k] = sheetCotas[k];
+      count++;
+    });
+    localStorage.setItem(LOCAL_STORAGE_COTAS_KEY, JSON.stringify(local));
+    triggerLocalUpdate();
+    return count;
+  }
+  return keys.length;
 }
 
 // -------------------------------------------------------------
@@ -272,12 +312,10 @@ export function exportSalesCSV(
   cotasMap: Record<string, Cota>,
   totalNumbers: number
 ): void {
-  // Ordena todas as cotas vendidas numericamente
   const soldNumbers = Object.keys(cotasMap)
     .filter((num) => cotasMap[num]?.status === "vendido")
     .sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
 
-  // Cabeçalho compatível com Excel brasileiro (; como separador)
   const headers = [
     "Número da Cota",
     "Status",
@@ -303,7 +341,6 @@ export function exportSalesCSV(
     ].join(";");
   });
 
-  // BOM UTF-8 para o Excel reconhecer acentos perfeitamente
   const csvContent = "\uFEFF" + [headers.join(";"), ...rows].join("\r\n");
 
   const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
