@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,600&family=Alex+Brush&family=Dancing+Script:wght@600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-navy: #07162c;
+  --secondary-navy: #0e294f;
+  --accent-gold: #cda02a;
+  --light-gold: #f5e8c3;
+  --bg-cream: #fdfbf7;
+}
+
+body {
+  color: #1e293b;
+  background-color: #fcfaf6;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Tipografias decorativas inspiradas na arte */
+.font-handwriting {
+  font-family: 'Dancing Script', 'Alex Brush', cursive;
+}
+
+.font-serif-luxury {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-display-luxury {
+  font-family: 'Cinzel', serif;
+}
+
+/* Efeitos dourados e metálicos */
+.gold-text-glow {
+  background: linear-gradient(135deg, #dfbe58 0%, #ffffff 35%, #cda02a 70%, #9e7314 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-border-glow {
+  border-color: #dfbe58;
+  box-shadow: 0 0 15px rgba(223, 190, 88, 0.25);
+}
+
+.ticket-border {
+  border: 2px dashed #d1c1a0;
+  background-image: radial-gradient(circle at 0% 50%, transparent 10px, #ffffff 11px),
+                    radial-gradient(circle at 100% 50%, transparent 10px, #ffffff 11px);
+}
+
+/* Animações suaves */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-float-subtle {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Custom scrollbar elegante */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1ebd9;
+}
+::-webkit-scrollbar-thumb {
+  background: #c5a059;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9e7314;
+}
