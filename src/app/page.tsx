@@ -86,7 +86,9 @@ export default function LandingPage() {
       {/* Card da Chave PIX */}
       <PixCard
         pixKey={settings.pix_key}
-        pixName={settings.pix_name}
+        pixName="MARIA JULIA GOMES GABRIEL"
+        pixBank="Itaú Unibanco S.A."
+        pixCpf="***.198.986-**"
         price={settings.price}
         whatsapp={settings.whatsapp}
       />

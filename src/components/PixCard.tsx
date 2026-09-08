@@ -1,20 +1,51 @@
 "use client";
 
 import React, { useState } from "react";
-import { Copy, Check, Phone, User, DollarSign, MessageCircle, ShieldCheck } from "lucide-react";
+import { Copy, Check, Phone, User, DollarSign, MessageCircle, ShieldCheck, Building2 } from "lucide-react";
 import confetti from "canvas-confetti";
 import { formatCurrency } from "@/lib/utils";
+
+// Componente da Logo Oficial do Banco Itaú em SVG
+function ItauLogo({ className = "w-7 h-7" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      aria-label="Logo Banco Itaú"
+    >
+      <rect width="40" height="40" rx="10" fill="#EC7000" />
+      <text
+        x="20"
+        y="25.5"
+        fill="#002D72"
+        fontSize="14.5"
+        fontWeight="900"
+        fontFamily="system-ui, -apple-system, sans-serif"
+        textAnchor="middle"
+        letterSpacing="-0.6px"
+      >
+        itaú
+      </text>
+    </svg>
+  );
+}
 
 interface PixCardProps {
   pixKey?: string;
   pixName?: string;
+  pixBank?: string;
+  pixCpf?: string;
   price?: number;
   whatsapp?: string;
 }
 
 export default function PixCard({
   pixKey = "37998427884",
-  pixName = "Maria Júlia Gomes Gabriel",
+  pixName = "MARIA JULIA GOMES GABRIEL",
+  pixBank = "Itaú Unibanco S.A.",
+  pixCpf = "***.198.986-**",
   price = 20,
   whatsapp = "5537998427884",
 }: PixCardProps) {
@@ -29,7 +60,7 @@ export default function PixCard({
         particleCount: 40,
         spread: 60,
         origin: { y: 0.8 },
-        colors: ["#0A1A32", "#2D7D66", "#C0B283"],
+        colors: ["#0A1A32", "#2D7D66", "#C0B283", "#EC7000"],
       });
     } catch {
       // fallback
@@ -56,7 +87,7 @@ export default function PixCard({
             <div className="inline-flex items-center gap-2 justify-center">
               <span className="w-6 h-px bg-antique-400" />
               <span className="text-[11px] uppercase tracking-[0.25em] text-antique-400 font-sans font-semibold">
-                Transferência Instantânea
+                Transferência Instantânea • Banco Itaú
               </span>
               <span className="w-6 h-px bg-antique-400" />
             </div>
@@ -66,12 +97,12 @@ export default function PixCard({
             </h2>
 
             <p className="text-xs sm:text-sm text-pearl/75 font-sans font-light leading-relaxed">
-              Transfira o valor de <strong className="text-pearl font-medium">{formatCurrency(price)}</strong> por cota diretamente para a conta da estudante Maria Júlia.
+              Transfira o valor de <strong className="text-pearl font-medium">{formatCurrency(price)}</strong> por cota diretamente para a conta da estudante Maria Júlia no <strong className="text-pearl font-medium">Banco Itaú</strong>.
             </p>
           </div>
 
-          {/* Box de Chave com Copiar */}
-          <div className="bg-navy-950/90 border border-navy-800 rounded-2xl p-6 sm:p-8 mb-8 relative z-10">
+          {/* Box Principal da Chave Celular com Copiar */}
+          <div className="bg-navy-950/90 border border-navy-800 rounded-2xl p-6 sm:p-8 mb-6 relative z-10">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
               <div className="flex items-center gap-4 w-full sm:w-auto">
                 <div className="w-12 h-12 rounded-xl bg-navy-850 border border-navy-700 flex items-center justify-center text-antique-300 shrink-0">
@@ -117,11 +148,27 @@ export default function PixCard({
             )}
           </div>
 
-          {/* Detalhes de Favorecida & Valor */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 relative z-10">
+          {/* Grade de Conferência: Banco Itaú, Favorecida e CPF Mascarado */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 relative z-10">
+            {/* Banco Itaú com Logo */}
             <div className="bg-navy-950/60 rounded-xl p-4 sm:p-5 border border-navy-850 flex items-center gap-3.5">
-              <div className="w-8 h-8 rounded-lg bg-navy-850 flex items-center justify-center text-slate-400 shrink-0">
-                <User className="w-4 h-4" />
+              <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                <ItauLogo className="w-7 h-7" />
+              </div>
+              <div>
+                <span className="text-[10px] uppercase tracking-wider text-slate-400 font-sans block">
+                  Banco Destino
+                </span>
+                <span className="text-sm font-sans font-semibold text-pearl">
+                  {pixBank}
+                </span>
+              </div>
+            </div>
+
+            {/* Titular Favorecida */}
+            <div className="bg-navy-950/60 rounded-xl p-4 sm:p-5 border border-navy-850 flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-navy-850 flex items-center justify-center text-slate-400 shrink-0">
+                <User className="w-5 h-5" />
               </div>
               <div>
                 <span className="text-[10px] uppercase tracking-wider text-slate-400 font-sans block">
@@ -133,19 +180,28 @@ export default function PixCard({
               </div>
             </div>
 
+            {/* CPF Mascarado */}
             <div className="bg-navy-950/60 rounded-xl p-4 sm:p-5 border border-navy-850 flex items-center gap-3.5">
-              <div className="w-8 h-8 rounded-lg bg-navy-850 flex items-center justify-center text-emerald shrink-0">
-                <DollarSign className="w-4 h-4" />
+              <div className="w-10 h-10 rounded-xl bg-navy-850 flex items-center justify-center text-emerald shrink-0">
+                <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
                 <span className="text-[10px] uppercase tracking-wider text-slate-400 font-sans block">
-                  Valor da Cota
+                  CPF Destinatário
                 </span>
-                <span className="text-sm font-serif font-bold text-pearl">
-                  {formatCurrency(price)} <span className="text-xs font-sans font-normal text-slate-400">/ bilhete</span>
+                <span className="text-sm font-mono font-medium text-pearl">
+                  {pixCpf}
                 </span>
               </div>
             </div>
+          </div>
+
+          {/* Dica de Segurança e Conferência */}
+          <div className="bg-navy-950/40 rounded-xl p-4 border border-navy-850 mb-8 flex items-start gap-3 relative z-10 text-left">
+            <ShieldCheck className="w-4 h-4 text-emerald shrink-0 mt-0.5" />
+            <p className="text-xs text-pearl/80 font-sans leading-relaxed">
+              <strong>Conferência no Aplicativo:</strong> Ao efetuar a transferência, certifique-se de que o destinatário selecionado é o <strong className="text-pearl">Itaú Unibanco S.A.</strong> em nome de <strong className="text-pearl">{pixName}</strong> com CPF <strong className="text-pearl font-mono">{pixCpf}</strong>.
+            </p>
           </div>
 
           {/* CTA Envio do Comprovante */}

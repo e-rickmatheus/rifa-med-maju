@@ -19,7 +19,7 @@ export const DEFAULT_SETTINGS: RaffleSettings = {
   price: 20.0,
   draw_date: "24/07/2027",
   pix_key: process.env.NEXT_PUBLIC_PIX_KEY || "37998427884",
-  pix_name: process.env.NEXT_PUBLIC_PIX_NAME || "Maria Júlia Gomes Gabriel",
+  pix_name: process.env.NEXT_PUBLIC_PIX_NAME || "MARIA JULIA GOMES GABRIEL",
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5537998427884",
   title: "RIFA MED MAJU",
   subtitle: "Ação Solidária em prol da faculdade de Medicina",

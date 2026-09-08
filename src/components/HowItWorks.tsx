@@ -21,7 +21,7 @@ export default function HowItWorks() {
       num: "03",
       icon: Receipt,
       title: "Pagamento via PIX",
-      description: "Realize o pagamento de R$ 20,00 por cota na chave celular e envie o comprovante pelo WhatsApp.",
+      description: "Realize o pagamento de R$ 20,00 por cota via PIX para o Banco Itaú (MARIA JULIA GOMES GABRIEL) e envie o comprovante pelo WhatsApp.",
     },
     {
       num: "04",
