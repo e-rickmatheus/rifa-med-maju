@@ -104,23 +104,27 @@ export default function HeroSection({
             </div>
           </div>
 
-          {/* Foto que ela usou no STORIE como a foto de início */}
+          {/* Foto MAJU PNG 1 */}
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-sm">
-              <div className="relative rounded-2xl overflow-hidden border-2 border-navy-800 bg-navy-900 shadow-2xl">
-                <div className="relative aspect-[9/16] w-full max-h-[560px] bg-navy-950 flex items-center justify-center">
+            <div className="relative w-full max-w-sm flex flex-col items-center">
+              <div className="relative w-full max-w-[300px] sm:max-w-[320px] rounded-3xl overflow-hidden border border-navy-800 bg-gradient-to-b from-navy-900 via-navy-900 to-navy-950 p-6 pt-8 shadow-2xl flex flex-col items-center">
+                <div className="relative w-full aspect-[139/220] max-h-[460px] flex items-center justify-center">
                   <Image
-                    src="/images/print-stories-rifa-maju.jpg"
-                    alt="Cartaz Oficial do Storie da Ação Solidária - Maria Júlia"
+                    src="/images/maju-png-1.png"
+                    alt="Maria Júlia Gomes Gabriel - Estudante de Medicina"
                     fill
-                    sizes="(max-width: 768px) 100vw, 400px"
-                    className="object-contain"
+                    sizes="(max-width: 768px) 280px, 320px"
+                    className="object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.6)]"
                     priority
                   />
                 </div>
-                <div className="p-3 bg-navy-950 border-t border-navy-800 text-center">
-                  <p className="text-xs font-semibold text-slate-300">
-                    Ação Solidária Oficial da Maria Júlia
+
+                <div className="w-full mt-4 pt-3 border-t border-navy-800 text-center">
+                  <p className="text-sm font-bold text-white font-serif-luxury">
+                    Maria Júlia Gomes Gabriel
+                  </p>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    Estudante de Medicina
                   </p>
                 </div>
               </div>
