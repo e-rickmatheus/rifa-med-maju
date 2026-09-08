@@ -52,7 +52,7 @@ export default function HowItWorks() {
         </div>
 
         {/* 4 Passos Editoriais com Números em Ouro Envelhecido */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
           {steps.map((step) => {
             const Icon = step.icon;
             return (
@@ -80,40 +80,6 @@ export default function HowItWorks() {
               </div>
             );
           })}
-        </div>
-
-        {/* Canhoto Físico de Controle Ilustrativo */}
-        <div className="max-w-xl mx-auto bg-white rounded-2xl p-6 sm:p-8 border border-dashed border-pearl-400 shadow-sm">
-          <div className="flex items-center justify-between mb-4 pb-3 border-b border-pearl-200">
-            <span className="text-[11px] uppercase tracking-[0.2em] text-antique-600 font-sans font-semibold">
-              Canhoto Oficial de Controle
-            </span>
-            <span className="text-[11px] font-sans text-slate-500 font-medium">
-              Ação Solidária Medicina
-            </span>
-          </div>
-
-          <div className="bg-pearl-50 rounded-xl p-5 border border-pearl-200/80 flex flex-col sm:flex-row items-center justify-between gap-5">
-            <div className="space-y-2.5 text-xs text-navy w-full sm:w-2/3">
-              <div className="flex items-center gap-2 border-b border-pearl-200 pb-1.5">
-                <span className="font-semibold text-navy w-14">Nome:</span>
-                <span className="text-slate-400 font-mono italic">Preenchido com seus dados</span>
-              </div>
-              <div className="flex items-center gap-2 border-b border-pearl-200 pb-1.5">
-                <span className="font-semibold text-navy w-14">Tel:</span>
-                <span className="text-slate-400 font-mono italic">Telefone com WhatsApp</span>
-              </div>
-            </div>
-
-            <div className="bg-navy text-pearl px-5 py-3 rounded-xl text-center min-w-[110px] shadow-sm">
-              <span className="text-[9px] uppercase tracking-widest text-antique-300 block font-sans font-medium">
-                Cota Nº
-              </span>
-              <span className="text-2xl sm:text-3xl font-serif font-bold tracking-wider text-pearl">
-                451
-              </span>
-            </div>
-          </div>
         </div>
       </div>
     </section>
