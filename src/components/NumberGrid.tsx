@@ -43,7 +43,7 @@ export default function NumberGrid({
   const allNumbers = useMemo(() => {
     return Array.from({ length: totalNumbers }, (_, i) => {
       const numStr = formatCotaNumber(i, totalNumbers);
-      const cota = cotasMap[numStr];
+      const cota = cotasMap[numStr] || cotasMap[String(i)];
       const isSold = cota?.status === "vendido";
       return {
         index: i,
@@ -55,8 +55,16 @@ export default function NumberGrid({
   }, [totalNumbers, cotasMap]);
 
   const soldCount = useMemo(() => {
-    return Object.values(cotasMap).filter((c) => c?.status === "vendido").length;
-  }, [cotasMap]);
+    const set = new Set<string>();
+    Object.values(cotasMap).forEach((c) => {
+      if (c?.status === "vendido") {
+        const numInt = parseInt(c.numero, 10);
+        const canonical = !isNaN(numInt) ? formatCotaNumber(numInt, totalNumbers) : c.numero;
+        set.add(canonical);
+      }
+    });
+    return set.size;
+  }, [cotasMap, totalNumbers]);
 
   const freeCount = Math.max(0, totalNumbers - soldCount);
 

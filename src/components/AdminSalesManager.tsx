@@ -34,12 +34,22 @@ export default function AdminSalesManager({
     null
   );
 
-  // Lista de todas as vendas cadastradas
+  // Lista de todas as vendas cadastradas (estritamente deduplicada por número canônico)
   const soldList = useMemo(() => {
-    return Object.values(cotasMap)
-      .filter((c) => c?.status === "vendido")
-      .sort((a, b) => parseInt(a.numero, 10) - parseInt(b.numero, 10));
-  }, [cotasMap]);
+    const unique = new Map<string, Cota>();
+    Object.values(cotasMap).forEach((c) => {
+      if (c && c.status === "vendido") {
+        const numInt = parseInt(c.numero, 10);
+        const canonicalKey = !isNaN(numInt) ? formatCotaNumber(numInt, totalNumbers) : c.numero;
+        if (!unique.has(canonicalKey)) {
+          unique.set(canonicalKey, { ...c, numero: canonicalKey });
+        }
+      }
+    });
+    return Array.from(unique.values()).sort(
+      (a, b) => parseInt(a.numero, 10) - parseInt(b.numero, 10)
+    );
+  }, [cotasMap, totalNumbers]);
 
   // Filtro da lista de vendas por termo de busca
   const filteredSoldList = useMemo(() => {
@@ -103,7 +113,7 @@ export default function AdminSalesManager({
         ? editingNumero.trim()
         : formatCotaNumber(numInt, totalNumbers);
 
-      await saveCotaSale(formattedNum, nomeComprador, telefone);
+      await saveCotaSale(formattedNum, nomeComprador, telefone, undefined, totalNumbers);
       setFeedback({
         type: "success",
         message: `Cota ${formattedNum} salva com sucesso!`,
@@ -127,7 +137,7 @@ export default function AdminSalesManager({
 
     setSaving(true);
     try {
-      await releaseCota(numero);
+      await releaseCota(numero, totalNumbers);
       setModalOpen(false);
       setFeedback({
         type: "success",

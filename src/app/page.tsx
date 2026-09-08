@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import PrizeSection from "@/components/PrizeSection";
@@ -13,6 +13,7 @@ import {
   subscribeRaffleSettings,
   subscribeCotas,
   DEFAULT_SETTINGS,
+  normalizeCotasMap,
 } from "@/lib/raffleService";
 import { isFirebaseConfigured } from "@/lib/firebase";
 import { RaffleSettings, Cota } from "@/types/raffle";
@@ -43,7 +44,11 @@ export default function LandingPage() {
   }, []);
 
   const totalNumbers = settings.total_numbers || 1000;
-  const soldCount = Object.values(cotasMap).filter((c) => c?.status === "vendido").length;
+  const normalizedCotas = useMemo(
+    () => normalizeCotasMap(cotasMap, totalNumbers),
+    [cotasMap, totalNumbers]
+  );
+  const soldCount = Object.keys(normalizedCotas).length;
 
   return (
     <main className="min-h-screen flex flex-col bg-pearl-50 text-navy font-sans selection:bg-antique-200 selection:text-navy">

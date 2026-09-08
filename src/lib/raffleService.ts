@@ -34,13 +34,6 @@ const INITIAL_DEMO_COTAS: Record<string, Cota> = {
     telefone: "(31) 9 9295-5010",
     data_compra: "08/03/2026 10:00:00",
   },
-  "57": {
-    numero: "057",
-    status: "vendido",
-    nome_comprador: "Erick Moraes",
-    telefone: "(31) 9 9295-5010",
-    data_compra: "08/03/2026 10:00:00",
-  },
 };
 
 const LOCAL_STORAGE_SETTINGS_KEY = "rifa_med_maju_settings";
@@ -52,6 +45,27 @@ function triggerLocalUpdate() {
   if (typeof window !== "undefined") {
     window.dispatchEvent(new Event(LOCAL_EVENT_NAME));
   }
+}
+
+/**
+ * Garante que qualquer mapa de cotas seja estritamente indexado
+ * pelo seu número canônico formatado (sem duplicatas como "57" e "057")
+ */
+export function normalizeCotasMap(
+  rawMap: Record<string, Cota>,
+  totalNumbers: number = 1000
+): Record<string, Cota> {
+  const normalized: Record<string, Cota> = {};
+  for (const [key, cota] of Object.entries(rawMap || {})) {
+    if (!cota || cota.status !== "vendido") continue;
+    const numInt = parseInt(cota.numero || key, 10);
+    const canonicalKey = !isNaN(numInt) ? formatCotaNumber(numInt, totalNumbers) : key;
+    normalized[canonicalKey] = {
+      ...cota,
+      numero: canonicalKey,
+    };
+  }
+  return normalized;
 }
 
 function getLocalSettings(): RaffleSettings {
@@ -76,7 +90,13 @@ function getLocalCotas(): Record<string, Cota> {
       localStorage.setItem(LOCAL_STORAGE_COTAS_KEY, JSON.stringify(INITIAL_DEMO_COTAS));
       return INITIAL_DEMO_COTAS;
     }
-    return JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    const normalized = normalizeCotasMap(parsed);
+    // Se havia duplicatas antigas na máquina do usuário, re-salva limpo
+    if (Object.keys(normalized).length !== Object.keys(parsed).length) {
+      localStorage.setItem(LOCAL_STORAGE_COTAS_KEY, JSON.stringify(normalized));
+    }
+    return normalized;
   } catch {
     return INITIAL_DEMO_COTAS;
   }
@@ -216,10 +236,14 @@ export async function saveCotaSale(
   numero: string,
   nome_comprador: string,
   telefone: string,
-  customDate?: string
+  customDate?: string,
+  totalNumbers: number = 1000
 ): Promise<void> {
+  const numInt = parseInt(numero, 10);
+  const canonical = !isNaN(numInt) ? formatCotaNumber(numInt, totalNumbers) : numero.trim();
+
   const cotaData: Cota = {
-    numero,
+    numero: canonical,
     status: "vendido",
     nome_comprador: nome_comprador.trim(),
     telefone: telefone.trim(),
@@ -229,26 +253,29 @@ export async function saveCotaSale(
 
   // 1. Salva no Firestore se configurado
   if (isFirebaseConfigured() && db) {
-    const docRef = doc(db, "cotas", numero);
+    const docRef = doc(db, "cotas", canonical);
     await setDoc(docRef, cotaData, { merge: true });
+    // Remove qualquer versão anterior sem zeros à esquerda para evitar duplicações
+    if (!isNaN(numInt) && String(numInt) !== canonical) {
+      deleteDoc(doc(db, "cotas", String(numInt))).catch(() => {});
+    }
   }
 
-  // 2. Salva no LocalStorage
+  // 2. Salva no LocalStorage com chave estritamente canônica
   if (typeof window !== "undefined") {
     const cotas = getLocalCotas();
-    cotas[numero] = cotaData;
-    // indexa também sem zeros à esquerda se numérico
-    const parsedInt = parseInt(numero, 10);
-    if (!isNaN(parsedInt)) {
-      cotas[String(parsedInt)] = cotaData;
+    // Remove chave legada sem zeros à esquerda
+    if (!isNaN(numInt)) {
+      delete cotas[String(numInt)];
     }
-    localStorage.setItem(LOCAL_STORAGE_COTAS_KEY, JSON.stringify(cotas));
+    cotas[canonical] = cotaData;
+    localStorage.setItem(LOCAL_STORAGE_COTAS_KEY, JSON.stringify(normalizeCotasMap(cotas, totalNumbers)));
     triggerLocalUpdate();
   }
 
   // 3. Notifica a Planilha Google em segundo plano
   pushSaleToGoogleSheet({
-    cota: numero,
+    cota: canonical,
     nome: nome_comprador,
     telefone,
     status: "Vendido",
@@ -259,25 +286,30 @@ export async function saveCotaSale(
 // -------------------------------------------------------------
 // Liberação / Cancelamento de Cota
 // -------------------------------------------------------------
-export async function releaseCota(numero: string): Promise<void> {
+export async function releaseCota(numero: string, totalNumbers: number = 1000): Promise<void> {
+  const numInt = parseInt(numero, 10);
+  const canonical = !isNaN(numInt) ? formatCotaNumber(numInt, totalNumbers) : numero.trim();
+
   if (isFirebaseConfigured() && db) {
-    const docRef = doc(db, "cotas", numero);
+    const docRef = doc(db, "cotas", canonical);
     await deleteDoc(docRef);
+    if (!isNaN(numInt) && String(numInt) !== canonical) {
+      deleteDoc(doc(db, "cotas", String(numInt))).catch(() => {});
+    }
   }
 
   if (typeof window !== "undefined") {
     const cotas = getLocalCotas();
-    delete cotas[numero];
-    const parsedInt = parseInt(numero, 10);
-    if (!isNaN(parsedInt)) {
-      delete cotas[String(parsedInt)];
+    delete cotas[canonical];
+    if (!isNaN(numInt)) {
+      delete cotas[String(numInt)];
     }
-    localStorage.setItem(LOCAL_STORAGE_COTAS_KEY, JSON.stringify(cotas));
+    localStorage.setItem(LOCAL_STORAGE_COTAS_KEY, JSON.stringify(normalizeCotasMap(cotas, totalNumbers)));
     triggerLocalUpdate();
   }
 
   pushSaleToGoogleSheet({
-    cota: numero,
+    cota: canonical,
     action: "release",
     status: "Disponível",
   }).catch((err) => console.warn("Erro ao atualizar cancelamento na planilha Google:", err));
@@ -295,10 +327,16 @@ export async function syncFromGoogleSheetsNow(totalNumbers: number = 1000): Prom
     const local = getLocalCotas();
     let count = 0;
     keys.forEach((k) => {
-      local[k] = sheetCotas[k];
+      const item = sheetCotas[k];
+      const numInt = parseInt(item.numero || k, 10);
+      const canonical = !isNaN(numInt) ? formatCotaNumber(numInt, totalNumbers) : k;
+      local[canonical] = { ...item, numero: canonical };
+      if (!isNaN(numInt) && String(numInt) !== canonical) {
+        delete local[String(numInt)];
+      }
       count++;
     });
-    localStorage.setItem(LOCAL_STORAGE_COTAS_KEY, JSON.stringify(local));
+    localStorage.setItem(LOCAL_STORAGE_COTAS_KEY, JSON.stringify(normalizeCotasMap(local, totalNumbers)));
     triggerLocalUpdate();
     return count;
   }
@@ -312,8 +350,8 @@ export function exportSalesCSV(
   cotasMap: Record<string, Cota>,
   totalNumbers: number
 ): void {
-  const soldNumbers = Object.keys(cotasMap)
-    .filter((num) => cotasMap[num]?.status === "vendido")
+  const normalized = normalizeCotasMap(cotasMap, totalNumbers);
+  const soldNumbers = Object.keys(normalized)
     .sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
 
   const headers = [
@@ -325,7 +363,7 @@ export function exportSalesCSV(
   ];
 
   const rows = soldNumbers.map((num) => {
-    const item = cotasMap[num];
+    const item = normalized[num];
     const dataCompraFormatada = item.data_compra
       ? new Date(item.data_compra).toLocaleString("pt-BR")
       : "-";

@@ -91,9 +91,8 @@ export async function fetchGoogleSheetSales(totalNumbers: number = 1000): Promis
           data_compra: dataStr || new Date().toISOString(),
         };
 
-        // Salva com formato com zeros e também no número puro
+        // Salva estritamente pela chave canônica formatada com zeros à esquerda
         result[formattedCota] = cotaData;
-        result[String(cotaNumInt)] = cotaData;
       }
     }
 

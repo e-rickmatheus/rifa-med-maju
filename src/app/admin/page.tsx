@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
 import AdminLogin from "@/components/AdminLogin";
 import AdminQuotaManager from "@/components/AdminQuotaManager";
@@ -11,6 +11,7 @@ import {
   DEFAULT_SETTINGS,
   exportSalesCSV,
   syncFromGoogleSheetsNow,
+  normalizeCotasMap,
 } from "@/lib/raffleService";
 import { GOOGLE_SHEET_URL, APPS_SCRIPT_TEMPLATE } from "@/lib/googleSheetService";
 import { isFirebaseConfigured } from "@/lib/firebase";
@@ -104,7 +105,11 @@ export default function AdminPage() {
   }
 
   const totalNumbers = settings.total_numbers || 1000;
-  const soldCount = Object.values(cotasMap).filter((c) => c?.status === "vendido").length;
+  const normalizedCotas = useMemo(
+    () => normalizeCotasMap(cotasMap, totalNumbers),
+    [cotasMap, totalNumbers]
+  );
+  const soldCount = Object.keys(normalizedCotas).length;
   const availableCount = Math.max(0, totalNumbers - soldCount);
   const totalRevenue = soldCount * (settings.price || 20);
   const percent = totalNumbers > 0 ? ((soldCount / totalNumbers) * 100).toFixed(1) : "0.0";
