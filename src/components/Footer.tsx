@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { GraduationCap, MessageCircle, Lock, Heart } from "lucide-react";
+import { Stethoscope, MessageCircle, Lock, Heart } from "lucide-react";
 
 interface FooterProps {
   whatsappNumber?: string;
@@ -50,13 +50,25 @@ export default function Footer({ whatsappNumber = "5537998427884" }: FooterProps
                 &ldquo;Mais do que uma rifa, essa é a prova de que sonhos se constroem juntos. Sua ajuda me aproxima da realização do meu maior propósito!&rdquo;
               </blockquote>
 
-              <div className="pt-2">
-                <p className="text-lg font-serif font-bold text-pearl">
-                  Maria Júlia Gomes Gabriel
-                </p>
-                <p className="text-xs uppercase tracking-widest text-antique-300 font-sans font-medium mt-0.5">
-                  Estudante de Medicina
-                </p>
+              <div className="pt-2 flex flex-col sm:flex-row items-center md:items-start justify-between gap-4">
+                <div>
+                  <p className="text-lg font-serif font-bold text-pearl">
+                    Maria Júlia Gomes Gabriel
+                  </p>
+                  <p className="text-xs uppercase tracking-widest text-antique-300 font-sans font-medium mt-0.5">
+                    Estudante de Medicina • UNIFENAS
+                  </p>
+                </div>
+
+                <div className="h-9 w-auto bg-white/95 px-3 py-1.5 rounded-lg flex items-center justify-center shadow-sm" title="Universidade José do Rosário Vellano - UNIFENAS">
+                  <Image
+                    src="/images/unifenas-logo.svg"
+                    alt="UNIFENAS - Universidade José do Rosário Vellano"
+                    width={110}
+                    height={26}
+                    className="h-5 w-auto object-contain"
+                  />
+                </div>
               </div>
 
               <div className="pt-2">
@@ -78,8 +90,8 @@ export default function Footer({ whatsappNumber = "5537998427884" }: FooterProps
         {/* Linha inferior de navegação e créditos institucionais */}
         <div className="pt-8 border-t border-navy-850 flex flex-col sm:flex-row items-center justify-between gap-5 text-xs text-slate-400 font-sans">
           <div className="flex items-center gap-2">
-            <GraduationCap className="w-4 h-4 text-antique-400" />
-            <span className="font-medium text-slate-300">RIFA MED MAJU • Ação Solidária Oficial</span>
+            <Stethoscope className="w-4 h-4 text-antique-400" />
+            <span className="font-medium text-slate-300">Rifa Solidária • Medicina UNIFENAS</span>
           </div>
 
           <div className="flex items-center gap-8">

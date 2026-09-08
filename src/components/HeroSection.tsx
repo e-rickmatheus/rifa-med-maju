@@ -33,7 +33,7 @@ export default function HeroSection({
             <div className="inline-flex items-center gap-2">
               <span className="w-6 h-px bg-antique-400" />
               <span className="text-[11px] uppercase tracking-[0.25em] text-antique-400 font-sans font-semibold">
-                Ação Solidária • Medicina
+                Ação Solidária • Medicina UNIFENAS
               </span>
             </div>
 
@@ -48,7 +48,7 @@ export default function HeroSection({
               </blockquote>
 
               <p className="text-base sm:text-lg text-pearl/75 font-sans font-light leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                Em prol de ajuda para o custeio da minha faculdade de Medicina. Ao adquirir um bilhete de{" "}
+                Em prol de ajuda para o custeio da minha faculdade de Medicina na <strong className="text-pearl font-medium">UNIFENAS</strong>. Ao adquirir um bilhete de{" "}
                 <strong className="text-pearl font-medium">{formatCurrency(price)}</strong>, você apoia diretamente minha formação e concorre a{" "}
                 <strong className="text-pearl font-medium">{prize}</strong>.
               </p>
@@ -133,7 +133,7 @@ export default function HeroSection({
                   Maria Júlia Gomes Gabriel
                 </p>
                 <p className="text-xs uppercase tracking-widest text-antique-400/90 font-sans font-medium mt-0.5">
-                  Estudante de Medicina
+                  Estudante de Medicina • UNIFENAS
                 </p>
               </div>
             </div>

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { GraduationCap, Lock, Menu, X, MessageCircle } from "lucide-react";
+import { Stethoscope, Lock, Menu, X, MessageCircle } from "lucide-react";
 
 interface HeaderProps {
   whatsappNumber?: string;
@@ -18,14 +18,14 @@ export default function Header({ whatsappNumber = "5537998427884" }: HeaderProps
           {/* Identificação Editorial */}
           <Link href="/" className="flex items-center gap-3.5 group">
             <div className="w-10 h-10 rounded-full border border-antique-400/40 flex items-center justify-center text-antique-400 group-hover:border-antique-300 transition-colors">
-              <GraduationCap className="w-5 h-5" />
+              <Stethoscope className="w-5 h-5" />
             </div>
             <div>
               <span className="text-xl sm:text-2xl font-serif font-bold tracking-tight text-pearl">
-                RIFA MED MAJU
+                Rifa Solidária
               </span>
               <p className="text-[11px] uppercase tracking-widest text-antique-300/80 font-sans font-medium">
-                Ação Solidária • Medicina
+                Medicina UNIFENAS • Maria Júlia
               </p>
             </div>
           </Link>

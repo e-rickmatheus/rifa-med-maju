@@ -121,13 +121,13 @@ export default function NumberGrid({
 
         {/* Legenda Discreta & Minimalista */}
         <div className="flex flex-wrap items-center justify-center gap-8 mb-8 text-xs font-sans">
-          <div className="flex items-center gap-2.5">
-            <span className="w-3.5 h-3.5 rounded border border-pearl-300 bg-white shadow-sm" />
-            <span className="text-navy font-medium">Disponível ({freeCount.toLocaleString("pt-BR")})</span>
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34D399] animate-pulse" />
+            <span className="text-navy font-semibold">Cota Livre ({freeCount.toLocaleString("pt-BR")})</span>
           </div>
-          <div className="flex items-center gap-2.5">
-            <span className="w-3.5 h-3.5 rounded bg-pearl-200/80 border border-pearl-300" />
-            <span className="text-slate-500 font-medium">Vendido ({soldCount.toLocaleString("pt-BR")})</span>
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-pearl-300" />
+            <span className="text-slate-500 font-medium">Cota Vendida ({soldCount.toLocaleString("pt-BR")})</span>
           </div>
         </div>
 
@@ -281,8 +281,9 @@ export default function NumberGrid({
                   <span className="tracking-wide group-hover:scale-105 transition-transform duration-300">
                     {numero}
                   </span>
-                  <span className="text-[8px] uppercase tracking-widest font-sans text-antique-600 group-hover:text-antique-300 font-medium mt-0.5">
-                    Livre
+                  <span className="inline-flex items-center gap-1 text-[8.5px] uppercase tracking-wider font-sans font-bold text-emerald-600 group-hover:text-emerald-300 transition-colors mt-0.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#10B981] animate-pulse shrink-0" />
+                    <span>LIVRE</span>
                   </span>
                 </button>
               );

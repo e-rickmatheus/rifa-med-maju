@@ -21,8 +21,8 @@ export const DEFAULT_SETTINGS: RaffleSettings = {
   pix_key: process.env.NEXT_PUBLIC_PIX_KEY || "37998427884",
   pix_name: process.env.NEXT_PUBLIC_PIX_NAME || "MARIA JULIA GOMES GABRIEL",
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5537998427884",
-  title: "RIFA MED MAJU",
-  subtitle: "Ação Solidária em prol da faculdade de Medicina",
+  title: "Rifa Solidaria - Medicina - Maria Julia",
+  subtitle: "Ação Solidária em prol da faculdade de Medicina na UNIFENAS",
 };
 
 // Dados de demonstração iniciais sincronizados com a planilha oficial
