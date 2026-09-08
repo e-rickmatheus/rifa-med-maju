@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
+import PrizeSection from "@/components/PrizeSection";
 import ProgressBar from "@/components/ProgressBar";
 import HowItWorks from "@/components/HowItWorks";
 import PixCard from "@/components/PixCard";
@@ -26,13 +27,11 @@ export default function LandingPage() {
   useEffect(() => {
     setFirebaseActive(isFirebaseConfigured());
 
-    // Assinatura de configurações
     const unsubSettings = subscribeRaffleSettings((newSettings) => {
       setSettings(newSettings);
       setLoading(false);
     });
 
-    // Assinatura de cotas
     const unsubCotas = subscribeCotas((newCotas) => {
       setCotasMap(newCotas);
     });
@@ -47,13 +46,13 @@ export default function LandingPage() {
   const soldCount = Object.values(cotasMap).filter((c) => c?.status === "vendido").length;
 
   return (
-    <main className="min-h-screen flex flex-col bg-cream-50">
+    <main className="min-h-screen flex flex-col bg-slate-50">
       {/* Banner Informativo sobre Status do Banco de Dados */}
       {!firebaseActive && (
-        <div className="bg-amber-500/15 border-b border-amber-500/30 text-amber-900 px-4 py-2 text-center text-xs font-semibold flex items-center justify-center gap-2">
-          <CloudOff className="w-4 h-4 text-amber-600" />
+        <div className="bg-slate-100 border-b border-slate-200 text-slate-700 px-4 py-2 text-center text-xs font-medium flex items-center justify-center gap-2">
+          <CloudOff className="w-4 h-4 text-slate-500" />
           <span>
-            <strong>Modo Local / Demonstração Ativo:</strong> Todas as ações funcionam instantaneamente. Para sincronizar na nuvem, adicione suas chaves no <code>.env.local</code>.
+            <strong>Modo Local de Testes:</strong> Para sincronizar na nuvem, adicione as credenciais do Firebase no <code>.env.local</code>.
           </span>
         </div>
       )}
@@ -61,7 +60,7 @@ export default function LandingPage() {
       {/* Header com Navegação */}
       <Header whatsappNumber={settings.whatsapp} />
 
-      {/* Hero Section com História e Foto */}
+      {/* Hero Section com História e Foto 0 da Maju */}
       <HeroSection
         price={settings.price}
         prize={settings.prize}
@@ -73,6 +72,12 @@ export default function LandingPage() {
         total={totalNumbers}
         sold={soldCount}
         price={settings.price}
+      />
+
+      {/* Seção do Prêmio (Honda Pop Azul e Ficha Técnica) */}
+      <PrizeSection
+        price={settings.price}
+        drawDate={settings.draw_date}
       />
 
       {/* 4 Passos Como Funciona */}

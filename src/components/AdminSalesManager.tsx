@@ -147,7 +147,7 @@ export default function AdminSalesManager({
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
         <div>
           <h3 className="text-lg font-bold text-navy-950 font-serif-luxury flex items-center gap-2">
-            <UserCheck className="w-5 h-5 text-gold-600" />
+            <UserCheck className="w-5 h-5 text-slate-700" />
             Gestão de Vendas de Cotas
           </h3>
           <p className="text-xs text-slate-500">
@@ -157,7 +157,7 @@ export default function AdminSalesManager({
 
         <button
           onClick={handleOpenNewSale}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold text-xs shadow-sm transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-navy-950 hover:bg-navy-800 text-white font-bold text-xs shadow-sm transition-colors"
         >
           <Plus className="w-4 h-4" />
           <span>Registrar Nova Venda</span>
@@ -258,7 +258,7 @@ export default function AdminSalesManager({
       {/* Modal de Registro / Edição de Venda */}
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-950/70 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-2xl border-2 border-gold-400 relative">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-xl border border-slate-200 relative">
             <button
               onClick={() => setModalOpen(false)}
               className="absolute top-5 right-5 text-slate-400 hover:text-slate-600 p-1"
@@ -297,7 +297,7 @@ export default function AdminSalesManager({
                   placeholder="Ex: 042 ou 451"
                   required
                   disabled={isSoldMode}
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-gold-400 font-mono font-bold disabled:bg-slate-100"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-navy-900 font-mono font-bold disabled:bg-slate-100"
                 />
               </div>
 
@@ -311,7 +311,7 @@ export default function AdminSalesManager({
                   onChange={(e) => setNomeComprador(e.target.value)}
                   placeholder="Ex: Maria Júlia da Silva"
                   required
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-gold-400"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-navy-900"
                 />
               </div>
 
@@ -325,7 +325,7 @@ export default function AdminSalesManager({
                   onChange={(e) => setTelefone(e.target.value)}
                   placeholder="Ex: 37998427884"
                   required
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-gold-400 font-mono"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-navy-900 font-mono"
                 />
               </div>
 
@@ -353,7 +353,7 @@ export default function AdminSalesManager({
                   <button
                     type="submit"
                     disabled={saving}
-                    className="px-6 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 text-xs font-bold shadow-sm disabled:opacity-50"
+                    className="px-6 py-2.5 rounded-xl bg-navy-950 hover:bg-navy-800 text-white text-xs font-bold shadow-sm disabled:opacity-50"
                   >
                     {saving ? "Salvando..." : "Salvar Venda"}
                   </button>

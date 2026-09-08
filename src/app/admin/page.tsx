@@ -86,16 +86,16 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col text-slate-900">
       {/* Barra de Navegação do Painel */}
-      <header className="bg-navy-950 text-white border-b border-gold-500/30 sticky top-0 z-30 shadow-md">
+      <header className="bg-navy-950 text-white border-b border-navy-800 sticky top-0 z-30 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 sm:h-20">
             {/* Logo do Admin */}
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-300 to-gold-600 flex items-center justify-center text-navy-950 font-bold shadow-gold">
-                <GraduationCap className="w-6 h-6" />
+              <div className="w-10 h-10 rounded-xl bg-navy-800 border border-navy-700 flex items-center justify-center text-white">
+                <GraduationCap className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-base sm:text-lg font-black font-display-luxury text-gold-300">
+                <span className="text-base sm:text-lg font-bold font-display-luxury text-white">
                   PAINEL ADMINISTRATIVO
                 </span>
                 <span className="block text-[11px] text-slate-300">
@@ -109,10 +109,10 @@ export default function AdminPage() {
               <Link
                 href="/"
                 target="_blank"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-navy-800 hover:bg-navy-700 text-cream-100 border border-gold-500/20 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-navy-900 hover:bg-navy-800 text-slate-200 border border-navy-700 transition-colors"
               >
                 <span>Ver Vitrine Pública</span>
-                <ExternalLink className="w-3.5 h-3.5 text-gold-400" />
+                <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
               </Link>
 
               <button
@@ -199,12 +199,12 @@ export default function AdminPage() {
 
           <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-gold-600">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-600">
                 Cotas Livres
               </span>
-              <TrendingUp className="w-4 h-4 text-gold-600" />
+              <TrendingUp className="w-4 h-4 text-slate-600" />
             </div>
-            <div className="text-2xl sm:text-3xl font-black text-gold-700 font-mono">
+            <div className="text-2xl sm:text-3xl font-black text-slate-800 font-mono">
               {availableCount.toLocaleString("pt-BR")}
             </div>
             <span className="text-[11px] text-slate-400 mt-1 block">Disponíveis na vitrine</span>

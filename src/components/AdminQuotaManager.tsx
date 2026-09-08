@@ -52,10 +52,10 @@ export default function AdminQuotaManager({ currentTotal }: AdminQuotaManagerPro
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gold-300/60 p-6 sm:p-7">
+    <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-7">
       <div className="flex items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gold-100 border border-gold-300 flex items-center justify-center text-gold-700">
+          <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700">
             <Layers className="w-5 h-5" />
           </div>
           <div>
@@ -108,9 +108,9 @@ export default function AdminQuotaManager({ currentTotal }: AdminQuotaManagerPro
                 key={increment}
                 onClick={() => handleAddQuick(increment)}
                 disabled={loading}
-                className="py-3 px-4 rounded-xl border border-gold-400/80 bg-amber-50/50 hover:bg-gold-500 hover:text-navy-950 text-navy-900 font-extrabold text-sm transition-all duration-200 shadow-sm flex items-center justify-center gap-1.5 disabled:opacity-50"
+                className="py-3 px-4 rounded-xl border border-slate-200 bg-slate-50 hover:bg-navy-900 hover:text-white text-slate-800 font-bold text-sm transition-all shadow-sm flex items-center justify-center gap-1.5 disabled:opacity-50"
               >
-                <PlusCircle className="w-4 h-4 text-gold-600 group-hover:text-navy-950" />
+                <PlusCircle className="w-4 h-4" />
                 <span>+{increment} Cotas</span>
               </button>
             ))}
@@ -130,12 +130,12 @@ export default function AdminQuotaManager({ currentTotal }: AdminQuotaManagerPro
               value={customValue}
               onChange={(e) => setCustomValue(e.target.value)}
               placeholder={`Ex: ${currentTotal + 200}`}
-              className="flex-1 px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-gold-400 font-mono"
+              className="flex-1 px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-navy-900 font-mono"
             />
             <button
               type="submit"
               disabled={loading || !customValue}
-              className="px-6 py-2.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white font-bold text-sm transition-colors disabled:opacity-40 flex items-center justify-center gap-2"
+              className="px-6 py-2.5 rounded-xl bg-navy-950 hover:bg-navy-800 text-white font-bold text-sm transition-colors disabled:opacity-40 flex items-center justify-center gap-2"
             >
               <span>Aplicar Novo Total</span>
               <ArrowUpRight className="w-4 h-4" />

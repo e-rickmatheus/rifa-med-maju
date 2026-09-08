@@ -3,15 +3,9 @@
 import React, { useState, useMemo } from "react";
 import {
   Search,
-  Filter,
-  CheckCircle2,
   Lock,
   MessageCircle,
-  ExternalLink,
-  ChevronLeft,
-  ChevronRight,
   Info,
-  Sparkles,
 } from "lucide-react";
 import { Cota } from "@/types/raffle";
 import {
@@ -34,7 +28,7 @@ export default function NumberGrid({
 }: NumberGridProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState<"todos" | "livres" | "vendidos">("todos");
-  const [selectedBlock, setSelectedBlock] = useState(0); // Bloco de 100 números (0 = 000-099, 1 = 100-199)
+  const [selectedBlock, setSelectedBlock] = useState(0);
   const [activeModalCota, setActiveModalCota] = useState<{
     numero: string;
     isSold: boolean;
@@ -44,7 +38,6 @@ export default function NumberGrid({
   const blockSize = 100;
   const totalBlocks = Math.ceil(totalNumbers / blockSize);
 
-  // Geração de todos os números disponíveis
   const allNumbers = useMemo(() => {
     return Array.from({ length: totalNumbers }, (_, i) => {
       const numStr = formatCotaNumber(i, totalNumbers);
@@ -59,25 +52,21 @@ export default function NumberGrid({
     });
   }, [totalNumbers, cotasMap]);
 
-  // Contadores
   const soldCount = useMemo(() => {
     return Object.values(cotasMap).filter((c) => c?.status === "vendido").length;
   }, [cotasMap]);
 
   const freeCount = Math.max(0, totalNumbers - soldCount);
 
-  // Filtragem
   const filteredNumbers = useMemo(() => {
     let list = allNumbers;
 
-    // Filtro por tipo
     if (filterType === "livres") {
       list = list.filter((item) => !item.isSold);
     } else if (filterType === "vendidos") {
       list = list.filter((item) => item.isSold);
     }
 
-    // Filtro por busca numérica ou texto
     if (searchTerm.trim() !== "") {
       const term = searchTerm.trim().toLowerCase();
       list = list.filter((item) => item.numero.includes(term));
@@ -86,8 +75,6 @@ export default function NumberGrid({
     return list;
   }, [allNumbers, filterType, searchTerm]);
 
-  // Se o usuário estiver buscando, mostra todos os resultados da busca sem paginação por bloco.
-  // Caso contrário, mostra o bloco de 100 selecionado.
   const isSearching = searchTerm.trim().length > 0;
   const currentViewNumbers = useMemo(() => {
     if (isSearching || filterType !== "todos") {
@@ -99,13 +86,7 @@ export default function NumberGrid({
   }, [allNumbers, filteredNumbers, isSearching, filterType, selectedBlock, blockSize, totalNumbers]);
 
   const handleCotaClick = (numero: string, isSold: boolean, cota?: Cota) => {
-    if (isSold) {
-      // Abre modal informativo com detalhes mascarados
-      setActiveModalCota({ numero, isSold: true, cotaData: cota });
-    } else {
-      // Abre confirmação e link do WhatsApp
-      setActiveModalCota({ numero, isSold: false, cotaData: cota });
-    }
+    setActiveModalCota({ numero, isSold, cotaData: cota });
   };
 
   const confirmWhatsAppRedirect = (numero: string) => {
@@ -115,44 +96,37 @@ export default function NumberGrid({
   };
 
   return (
-    <section id="numeros" className="py-20 bg-white relative">
+    <section id="numeros" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Cabeçalho da Grade */}
-        <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-gold-100 text-gold-800 text-xs font-bold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5 text-gold-600" />
-            Tabela Interativa em Tempo Real
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-navy-950 font-serif-luxury">
-            Escolha os seus Números da Sorte
+        {/* Cabeçalho */}
+        <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
+          <span className="text-xs font-bold uppercase tracking-widest text-slate-500 block">
+            Grade de Cotas
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-black text-navy-950 font-serif-luxury">
+            Escolha o seu Número
           </h2>
-          <p className="text-sm sm:text-base text-slate-600">
-            Clique em qualquer número livre em destaque para solicitá-lo no WhatsApp oficial da Maria Júlia.
+          <p className="text-xs sm:text-sm text-slate-600">
+            Clique em qualquer número livre para solicitar sua reserva no WhatsApp oficial.
           </p>
         </div>
 
-        {/* Legenda de Cores & Status */}
-        <div className="flex flex-wrap items-center justify-center gap-6 mb-8 text-xs sm:text-sm font-semibold">
+        {/* Legenda */}
+        <div className="flex flex-wrap items-center justify-center gap-6 mb-8 text-xs font-medium">
           <div className="flex items-center gap-2">
-            <span className="w-4 h-4 rounded-md bg-amber-50 border-2 border-gold-400 shadow-sm" />
-            <span className="text-slate-700">Disponível / Livre ({freeCount})</span>
+            <span className="w-4 h-4 rounded bg-white border border-slate-300 shadow-sm" />
+            <span className="text-slate-700">Disponível ({freeCount})</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="w-4 h-4 rounded-md bg-slate-200 border-2 border-slate-300" />
-            <span className="text-slate-500">Já Vendido ({soldCount})</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="w-4 h-4 rounded-md bg-emerald-500 text-white flex items-center justify-center text-[10px]">
-              ✓
-            </span>
-            <span className="text-emerald-700 font-bold">Reserva Direta no WhatsApp</span>
+            <span className="w-4 h-4 rounded bg-slate-200 border border-slate-300" />
+            <span className="text-slate-500">Vendido ({soldCount})</span>
           </div>
         </div>
 
-        {/* Barra de Ferramentas (Busca + Filtros) */}
+        {/* Barra de Filtros e Busca */}
         <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5 mb-8 shadow-sm">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            {/* Campo de Busca Rápida */}
+            {/* Campo de Busca */}
             <div className="relative w-full md:w-80">
               <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
@@ -160,7 +134,7 @@ export default function NumberGrid({
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Buscar número (ex: 451 ou 042)..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-gold-400 text-sm bg-white"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-navy-800 text-sm bg-white font-mono"
               />
               {searchTerm && (
                 <button
@@ -172,37 +146,31 @@ export default function NumberGrid({
               )}
             </div>
 
-            {/* Abas de Filtros */}
+            {/* Abas */}
             <div className="flex items-center gap-1.5 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
               <button
-                onClick={() => {
-                  setFilterType("todos");
-                }}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+                onClick={() => setFilterType("todos")}
+                className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all whitespace-nowrap ${
                   filterType === "todos"
-                    ? "bg-navy-900 text-white shadow-sm"
+                    ? "bg-navy-950 text-white shadow-sm"
                     : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
                 }`}
               >
                 Todos ({totalNumbers})
               </button>
               <button
-                onClick={() => {
-                  setFilterType("livres");
-                }}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+                onClick={() => setFilterType("livres")}
+                className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all whitespace-nowrap ${
                   filterType === "livres"
-                    ? "bg-gold-500 text-navy-950 shadow-sm"
+                    ? "bg-emerald-700 text-white shadow-sm"
                     : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
                 }`}
               >
                 Livres ({freeCount})
               </button>
               <button
-                onClick={() => {
-                  setFilterType("vendidos");
-                }}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+                onClick={() => setFilterType("vendidos")}
+                className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all whitespace-nowrap ${
                   filterType === "vendidos"
                     ? "bg-slate-700 text-white shadow-sm"
                     : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
@@ -213,10 +181,10 @@ export default function NumberGrid({
             </div>
           </div>
 
-          {/* Navegação por Faixas de 100 números (quando em modo "Todos" sem busca) */}
+          {/* Navegação por blocos de 100 */}
           {!isSearching && filterType === "todos" && totalBlocks > 1 && (
-            <div className="mt-4 pt-4 border-t border-slate-200/80 flex flex-wrap items-center justify-between gap-3">
-              <span className="text-xs text-slate-500 font-medium">Navegue por blocos de 100:</span>
+            <div className="mt-4 pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+              <span className="text-xs text-slate-500">Blocos de 100 cotas:</span>
               <div className="flex flex-wrap items-center gap-1.5">
                 {Array.from({ length: totalBlocks }, (_, blockIdx) => {
                   const startNum = formatCotaNumber(blockIdx * blockSize, totalNumbers);
@@ -230,9 +198,9 @@ export default function NumberGrid({
                     <button
                       key={blockIdx}
                       onClick={() => setSelectedBlock(blockIdx)}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                      className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all ${
                         isActive
-                          ? "bg-gold-500 text-navy-950 shadow-sm scale-105"
+                          ? "bg-navy-950 text-white shadow-sm font-bold"
                           : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
                       }`}
                     >
@@ -245,32 +213,30 @@ export default function NumberGrid({
           )}
         </div>
 
-        {/* Informação sobre o número de resultados */}
+        {/* Resumo */}
         <div className="flex justify-between items-center text-xs text-slate-500 mb-3 px-1">
           <span>
             Exibindo <strong>{currentViewNumbers.length}</strong> números
-            {isSearching && ` encontrados para "${searchTerm}"`}
+            {isSearching && ` para "${searchTerm}"`}
             {!isSearching && filterType === "todos" && ` (Bloco ${selectedBlock + 1} de ${totalBlocks})`}
           </span>
-          <span className="italic">Clique no número para interagir</span>
         </div>
 
-        {/* Grade Visual dos Números */}
+        {/* Grade de Números */}
         {currentViewNumbers.length === 0 ? (
           <div className="text-center py-16 bg-slate-50 rounded-2xl border border-dashed border-slate-300">
-            <Info className="w-10 h-10 text-slate-400 mx-auto mb-2" />
-            <h4 className="text-base font-bold text-slate-700">Nenhum número encontrado</h4>
+            <Info className="w-8 h-8 text-slate-400 mx-auto mb-2" />
+            <h4 className="text-sm font-bold text-slate-700">Nenhum número encontrado</h4>
             <p className="text-xs text-slate-500 mt-1">
-              Verifique a busca digitada ou limpe os filtros para ver mais cotas.
+              Verifique a busca ou troque os filtros de visualização.
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-2 sm:gap-2.5">
+          <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-2">
             {currentViewNumbers.map((item) => {
               const { numero, isSold, cota } = item;
 
               if (isSold) {
-                // Número Vendido
                 const maskedName = maskBuyerName(cota?.nome_comprador);
                 const maskedPhone = maskPhoneNumber(cota?.telefone);
 
@@ -281,33 +247,31 @@ export default function NumberGrid({
                     className="group relative cursor-pointer"
                     title={`Comprado por ${maskedName} (Tel: ${maskedPhone})`}
                   >
-                    <div className="h-12 sm:h-14 rounded-xl bg-slate-200 border border-slate-300 text-slate-500 flex flex-col items-center justify-center font-mono font-bold text-xs sm:text-sm select-none transition-all duration-150 hover:bg-slate-300/80 shadow-inner">
-                      <span className="line-through opacity-75">{numero}</span>
-                      <span className="text-[9px] font-sans text-slate-500 font-semibold mt-0.5 flex items-center gap-0.5">
+                    <div className="h-12 rounded-xl bg-slate-200 border border-slate-300 text-slate-400 flex flex-col items-center justify-center font-mono font-semibold text-xs sm:text-sm select-none transition-colors hover:bg-slate-300/80">
+                      <span className="line-through">{numero}</span>
+                      <span className="text-[9px] font-sans text-slate-500 flex items-center gap-0.5">
                         <Lock className="w-2.5 h-2.5" /> Vendido
                       </span>
                     </div>
 
-                    {/* Tooltip Mascarado para Privacidade (Hover no Desktop) */}
-                    <div className="hidden group-hover:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-30 w-52 p-2.5 bg-navy-950 text-white text-[11px] rounded-xl shadow-xl border border-gold-500/40 pointer-events-none animate-fadeIn">
-                      <p className="font-bold text-gold-300">Cota {numero} (Vendida)</p>
-                      <p className="text-slate-200 mt-0.5">Comprador: {maskedName}</p>
+                    <div className="hidden group-hover:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-30 w-48 p-2.5 bg-navy-950 text-white text-[11px] rounded-xl shadow-lg border border-navy-800 pointer-events-none animate-fadeIn">
+                      <p className="font-bold text-slate-200">Cota {numero}</p>
+                      <p className="text-slate-300 mt-0.5">{maskedName}</p>
                       <p className="text-slate-400">Tel: {maskedPhone}</p>
                     </div>
                   </div>
                 );
               }
 
-              // Número Livre (Destaque Dourado/Bege)
               return (
                 <button
                   key={numero}
                   onClick={() => handleCotaClick(numero, false, cota)}
-                  className="h-12 sm:h-14 rounded-xl bg-gradient-to-b from-amber-50 to-orange-50/40 border-2 border-gold-400/80 hover:border-gold-500 text-navy-950 hover:text-navy-900 font-mono font-black text-xs sm:text-sm flex flex-col items-center justify-center shadow-sm hover:shadow-gold hover:scale-105 active:scale-95 transition-all duration-150 group"
-                  title={`Cota ${numero} Livre! Clique para escolher`}
+                  className="h-12 rounded-xl bg-white border border-slate-300 hover:border-navy-900 text-navy-950 hover:bg-slate-50 font-mono font-bold text-xs sm:text-sm flex flex-col items-center justify-center shadow-sm transition-all duration-150"
+                  title={`Cota ${numero} Livre`}
                 >
-                  <span className="tracking-wider">{numero}</span>
-                  <span className="text-[9px] font-sans text-gold-700 font-bold uppercase tracking-wider group-hover:text-emerald-700">
+                  <span className="tracking-wide">{numero}</span>
+                  <span className="text-[9px] font-sans text-emerald-700 font-medium uppercase">
                     Livre
                   </span>
                 </button>
@@ -316,41 +280,38 @@ export default function NumberGrid({
           </div>
         )}
 
-        {/* Modal Interativo de Cota */}
+        {/* Modal Interativo */}
         {activeModalCota && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-950/70 backdrop-blur-sm animate-fadeIn">
-            <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl border-2 border-gold-400 text-center relative overflow-hidden">
-              {/* Badge Topo */}
-              <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-black uppercase mb-4 bg-gold-100 text-gold-800">
+            <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-xl border border-slate-200 text-center relative">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase mb-4 bg-slate-100 text-slate-800">
                 {activeModalCota.isSold ? (
                   <>
-                    <Lock className="w-3.5 h-3.5 text-slate-600" />
-                    Cota Indisponível
+                    <Lock className="w-3.5 h-3.5 text-slate-500" />
+                    Cota Já Vendida
                   </>
                 ) : (
                   <>
-                    <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-                    Cota Disponível!
+                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                    Cota Disponível
                   </>
                 )}
               </div>
 
-              {/* Número Gigante */}
               <div className="mb-5">
-                <span className="text-xs text-slate-500 block uppercase tracking-widest font-semibold">
-                  Número Selecionado
+                <span className="text-xs text-slate-500 block uppercase font-medium">
+                  Número
                 </span>
-                <span className="text-5xl sm:text-6xl font-black font-display-luxury tracking-widest text-navy-950">
+                <span className="text-5xl font-black font-mono tracking-wider text-navy-950">
                   {activeModalCota.numero}
                 </span>
               </div>
 
               {activeModalCota.isSold ? (
-                // Detalhes mascarados do número já vendido
                 <div className="space-y-4">
-                  <div className="bg-slate-100 rounded-2xl p-4 text-xs sm:text-sm text-slate-700 space-y-1.5 border border-slate-200">
+                  <div className="bg-slate-50 rounded-xl p-4 text-xs text-slate-700 space-y-1 border border-slate-200 text-left">
                     <p>
-                      <strong>Status:</strong> Já adquirida
+                      <strong>Status:</strong> Já registrada
                     </p>
                     <p>
                       <strong>Comprador:</strong>{" "}
@@ -363,41 +324,40 @@ export default function NumberGrid({
                   </div>
 
                   <p className="text-xs text-slate-500">
-                    Este número já foi registrado. Por favor, selecione outro número livre na grade para participar!
+                    Este número já foi adquirido. Escolha outro número livre na grade para participar.
                   </p>
 
                   <button
                     onClick={() => setActiveModalCota(null)}
-                    className="w-full py-3 rounded-xl bg-navy-900 text-white font-bold text-sm hover:bg-navy-800 transition-colors"
+                    className="w-full py-3 rounded-xl bg-navy-950 text-white font-bold text-xs hover:bg-navy-800 transition-colors"
                   >
-                    Escolher Outro Número
+                    Voltar para a Grade
                   </button>
                 </div>
               ) : (
-                // Confirmação para compra do número livre
                 <div className="space-y-4">
-                  <p className="text-xs sm:text-sm text-slate-600">
-                    Excelente escolha! Ao confirmar, você será direcionado para o WhatsApp da Maria Júlia com a mensagem pronta:
+                  <p className="text-xs text-slate-600">
+                    Você será direcionado para o WhatsApp de Maria Júlia com a mensagem:
                   </p>
 
-                  <div className="bg-amber-50 rounded-2xl p-4 border border-gold-300 text-xs text-slate-800 italic text-left">
+                  <div className="bg-slate-50 rounded-xl p-3 border border-slate-200 text-xs text-slate-800 italic text-left">
                     &ldquo;Oi Maria Júlia, quero a cota número {activeModalCota.numero} da sua Ação Solidária!&rdquo;
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-3 pt-2">
                     <button
                       onClick={() => confirmWhatsAppRedirect(activeModalCota.numero)}
-                      className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-md transition-colors"
+                      className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs transition-colors"
                     >
-                      <MessageCircle className="w-5 h-5" />
-                      <span>Pedir Cota no WhatsApp</span>
+                      <MessageCircle className="w-4 h-4" />
+                      <span>Pedir no WhatsApp</span>
                     </button>
 
                     <button
                       onClick={() => setActiveModalCota(null)}
-                      className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition-colors"
+                      className="w-full sm:w-auto px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition-colors"
                     >
-                      Voltar
+                      Cancelar
                     </button>
                   </div>
                 </div>
