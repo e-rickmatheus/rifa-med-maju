@@ -46,7 +46,7 @@ export default function LandingPage() {
   const soldCount = Object.values(cotasMap).filter((c) => c?.status === "vendido").length;
 
   return (
-    <main className="min-h-screen flex flex-col bg-slate-50">
+    <main className="min-h-screen flex flex-col bg-pearl-50 text-navy font-sans selection:bg-antique-200 selection:text-navy">
       {/* Banner Informativo sobre Status do Banco de Dados */}
       {!firebaseActive && (
         <div className="bg-slate-100 border-b border-slate-200 text-slate-700 px-4 py-2 text-center text-xs font-medium flex items-center justify-center gap-2">

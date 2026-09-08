@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { Gauge, Fuel, Zap, Check, ArrowRight, CalendarPlus } from "lucide-react";
+import { Gauge, Fuel, Zap, ArrowRight, CalendarPlus, ShieldCheck } from "lucide-react";
 import { formatCurrency, generateGoogleCalendarUrl } from "@/lib/utils";
 
 interface PrizeSectionProps {
@@ -30,84 +30,97 @@ export default function PrizeSection({
       value: "Gasolina",
       icon: Fuel,
     },
+    {
+      label: "Garantia & Condição",
+      value: "0 km • Modelo Oficial de Fábrica",
+      icon: ShieldCheck,
+    },
   ];
 
   return (
-    <section id="premio" className="py-16 sm:py-20 bg-white border-b border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* Imagem da Moto */}
-          <div className="lg:col-span-6 flex flex-col items-center justify-center">
-            <div className="relative w-full max-w-lg aspect-[4/3] flex items-center justify-center bg-slate-50 rounded-3xl p-6 border border-slate-200/80 shadow-sm">
+    <section id="premio" className="py-20 sm:py-28 bg-white border-b border-pearl-300/60">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          {/* Apresentação Visual da Moto */}
+          <div className="lg:col-span-6 flex flex-col items-center">
+            <div className="relative w-full max-w-lg aspect-[4/3] flex items-center justify-center bg-pearl-50 rounded-3xl p-8 border border-pearl-200 transition-transform duration-500 hover:scale-[1.02]">
               <Image
                 src="/images/honda-pop-azul.png"
                 alt="Honda Pop 110i ES Azul - 0 km"
                 fill
                 sizes="(max-width: 768px) 100vw, 550px"
-                className="object-contain hover:scale-105 transition-transform duration-300"
+                className="object-contain drop-shadow-md"
               />
             </div>
-            <p className="text-xs text-slate-500 mt-3 text-center">
-              Honda Pop 110i ES • Cor Azul • 0 km
+            <p className="text-xs text-slate-500 font-sans mt-4 text-center tracking-wide">
+              Honda Pop 110i ES • Cor Azul • Zero Quilômetro
             </p>
           </div>
 
-          {/* Ficha Técnica e Informações */}
-          <div className="lg:col-span-6 space-y-6">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-1">
-                Concorra ao Prêmio
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-navy-950 font-serif-luxury">
+          {/* Ficha Técnica & Informações Editoriais */}
+          <div className="lg:col-span-6 space-y-8">
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2">
+                <span className="w-6 h-px bg-antique-500" />
+                <span className="text-[11px] uppercase tracking-[0.2em] text-antique-600 font-sans font-semibold">
+                  O Prêmio Oficial
+                </span>
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-navy tracking-tight leading-tight">
                 01 Moto Honda Pop 110i ES
               </h2>
-              <p className="text-sm text-slate-600 mt-2 leading-relaxed">
-                A moto mais econômica, prática e confiável do Brasil para o seu dia a dia. Você concorre a esta moto 0 km por apenas <strong>{formatCurrency(price)}</strong> a cota.
+
+              <p className="text-base text-slate-600 font-sans font-light leading-relaxed pt-1">
+                A moto mais econômica, prática e confiável do Brasil para transformar sua mobilidade. Você concorre a este veículo 0 km com bilhetes a apenas <strong className="text-navy font-medium">{formatCurrency(price)}</strong> por cota.
               </p>
             </div>
 
-            {/* Especificações Técnicas Oficiais da Honda */}
-            <div className="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-4">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-navy-900 border-b border-slate-200 pb-2">
-                Especificações Técnicas Oficiais (Honda)
-              </h3>
-
-              <div className="space-y-3">
-                {specs.map((spec) => {
-                  const Icon = spec.icon;
-                  return (
-                    <div key={spec.label} className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-700 shrink-0">
-                        <Icon className="w-4 h-4" />
+            {/* Especificações Técnicas em Formato de Lista Editorial */}
+            <div className="border-t border-b border-pearl-200 divide-y divide-pearl-200">
+              {specs.map((spec) => {
+                const Icon = spec.icon;
+                return (
+                  <div
+                    key={spec.label}
+                    className="py-3.5 flex items-center justify-between gap-4"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-pearl-100 flex items-center justify-center text-navy shrink-0">
+                        <Icon className="w-4 h-4 text-navy/80" />
                       </div>
-                      <div>
-                        <span className="text-xs text-slate-500 font-medium block">
-                          {spec.label}
-                        </span>
-                        <span className="text-xs sm:text-sm font-semibold text-slate-900 font-mono">
-                          {spec.value}
-                        </span>
-                      </div>
+                      <span className="text-xs uppercase tracking-wider text-slate-500 font-sans font-medium">
+                        {spec.label}
+                      </span>
                     </div>
-                  );
-                })}
-              </div>
+
+                    <span className="text-xs sm:text-sm font-sans font-semibold text-navy text-right">
+                      {spec.value}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
 
-            {/* Resumo da Cota & CTA */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2">
-              <div>
-                <span className="text-xs text-slate-500 block">Sorteio marcado para</span>
-                <div className="flex items-center gap-3 mt-0.5">
-                  <span className="text-base font-bold text-navy-950 font-mono">{drawDate}</span>
+            {/* Sorteio, Agenda e Botão CTA */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pt-2">
+              <div className="space-y-1.5">
+                <span className="text-[11px] uppercase tracking-widest text-slate-500 font-sans font-medium block">
+                  Data do Sorteio
+                </span>
+                <div className="flex items-center gap-3">
+                  <span className="text-xl font-serif font-bold text-navy">
+                    {drawDate}
+                  </span>
                   <a
                     href={generateGoogleCalendarUrl()}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium border border-slate-200 transition-colors"
-                    title="Adicionar lembrete na sua agenda"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-navy/20 hover:border-navy text-navy text-xs font-medium transition-colors"
+                    title="Adicionar evento na sua agenda"
                   >
-                    <CalendarPlus className="w-3.5 h-3.5 text-navy-900" />
+                    <CalendarPlus className="w-3.5 h-3.5 text-navy" />
                     <span>Lembrete no Google Agenda</span>
                   </a>
                 </div>
@@ -115,12 +128,13 @@ export default function PrizeSection({
 
               <a
                 href="#numeros"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-navy-950 hover:bg-navy-800 text-white font-bold text-sm transition-colors shadow-sm"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-primaryBlue hover:bg-primaryBlue-hover text-white font-sans font-semibold text-sm transition-all duration-300 shadow-sm"
               >
-                <span>Garantir Cota por {formatCurrency(price)}</span>
+                <span>Escolher Números</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
             </div>
+
           </div>
         </div>
       </div>

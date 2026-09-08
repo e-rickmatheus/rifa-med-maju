@@ -59,7 +59,7 @@ export default function AdminQuotaManager({ currentTotal }: AdminQuotaManagerPro
             <Layers className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="text-lg font-bold text-navy-950 font-serif-luxury">
+            <h3 className="text-lg font-bold text-navy-950 font-serif">
               Expandir Limite de Cotas (Escalabilidade)
             </h3>
             <p className="text-xs text-slate-500">

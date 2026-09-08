@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { TrendingUp, CheckCircle2, Ticket, DollarSign } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 
 interface ProgressBarProps {
@@ -17,66 +16,94 @@ export default function ProgressBar({ total, sold, price = 20 }: ProgressBarProp
   const goalAmount = total * price;
 
   return (
-    <section className="relative -mt-8 z-20 max-w-5xl mx-auto px-4 sm:px-6">
-      <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 sm:p-7">
-        {/* Cabeçalho */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-5">
-          <div>
-            <h3 className="text-lg font-bold text-navy-950 font-serif-luxury">
+    <section className="py-20 sm:py-24 bg-pearl border-b border-pearl-300/60">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+        {/* Cabeçalho da Seção de Progresso */}
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-10">
+          <div className="space-y-2">
+            <span className="text-[11px] uppercase tracking-[0.2em] text-antique-600 font-sans font-semibold block">
+              Transparência & Andamento
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-navy tracking-tight">
               Progresso da Ação Solidária
-            </h3>
-            <p className="text-xs text-slate-500">
-              Contagem atualizada em tempo real
+            </h2>
+            <p className="text-sm text-slate-600 font-sans font-light">
+              Acompanhamento oficial das cotas em tempo real
             </p>
           </div>
 
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-800 font-bold text-xs sm:text-sm font-mono">
-            <span>{percent.toFixed(1)}% da meta</span>
+          <div className="text-left md:text-right">
+            <span className="text-4xl sm:text-5xl font-serif font-bold text-navy tracking-tight">
+              {percent.toFixed(1)}%
+            </span>
+            <span className="block text-xs uppercase tracking-widest text-slate-500 font-sans font-medium mt-1">
+              da meta alcançada
+            </span>
           </div>
         </div>
 
-        {/* Barra de Progresso */}
-        <div className="space-y-2 mb-6">
-          <div className="w-full h-4 bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200">
+        {/* Linha Fina e Elegante de Progresso */}
+        <div className="space-y-2 mb-14">
+          <div className="w-full h-2.5 bg-pearl-300/80 rounded-full overflow-hidden">
             <div
-              className="h-full rounded-full bg-navy-900 transition-all duration-700 ease-out"
+              className="h-full bg-navy rounded-full transition-all duration-1000 ease-out"
               style={{ width: `${Math.max(percent, 1.5)}%` }}
             />
           </div>
-          <div className="flex justify-between items-center text-[11px] text-slate-500 font-medium">
-            <span>0 cotas</span>
+          <div className="flex justify-between items-center text-xs font-sans text-slate-500">
+            <span>Início</span>
             <span>Meta: {total.toLocaleString("pt-BR")} cotas ({formatCurrency(goalAmount)})</span>
           </div>
         </div>
 
-        {/* 4 Cards de Métricas */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2 border-t border-slate-100">
-          <div className="bg-slate-50 rounded-xl p-3 border border-slate-200/80 text-center">
-            <div className="text-xs text-slate-500 mb-0.5">Vendidas</div>
-            <div className="text-xl font-bold text-navy-950 font-mono">
+        {/* 4 Métricas em Tipografia Editorial */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 pt-6 border-t border-pearl-300/60">
+          <div className="space-y-1">
+            <span className="text-[11px] uppercase tracking-widest text-slate-500 font-sans font-medium block">
+              Cotas Vendidas
+            </span>
+            <div className="text-3xl sm:text-4xl font-serif font-bold text-navy">
               {sold.toLocaleString("pt-BR")}
             </div>
+            <span className="text-xs text-slate-500 font-sans font-light block">
+              bilhetes confirmados
+            </span>
           </div>
 
-          <div className="bg-slate-50 rounded-xl p-3 border border-slate-200/80 text-center">
-            <div className="text-xs text-slate-500 mb-0.5">Disponíveis</div>
-            <div className="text-xl font-bold text-slate-800 font-mono">
+          <div className="space-y-1">
+            <span className="text-[11px] uppercase tracking-widest text-slate-500 font-sans font-medium block">
+              Cotas Livres
+            </span>
+            <div className="text-3xl sm:text-4xl font-serif font-bold text-navy">
               {available.toLocaleString("pt-BR")}
             </div>
+            <span className="text-xs text-slate-500 font-sans font-light block">
+              disponíveis na grade
+            </span>
           </div>
 
-          <div className="bg-slate-50 rounded-xl p-3 border border-slate-200/80 text-center">
-            <div className="text-xs text-slate-500 mb-0.5">Total de Cotas</div>
-            <div className="text-xl font-bold text-navy-950 font-mono">
+          <div className="space-y-1">
+            <span className="text-[11px] uppercase tracking-widest text-slate-500 font-sans font-medium block">
+              Total Emitido
+            </span>
+            <div className="text-3xl sm:text-4xl font-serif font-bold text-navy">
               {total.toLocaleString("pt-BR")}
             </div>
+            <span className="text-xs text-slate-500 font-sans font-light block">
+              limite atual configurado
+            </span>
           </div>
 
-          <div className="bg-emerald-50 rounded-xl p-3 border border-emerald-200/80 text-center">
-            <div className="text-xs text-emerald-800 mb-0.5 font-medium">Total Arrecadado</div>
-            <div className="text-xl font-bold text-emerald-800 font-mono">
+          <div className="space-y-1">
+            <span className="text-[11px] uppercase tracking-widest text-emerald font-sans font-medium block">
+              Total Arrecadado
+            </span>
+            <div className="text-3xl sm:text-4xl font-serif font-bold text-emerald">
               {formatCurrency(totalRaised)}
             </div>
+            <span className="text-xs text-slate-500 font-sans font-light block">
+              destinado aos estudos
+            </span>
           </div>
         </div>
       </div>

@@ -49,7 +49,7 @@ export default function AdminLogin({ onSuccess }: AdminLoginProps) {
             <div className="w-12 h-12 rounded-xl bg-navy-800 border border-navy-700 flex items-center justify-center text-white mx-auto mb-4">
               <Lock className="w-6 h-6" />
             </div>
-            <h1 className="text-xl font-bold font-serif-luxury text-white">
+            <h1 className="text-xl font-bold font-serif text-white">
               Painel da Organizadora
             </h1>
             <p className="text-xs text-slate-400 mt-1">

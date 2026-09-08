@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Copy, Check, Phone, User, DollarSign, MessageCircle } from "lucide-react";
+import { Copy, Check, Phone, User, DollarSign, MessageCircle, ShieldCheck } from "lucide-react";
 import confetti from "canvas-confetti";
 import { formatCurrency } from "@/lib/utils";
 
@@ -29,7 +29,7 @@ export default function PixCard({
         particleCount: 40,
         spread: 60,
         origin: { y: 0.8 },
-        colors: ["#07162c", "#10b981", "#3b82f6"],
+        colors: ["#0A1A32", "#2D7D66", "#C0B283"],
       });
     } catch {
       // fallback
@@ -41,38 +41,47 @@ export default function PixCard({
   };
 
   const whatsappConfirmationUrl = `https://wa.me/${whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(
-    `Oi Maria Júlia, fiz o pagamento do PIX para a rifa. Segue o comprovante!`
+    `Oi Maria Júlia, acabei de realizar o pagamento da minha cota da rifa pelo PIX! Segue o comprovante.`
   )}`;
 
   return (
-    <section id="pix" className="py-16 bg-white border-b border-slate-200">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        <div className="bg-navy-950 rounded-3xl p-6 sm:p-10 text-white shadow-xl border border-navy-800">
+    <section id="pix" className="py-20 sm:py-28 bg-white border-b border-pearl-300/60">
+      <div className="max-w-4xl mx-auto px-6 sm:px-8">
+        <div className="bg-navy rounded-3xl p-8 sm:p-12 text-pearl border border-navy-800 relative overflow-hidden shadow-2xl">
+          {/* Luz ambiente sutil */}
+          <div className="absolute top-0 right-0 w-80 h-80 bg-antique-500/5 rounded-full blur-3xl pointer-events-none" />
+
           {/* Cabeçalho */}
-          <div className="text-center max-w-lg mx-auto mb-8 space-y-1.5">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block">
+          <div className="text-center max-w-lg mx-auto mb-10 space-y-3 relative z-10">
+            <div className="inline-flex items-center gap-2 justify-center">
+              <span className="w-6 h-px bg-antique-400" />
+              <span className="text-[11px] uppercase tracking-[0.25em] text-antique-400 font-sans font-semibold">
+                Transferência Instantânea
+              </span>
+              <span className="w-6 h-px bg-antique-400" />
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-pearl tracking-tight">
               Pagamento via PIX
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-black font-serif-luxury text-white">
-              PIX CELULAR: {pixKey}
             </h2>
-            <p className="text-xs text-slate-300">
-              Titular: {pixName} • Valor: {formatCurrency(price)} por cota
+
+            <p className="text-xs sm:text-sm text-pearl/75 font-sans font-light leading-relaxed">
+              Transfira o valor de <strong className="text-pearl font-medium">{formatCurrency(price)}</strong> por cota diretamente para a conta da estudante Maria Júlia.
             </p>
           </div>
 
-          {/* Box da Chave com Botão Copiar */}
-          <div className="bg-navy-900 border border-navy-700 rounded-2xl p-5 sm:p-6 mb-6">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3 w-full sm:w-auto">
-                <div className="w-10 h-10 rounded-xl bg-navy-800 border border-navy-700 flex items-center justify-center text-slate-200 shrink-0">
+          {/* Box de Chave com Copiar */}
+          <div className="bg-navy-950/90 border border-navy-800 rounded-2xl p-6 sm:p-8 mb-8 relative z-10">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-4 w-full sm:w-auto">
+                <div className="w-12 h-12 rounded-xl bg-navy-850 border border-navy-700 flex items-center justify-center text-antique-300 shrink-0">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-[11px] uppercase tracking-wider text-slate-400 font-bold block">
+                  <span className="text-[11px] uppercase tracking-widest text-antique-300/80 font-sans font-medium block">
                     Chave Celular
                   </span>
-                  <div className="text-xl sm:text-2xl font-black font-mono tracking-wider text-white select-all">
+                  <div className="text-2xl sm:text-3xl font-serif font-bold tracking-wider text-pearl select-all">
                     {pixKey}
                   </div>
                 </div>
@@ -80,10 +89,10 @@ export default function PixCard({
 
               <button
                 onClick={handleCopy}
-                className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-sm ${
+                className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-sans font-semibold text-xs sm:text-sm transition-all duration-300 shadow-sm ${
                   copied
-                    ? "bg-emerald-600 text-white"
-                    : "bg-white hover:bg-slate-100 text-navy-950"
+                    ? "bg-emerald text-white"
+                    : "bg-pearl text-navy hover:bg-white"
                 }`}
               >
                 {copied ? (
@@ -101,43 +110,54 @@ export default function PixCard({
             </div>
 
             {copied && (
-              <div className="mt-3 text-center text-xs font-medium text-emerald-400">
-                Chave copiada para a área de transferência. Cole no aplicativo do seu banco.
+              <div className="mt-4 pt-3 border-t border-navy-800/80 text-center text-xs font-sans text-emerald-100 flex items-center justify-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-emerald" />
+                <span>Chave copiada com sucesso! Cole no aplicativo do seu banco para transferir.</span>
               </div>
             )}
           </div>
 
-          {/* Informações adicionais */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-            <div className="bg-navy-900/60 rounded-xl p-4 border border-navy-800 flex items-center gap-3">
-              <User className="w-4 h-4 text-slate-400 shrink-0" />
+          {/* Detalhes de Favorecida & Valor */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 relative z-10">
+            <div className="bg-navy-950/60 rounded-xl p-4 sm:p-5 border border-navy-850 flex items-center gap-3.5">
+              <div className="w-8 h-8 rounded-lg bg-navy-850 flex items-center justify-center text-slate-400 shrink-0">
+                <User className="w-4 h-4" />
+              </div>
               <div>
-                <span className="text-[10px] text-slate-400 uppercase block">Favorecida</span>
-                <span className="text-sm font-semibold text-white">{pixName}</span>
+                <span className="text-[10px] uppercase tracking-wider text-slate-400 font-sans block">
+                  Titular Favorecida
+                </span>
+                <span className="text-sm font-sans font-medium text-pearl">
+                  {pixName}
+                </span>
               </div>
             </div>
 
-            <div className="bg-navy-900/60 rounded-xl p-4 border border-navy-800 flex items-center gap-3">
-              <DollarSign className="w-4 h-4 text-emerald-400 shrink-0" />
+            <div className="bg-navy-950/60 rounded-xl p-4 sm:p-5 border border-navy-850 flex items-center gap-3.5">
+              <div className="w-8 h-8 rounded-lg bg-navy-850 flex items-center justify-center text-emerald shrink-0">
+                <DollarSign className="w-4 h-4" />
+              </div>
               <div>
-                <span className="text-[10px] text-slate-400 uppercase block">Valor</span>
-                <span className="text-sm font-semibold text-emerald-400">
-                  {formatCurrency(price)} por número
+                <span className="text-[10px] uppercase tracking-wider text-slate-400 font-sans block">
+                  Valor da Cota
+                </span>
+                <span className="text-sm font-serif font-bold text-pearl">
+                  {formatCurrency(price)} <span className="text-xs font-sans font-normal text-slate-400">/ bilhete</span>
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Botão Envio do Comprovante */}
-          <div className="text-center pt-2">
+          {/* CTA Envio do Comprovante */}
+          <div className="text-center pt-2 relative z-10">
             <a
               href={whatsappConfirmationUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-sm transition-colors w-full sm:w-auto shadow-sm"
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-emerald hover:bg-emerald-700 text-white font-sans font-semibold text-sm transition-all duration-300 w-full sm:w-auto shadow-sm"
             >
               <MessageCircle className="w-4 h-4" />
-              <span>Enviar Comprovante no WhatsApp ((37) 99842-7884)</span>
+              <span>Enviar Comprovante no WhatsApp • (37) 99842-7884</span>
             </a>
           </div>
         </div>

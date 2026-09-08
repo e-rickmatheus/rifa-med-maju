@@ -146,7 +146,7 @@ export default function AdminSalesManager({
       {/* Cabeçalho */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
         <div>
-          <h3 className="text-lg font-bold text-navy-950 font-serif-luxury flex items-center gap-2">
+          <h3 className="text-lg font-bold text-navy-950 font-serif flex items-center gap-2">
             <UserCheck className="w-5 h-5 text-slate-700" />
             Gestão de Vendas de Cotas
           </h3>
@@ -266,7 +266,7 @@ export default function AdminSalesManager({
               <X className="w-5 h-5" />
             </button>
 
-            <h3 className="text-xl font-bold font-serif-luxury text-navy-950 mb-1">
+            <h3 className="text-xl font-bold font-serif text-navy-950 mb-1">
               {isSoldMode ? `Editar Cota ${editingNumero}` : "Registrar Nova Venda"}
             </h3>
             <p className="text-xs text-slate-500 mb-5">

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { ArrowDown, Calendar, CalendarPlus } from "lucide-react";
+import { ArrowDown, Calendar, CalendarPlus, ChevronRight } from "lucide-react";
 import { formatCurrency, generateGoogleCalendarUrl } from "@/lib/utils";
 
 interface HeroSectionProps {
@@ -19,77 +19,82 @@ export default function HeroSection({
   const calendarUrl = generateGoogleCalendarUrl();
 
   return (
-    <section className="relative overflow-hidden bg-navy-950 text-white pt-12 pb-20 sm:pt-16 sm:pb-24 border-b border-navy-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Texto Principal com a copy da arte original */}
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-            <div className="inline-block px-3 py-1 rounded-full bg-navy-900 border border-navy-800 text-slate-300 text-xs font-semibold tracking-wider uppercase">
-              Ação Solidária
+    <section className="relative overflow-hidden bg-navy text-pearl pt-20 pb-28 sm:pt-28 sm:pb-36 border-b border-navy-800">
+      {/* Luz ambiente sutil */}
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-antique-500/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          {/* Coluna Editorial (Texto & Citação do Sonho) */}
+          <div className="lg:col-span-7 space-y-8 text-center lg:text-left">
+            
+            {/* Tag Pre-Header */}
+            <div className="inline-flex items-center gap-2">
+              <span className="w-6 h-px bg-antique-400" />
+              <span className="text-[11px] uppercase tracking-[0.25em] text-antique-400 font-sans font-semibold">
+                Ação Solidária • Medicina
+              </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-serif-luxury text-white leading-tight">
-              &ldquo;Cada número comprado é um passo a mais para a realização de um sonho: me tornar médica e cuidar de vidas com amor e dedicação.&rdquo;
-            </h1>
+            {/* A Citação Principal em Grande Escala Serifada Editorial */}
+            <div className="space-y-6">
+              <blockquote className="text-3xl sm:text-4xl lg:text-5xl font-serif font-normal text-pearl leading-[1.25] tracking-tight italic">
+                &ldquo;Cada número comprado é um passo a mais para a realização de um sonho:{" "}
+                <span className="text-pearl not-italic font-medium">
+                  me tornar médica e cuidar de vidas com amor e dedicação.
+                </span>
+                &rdquo;
+              </blockquote>
 
-            <div className="space-y-2 text-slate-300 text-base sm:text-lg">
-              <p className="font-medium text-slate-200">
-                Em prol de ajuda para o custeio da minha{" "}
-                <span className="text-white font-semibold underline underline-offset-4 decoration-slate-500">
-                  faculdade de Medicina
-                </span>.
-              </p>
-              <p className="text-sm sm:text-base text-slate-400">
-                Ao adquirir um bilhete, você estará me ajudando a realizar esse sonho e ainda estará concorrendo a:
+              <p className="text-base sm:text-lg text-pearl/75 font-sans font-light leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                Em prol de ajuda para o custeio da minha faculdade de Medicina. Ao adquirir um bilhete de{" "}
+                <strong className="text-pearl font-medium">{formatCurrency(price)}</strong>, você apoia diretamente minha formação e concorre a{" "}
+                <strong className="text-pearl font-medium">{prize}</strong>.
               </p>
             </div>
 
-            {/* Caixa do Prêmio */}
-            <div className="bg-navy-900/90 border border-navy-700/80 rounded-2xl p-5 sm:p-6 text-left">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div>
-                  <span className="text-[11px] font-bold uppercase tracking-widest text-slate-400 block mb-1">
-                    Prêmio da Rifa
-                  </span>
-                  <div className="text-2xl sm:text-3xl font-black font-display-luxury text-white tracking-wide">
-                    {prize}
-                  </div>
-                  <div className="flex flex-wrap items-center gap-3 mt-2 text-xs text-slate-400">
-                    <div className="flex items-center gap-1.5">
-                      <Calendar className="w-4 h-4 text-slate-400" />
-                      <span>Sorteio dia: <strong className="text-white">{drawDate}</strong></span>
-                    </div>
-
-                    {/* Botão Google Calendário */}
-                    <a
-                      href={calendarUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-navy-800 hover:bg-navy-700 text-blue-200 hover:text-white border border-navy-700 transition-colors text-[11px] font-medium"
-                      title="Salvar lembrete na sua agenda"
-                    >
-                      <CalendarPlus className="w-3.5 h-3.5" />
-                      <span>Adicionar ao Google Agenda</span>
-                    </a>
-                  </div>
+            {/* Faixa Nobre do Prêmio e Sorteio (Sem boxes genéricos) */}
+            <div className="pt-2 border-t border-navy-800 flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div className="space-y-1">
+                <span className="text-[11px] uppercase tracking-widest text-antique-300/80 font-sans font-medium block">
+                  Prêmio Principal
+                </span>
+                <div className="text-2xl sm:text-3xl font-serif font-bold text-pearl tracking-tight">
+                  {prize}
                 </div>
-
-                <div className="bg-navy-950 px-5 py-3 rounded-xl border border-navy-800 text-left sm:text-right min-w-[140px]">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
-                    Valor da Cota
+                <div className="flex flex-wrap items-center gap-3 pt-1">
+                  <span className="text-xs text-pearl/70 font-sans">
+                    Sorteio oficial em <strong className="text-pearl font-medium">{drawDate}</strong>
                   </span>
-                  <span className="text-2xl sm:text-3xl font-black font-mono text-white">
-                    {formatCurrency(price)}
-                  </span>
+                  <a
+                    href={calendarUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-[11px] text-antique-300 hover:text-pearl font-sans transition-colors underline underline-offset-4 decoration-antique-400/40"
+                  >
+                    <CalendarPlus className="w-3.5 h-3.5 text-antique-400" />
+                    <span>Lembrete no Google Agenda</span>
+                  </a>
                 </div>
+              </div>
+
+              {/* Valor Unitário */}
+              <div className="text-center sm:text-right border-l-0 sm:border-l sm:border-navy-800 sm:pl-8">
+                <span className="text-[10px] uppercase tracking-widest text-antique-300/80 font-sans font-medium block">
+                  Valor por Cota
+                </span>
+                <span className="text-3xl sm:text-4xl font-serif font-bold text-pearl">
+                  {formatCurrency(price)}
+                </span>
               </div>
             </div>
 
             {/* Ações */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
               <a
                 href="#numeros"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-white hover:bg-slate-100 text-navy-950 font-bold text-sm transition-all shadow-md"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-primaryBlue hover:bg-primaryBlue-hover text-white font-sans font-semibold text-sm tracking-wide shadow-lg hover:shadow-primaryBlue/20 transition-all duration-300"
               >
                 <span>Escolher Meu Número</span>
                 <ArrowDown className="w-4 h-4" />
@@ -97,39 +102,43 @@ export default function HeroSection({
 
               <a
                 href="#premio"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-navy-900 hover:bg-navy-800 border border-navy-700 text-slate-200 font-semibold text-sm transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full border border-pearl/20 text-pearl/90 hover:text-pearl hover:border-pearl/40 font-sans font-medium text-sm transition-all"
               >
-                <span>Ver Detalhes da Moto</span>
+                <span>Conhecer a Moto</span>
+                <ChevronRight className="w-4 h-4" />
               </a>
             </div>
           </div>
 
-          {/* Foto MAJU PNG 1 */}
+          {/* Coluna da Imagem (MAJU PNG 1 Integrada Organicamente) */}
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-sm flex flex-col items-center">
-              <div className="relative w-full max-w-[300px] sm:max-w-[320px] rounded-3xl overflow-hidden border border-navy-800 bg-gradient-to-b from-navy-900 via-navy-900 to-navy-950 p-6 pt-8 shadow-2xl flex flex-col items-center">
-                <div className="relative w-full aspect-[139/220] max-h-[460px] flex items-center justify-center">
-                  <Image
-                    src="/images/maju-png-1.png"
-                    alt="Maria Júlia Gomes Gabriel - Estudante de Medicina"
-                    fill
-                    sizes="(max-width: 768px) 280px, 320px"
-                    className="object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.6)]"
-                    priority
-                  />
-                </div>
+            <div className="relative w-full max-w-[320px] sm:max-w-[360px] flex flex-col items-center">
+              {/* Círculo suave de fundo que ambienta a foto */}
+              <div className="absolute top-1/2 -translate-y-1/2 w-64 h-64 sm:w-72 sm:h-72 rounded-full bg-gradient-to-b from-navy-800/60 to-transparent blur-xl pointer-events-none" />
 
-                <div className="w-full mt-4 pt-3 border-t border-navy-800 text-center">
-                  <p className="text-sm font-bold text-white font-serif-luxury">
-                    Maria Júlia Gomes Gabriel
-                  </p>
-                  <p className="text-xs text-slate-400 mt-0.5">
-                    Estudante de Medicina
-                  </p>
-                </div>
+              <div className="relative w-full aspect-[139/220] max-h-[500px] flex items-center justify-center">
+                <Image
+                  src="/images/maju-png-1.png"
+                  alt="Maria Júlia Gomes Gabriel - Estudante de Medicina"
+                  fill
+                  sizes="(max-width: 768px) 300px, 360px"
+                  className="object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.6)]"
+                  priority
+                />
+              </div>
+
+              {/* Assinatura sutil abaixo da foto */}
+              <div className="mt-4 text-center">
+                <p className="text-base font-serif font-medium text-pearl">
+                  Maria Júlia Gomes Gabriel
+                </p>
+                <p className="text-xs uppercase tracking-widest text-antique-400/90 font-sans font-medium mt-0.5">
+                  Estudante de Medicina
+                </p>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>

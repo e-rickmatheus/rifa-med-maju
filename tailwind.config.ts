@@ -9,45 +9,56 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Deep Navy (#0A1A32) as the new Black
         navy: {
-          950: "#040b17",
-          900: "#07162c",
-          850: "#0b203e",
-          800: "#0e294f",
-          700: "#173b6f",
-          600: "#225295",
+          DEFAULT: "#0A1A32",
+          950: "#060F1F",
+          900: "#0A1A32",
+          850: "#0E2242",
+          800: "#132D56",
+          700: "#1D3E74",
+          600: "#2B569E",
         },
-        gold: {
-          100: "#fbf6e8",
-          200: "#f5e8c3",
-          300: "#edd392",
-          400: "#e0b852",
-          500: "#cda02a",
-          600: "#af811c",
-          700: "#8c6217",
+        // Pearl Off-White (#F5F4F0) as the luxury background
+        pearl: {
+          DEFAULT: "#F5F4F0",
+          50: "#FAF9F6",
+          100: "#F5F4F0",
+          200: "#EAE7DF",
+          300: "#DDD8CD",
+          400: "#CCC5B5",
         },
-        cream: {
-          50: "#fffefb",
-          100: "#fdfbf5",
-          200: "#f7f2e4",
-          300: "#ede2cb",
+        // Primary Action Blue
+        primaryBlue: {
+          DEFAULT: "#1D4ED8",
+          hover: "#1E40AF",
+          light: "#DBEAFE",
+        },
+        // Sophisticated Emerald Green (#2D7D66)
+        emerald: {
+          DEFAULT: "#2D7D66",
+          50: "#F2F8F6",
+          100: "#E3F1EC",
+          600: "#2D7D66",
+          700: "#246552",
+          800: "#1A493B",
+        },
+        // Antique Gold (#C0B283) - muted, prestigious accent
+        antique: {
+          DEFAULT: "#C0B283",
+          100: "#F7F5EE",
+          200: "#EBE6D7",
+          300: "#DDD5BE",
+          400: "#CFC3A0",
+          500: "#C0B283",
+          600: "#A89865",
+          700: "#8B7D4F",
         },
       },
       fontFamily: {
-        serif: ["var(--font-playfair)", "Playfair Display", "Georgia", "serif"],
-        sans: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
-        display: ["var(--font-cinzel)", "Cinzel", "serif"],
-      },
-      boxShadow: {
-        gold: "0 4px 20px -2px rgba(205, 160, 42, 0.25)",
-        "gold-lg": "0 10px 30px -4px rgba(205, 160, 42, 0.35)",
-        navy: "0 10px 30px -4px rgba(7, 22, 44, 0.4)",
-      },
-      backgroundImage: {
-        "gold-gradient": "linear-gradient(135deg, #f5e8c3 0%, #e0b852 50%, #cda02a 100%)",
-        "gold-metallic": "linear-gradient(90deg, #dfbe58 0%, #fbf6e8 30%, #cda02a 70%, #af811c 100%)",
-        "navy-gradient": "linear-gradient(180deg, #07162c 0%, #0b203e 50%, #07162c 100%)",
-        "cream-gradient": "linear-gradient(180deg, #ffffff 0%, #fdfbf5 50%, #f7f2e4 100%)",
+        serif: ["Lora", "Playfair Display", "Merriweather", "Georgia", "serif"],
+        sans: ["Montserrat", "Open Sans", "Lato", "system-ui", "-apple-system", "sans-serif"],
+        display: ["Playfair Display", "Lora", "serif"],
       },
     },
   },
