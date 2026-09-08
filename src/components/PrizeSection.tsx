@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { Gauge, Fuel, Zap, Check, ArrowRight, CalendarPlus } from "lucide-react";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency, generateGoogleCalendarUrl } from "@/lib/utils";
 
 interface PrizeSectionProps {
   price?: number;
@@ -101,7 +101,7 @@ export default function PrizeSection({
                 <div className="flex items-center gap-3 mt-0.5">
                   <span className="text-base font-bold text-navy-950 font-mono">{drawDate}</span>
                   <a
-                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sorteio+Rifa+Med+Maju+-+Moto+Honda+Pop&dates=20270724T220000Z/20270724T230000Z&details=Sorteio+oficial+da+A%C3%A7%C3%A3o+Solid%C3%A1ria+RIFA+MED+MAJU+(01+Moto+Honda+Pop+110i+ES+0km).+Transmiss%C3%A3o+ao+vivo+%2F+WhatsApp+(37)+99842-7884.&location=WhatsApp+%2F+Ao+Vivo+(37)+99842-7884"
+                    href={generateGoogleCalendarUrl()}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium border border-slate-200 transition-colors"
