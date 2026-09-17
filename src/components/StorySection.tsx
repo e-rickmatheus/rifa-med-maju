@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import Image from "next/image";
@@ -68,10 +68,10 @@ export default function StorySection() {
                 </div>
                 <div className="p-3 bg-white/95 text-center border-t border-pearl-200">
                   <span className="text-[11px] font-serif italic text-navy-800 block">
-                    Biquinhas (MG)
+                    A primeira consulta
                   </span>
                   <span className="text-[10px] font-sans text-slate-500 uppercase tracking-wider">
-                    As primeiras memórias
+                    A arte de ouvir e acolher
                   </span>
                 </div>
               </div>
@@ -89,10 +89,10 @@ export default function StorySection() {
                 </div>
                 <div className="p-3 bg-white/95 text-center border-t border-pearl-200">
                   <span className="text-[11px] font-serif italic text-navy-800 block">
-                    Vocação em construção
+                    O desejo de atender
                   </span>
                   <span className="text-[10px] font-sans text-slate-500 uppercase tracking-wider">
-                    O desejo de servir
+                    Sempre pronta a ajudar
                   </span>
                 </div>
               </div>

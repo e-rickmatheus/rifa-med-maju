@@ -94,13 +94,26 @@ export default function Footer({ whatsappNumber = "5537998427884" }: FooterProps
         </div>
 
         {/* Linha inferior de navegação e créditos institucionais */}
-        <div className="pt-8 border-t border-navy-850 flex flex-col sm:flex-row items-center justify-between gap-5 text-xs text-slate-400 font-sans">
+        <div className="pt-8 border-t border-navy-850 flex flex-col md:flex-row items-center justify-between gap-5 text-xs text-slate-400 font-sans">
           <div className="flex items-center gap-2">
             <Stethoscope className="w-4 h-4 text-antique-400" />
             <span className="font-medium text-slate-300">Rifa Solidária • Medicina UNIFENAS</span>
           </div>
 
-          <div className="flex items-center gap-8">
+          {/* Créditos afetivos com link do autor */}
+          <div className="text-center text-slate-400 flex items-center justify-center gap-1.5 flex-wrap">
+            <span>Criado com carinho para minha amiga MaJu,</span>
+            <a
+              href="https://www.erickmatheus.com.br/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-antique-400 hover:text-pearl font-medium underline underline-offset-4 decoration-antique-400/50 hover:decoration-pearl transition-colors"
+            >
+              Erick Matheus
+            </a>
+          </div>
+
+          <div className="flex items-center gap-6 sm:gap-8">
             <a
               href={`https://wa.me/${whatsappNumber}`}
               target="_blank"
@@ -116,7 +129,7 @@ export default function Footer({ whatsappNumber = "5537998427884" }: FooterProps
               className="hover:text-pearl transition-colors flex items-center gap-1.5"
             >
               <Lock className="w-3.5 h-3.5 text-slate-400" />
-              <span>Painel Administrativo</span>
+              <span>Painel</span>
             </Link>
           </div>
         </div>
