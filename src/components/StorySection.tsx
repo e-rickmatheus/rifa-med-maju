@@ -57,13 +57,13 @@ export default function StorySection() {
               
               {/* Foto Infância 1 */}
               <div className="group relative rounded-2xl overflow-hidden shadow-xl border-2 border-antique-100 bg-pearl-100 transform -rotate-1 hover:rotate-0 transition-transform duration-300">
-                <div className="relative aspect-[3/4] w-full">
+                <div className="relative aspect-[3/4] w-full overflow-hidden">
                   <Image
                     src="/images/maju-infancia-farmacia-1.jpg"
                     alt="Maria Júlia na infância entre prateleiras de farmácia"
                     fill
                     sizes="(max-width: 768px) 50vw, 280px"
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover object-center scale-105 group-hover:scale-112 transition-transform duration-500"
                   />
                 </div>
                 <div className="p-3 bg-white/95 text-center border-t border-pearl-200">
@@ -78,13 +78,13 @@ export default function StorySection() {
 
               {/* Foto Infância 2 */}
               <div className="group relative rounded-2xl overflow-hidden shadow-xl border-2 border-antique-100 bg-pearl-100 transform rotate-2 hover:rotate-0 transition-transform duration-300 sm:mt-6">
-                <div className="relative aspect-[3/4] w-full">
+                <div className="relative aspect-[3/4] w-full overflow-hidden">
                   <Image
                     src="/images/maju-infancia-farmacia-2.jpg"
                     alt="Maria Júlia pequenina atendendo no telefone da farmácia"
                     fill
                     sizes="(max-width: 768px) 50vw, 280px"
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover object-center scale-105 group-hover:scale-112 transition-transform duration-500"
                   />
                 </div>
                 <div className="p-3 bg-white/95 text-center border-t border-pearl-200">
