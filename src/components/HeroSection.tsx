@@ -116,12 +116,12 @@ export default function HeroSection({
               {/* Círculo suave de fundo que ambienta a foto */}
               <div className="absolute top-1/2 -translate-y-1/2 w-64 h-64 sm:w-72 sm:h-72 rounded-full bg-gradient-to-b from-navy-800/60 to-transparent blur-xl pointer-events-none" />
 
-              <div className="relative w-full aspect-[139/220] max-h-[500px] flex items-center justify-center">
+              <div className="relative w-full aspect-[682/1024] max-h-[540px] flex items-center justify-center">
                 <Image
-                  src="/images/maju-png-1.png"
-                  alt="Maria Júlia Gomes Gabriel - Estudante de Medicina"
+                  src="/images/maju-hero-hd.png"
+                  alt="Maria Júlia Gomes Gabriel - Estudante de Medicina UNIFENAS"
                   fill
-                  sizes="(max-width: 768px) 300px, 360px"
+                  sizes="(max-width: 768px) 340px, 420px"
                   className="object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.6)]"
                   priority
                 />

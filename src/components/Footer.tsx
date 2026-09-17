@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Stethoscope, MessageCircle, Lock, Heart } from "lucide-react";
+import RotatingQuotes from "@/components/RotatingQuotes";
 
 interface FooterProps {
   whatsappNumber?: string;
@@ -84,6 +85,11 @@ export default function Footer({ whatsappNumber = "5537998427884" }: FooterProps
               </div>
             </div>
 
+          </div>
+
+          {/* Carrossel Rotativo de Frases Bíblicas e Provérbios */}
+          <div className="mt-8 pt-8 border-t border-navy-800">
+            <RotatingQuotes />
           </div>
         </div>
 

@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Stethoscope, Lock, Menu, X, MessageCircle } from "lucide-react";
+import { Stethoscope, GraduationCap, Lock, Menu, X, MessageCircle } from "lucide-react";
 
 interface HeaderProps {
   whatsappNumber?: string;
@@ -10,6 +10,15 @@ interface HeaderProps {
 
 export default function Header({ whatsappNumber = "5537998427884" }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showStethoscope, setShowStethoscope] = useState(false);
+
+  // Alterna suavemente entre o chapéu de formando (beca) e o estetoscópio
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setShowStethoscope((prev) => !prev);
+    }, 2800);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <header className="sticky top-0 z-40 bg-navy text-pearl border-b border-navy-800/80 backdrop-blur-md">
@@ -17,8 +26,25 @@ export default function Header({ whatsappNumber = "5537998427884" }: HeaderProps
         <div className="flex items-center justify-between h-20 sm:h-24">
           {/* Identificação Editorial */}
           <Link href="/" className="flex items-center gap-3.5 group">
-            <div className="w-10 h-10 rounded-full border border-antique-400/40 flex items-center justify-center text-antique-400 group-hover:border-antique-300 transition-colors">
-              <Stethoscope className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-full border border-antique-400/40 flex items-center justify-center text-antique-400 group-hover:border-antique-300 transition-colors relative overflow-hidden">
+              <div className="relative w-5 h-5 flex items-center justify-center">
+                {/* Chapéu de Formando (Beca) */}
+                <GraduationCap
+                  className={`w-5 h-5 absolute inset-0 transition-all duration-700 ease-in-out transform ${
+                    showStethoscope
+                      ? "opacity-0 rotate-45 scale-75 pointer-events-none"
+                      : "opacity-100 rotate-0 scale-100"
+                  }`}
+                />
+                {/* Objeto de Médico (Estetoscópio) */}
+                <Stethoscope
+                  className={`w-5 h-5 absolute inset-0 transition-all duration-700 ease-in-out transform ${
+                    showStethoscope
+                      ? "opacity-100 rotate-0 scale-100"
+                      : "opacity-0 -rotate-45 scale-75 pointer-events-none"
+                  }`}
+                />
+              </div>
             </div>
             <div>
               <span className="text-xl sm:text-2xl font-serif font-bold tracking-tight text-pearl">
@@ -31,7 +57,10 @@ export default function Header({ whatsappNumber = "5537998427884" }: HeaderProps
           </Link>
 
           {/* Navegação Desktop */}
-          <nav className="hidden md:flex items-center gap-10 text-xs uppercase tracking-widest font-sans font-medium text-pearl/80">
+          <nav className="hidden md:flex items-center gap-8 lg:gap-10 text-xs uppercase tracking-widest font-sans font-medium text-pearl/80">
+            <a href="#historia" className="hover:text-pearl transition-colors text-antique-300">
+              Minha História
+            </a>
             <a href="#premio" className="hover:text-pearl transition-colors">
               O Prêmio
             </a>
@@ -86,6 +115,13 @@ export default function Header({ whatsappNumber = "5537998427884" }: HeaderProps
       {/* Menu Mobile */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-navy-950 border-b border-navy-800 px-6 py-6 space-y-4 text-sm font-sans">
+          <a
+            href="#historia"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block text-antique-300 font-medium py-1"
+          >
+            Minha História
+          </a>
           <a
             href="#premio"
             onClick={() => setMobileMenuOpen(false)}

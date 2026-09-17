@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
+import StorySection from "@/components/StorySection";
 import PrizeSection from "@/components/PrizeSection";
 import ProgressBar from "@/components/ProgressBar";
 import HowItWorks from "@/components/HowItWorks";
@@ -65,12 +66,15 @@ export default function LandingPage() {
       {/* Header com Navegação */}
       <Header whatsappNumber={settings.whatsapp} />
 
-      {/* Hero Section com História e Foto 0 da Maju */}
+      {/* Hero Section com Chamada Principal e Foto HD da Maju */}
       <HeroSection
         price={settings.price}
         prize={settings.prize}
         drawDate={settings.draw_date}
       />
+
+      {/* Seção de Storytelling Emocionante: A Trajetória da Maju */}
+      <StorySection />
 
       {/* Barra de Progresso Dinâmica */}
       <ProgressBar

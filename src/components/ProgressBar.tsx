@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { formatCurrency } from "@/lib/utils";
 
 interface ProgressBarProps {
   total: number;
@@ -9,11 +8,9 @@ interface ProgressBarProps {
   price?: number;
 }
 
-export default function ProgressBar({ total, sold, price = 20 }: ProgressBarProps) {
+export default function ProgressBar({ total, sold }: ProgressBarProps) {
   const percent = total > 0 ? Math.min(100, Math.round((sold / total) * 1000) / 10) : 0;
   const available = Math.max(0, total - sold);
-  const totalRaised = sold * price;
-  const goalAmount = total * price;
 
   return (
     <section className="py-20 sm:py-24 bg-pearl border-b border-pearl-300/60">
@@ -52,33 +49,33 @@ export default function ProgressBar({ total, sold, price = 20 }: ProgressBarProp
           </div>
           <div className="flex justify-between items-center text-xs font-sans text-slate-500">
             <span>Início</span>
-            <span>Meta: {total.toLocaleString("pt-BR")} cotas ({formatCurrency(goalAmount)})</span>
+            <span>Meta: {total.toLocaleString("pt-BR")} cotas</span>
           </div>
         </div>
 
-        {/* 4 Métricas em Tipografia Editorial */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 pt-6 border-t border-pearl-300/60">
+        {/* 3 Métricas em Tipografia Editorial */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12 pt-6 border-t border-pearl-300/60">
           <div className="space-y-1">
             <span className="text-[11px] uppercase tracking-widest text-slate-500 font-sans font-medium block">
-              Cotas Vendidas
+              Cotas Confirmadas
             </span>
             <div className="text-3xl sm:text-4xl font-serif font-bold text-navy">
               {sold.toLocaleString("pt-BR")}
             </div>
             <span className="text-xs text-slate-500 font-sans font-light block">
-              bilhetes confirmados
+              bilhetes reservados e pagos
             </span>
           </div>
 
           <div className="space-y-1">
             <span className="text-[11px] uppercase tracking-widest text-slate-500 font-sans font-medium block">
-              Cotas Livres
+              Cotas Disponíveis
             </span>
             <div className="text-3xl sm:text-4xl font-serif font-bold text-navy">
               {available.toLocaleString("pt-BR")}
             </div>
             <span className="text-xs text-slate-500 font-sans font-light block">
-              disponíveis na grade
+              disponíveis para escolha
             </span>
           </div>
 
@@ -90,19 +87,7 @@ export default function ProgressBar({ total, sold, price = 20 }: ProgressBarProp
               {total.toLocaleString("pt-BR")}
             </div>
             <span className="text-xs text-slate-500 font-sans font-light block">
-              limite atual configurado
-            </span>
-          </div>
-
-          <div className="space-y-1">
-            <span className="text-[11px] uppercase tracking-widest text-emerald font-sans font-medium block">
-              Total Arrecadado
-            </span>
-            <div className="text-3xl sm:text-4xl font-serif font-bold text-emerald">
-              {formatCurrency(totalRaised)}
-            </div>
-            <span className="text-xs text-slate-500 font-sans font-light block">
-              destinado aos estudos
+              cotas no sorteio oficial
             </span>
           </div>
         </div>
