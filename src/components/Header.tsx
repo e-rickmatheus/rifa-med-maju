@@ -25,8 +25,8 @@ export default function Header({ whatsappNumber = "5537998427884" }: HeaderProps
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="flex items-center justify-between h-20 sm:h-24">
           {/* Identificação Editorial */}
-          <Link href="/" className="flex items-center gap-3.5 group">
-            <div className="w-10 h-10 rounded-full border border-antique-400/40 flex items-center justify-center text-antique-400 group-hover:border-antique-300 transition-colors relative overflow-hidden">
+          <Link href="/" className="flex items-center gap-3.5 group shrink-0 mr-4 lg:mr-8">
+            <div className="w-10 h-10 rounded-full border border-antique-400/40 flex items-center justify-center text-antique-400 group-hover:border-antique-300 transition-colors relative overflow-hidden shrink-0">
               <div className="relative w-5 h-5 flex items-center justify-center">
                 {/* Chapéu de Formando (Beca) */}
                 <GraduationCap
@@ -47,22 +47,23 @@ export default function Header({ whatsappNumber = "5537998427884" }: HeaderProps
               </div>
             </div>
             <div className="shrink-0 whitespace-nowrap">
-              <div className="flex items-baseline gap-2">
-                <span className="text-xl sm:text-2xl font-serif font-bold tracking-tight text-pearl">
-                  Rifa Solidária
-                </span>
-                <span className="text-antique-300 font-serif italic font-bold text-lg sm:text-2xl">
+              <span className="text-xl sm:text-2xl font-serif font-bold tracking-tight text-pearl block leading-tight">
+                Rifa Solidária
+              </span>
+              <p className="text-xs sm:text-sm font-sans text-antique-300 flex items-center gap-1.5 mt-0.5">
+                <strong className="font-serif italic font-bold text-antique-300 text-sm sm:text-base tracking-wide">
                   Maria Júlia
+                </strong>
+                <span className="text-antique-400/60">•</span>
+                <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-slate-300 font-medium">
+                  Medicina UNIFENAS
                 </span>
-              </div>
-              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-antique-400/80 font-sans font-medium">
-                Medicina UNIFENAS
               </p>
             </div>
           </Link>
 
           {/* Navegação Desktop */}
-          <nav className="hidden md:flex items-center gap-8 lg:gap-10 text-xs uppercase tracking-widest font-sans font-medium text-pearl/80">
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-xs uppercase tracking-widest font-sans font-medium text-pearl/80">
             <a href="#historia" className="hover:text-pearl transition-colors text-antique-300">
               Minha História
             </a>
