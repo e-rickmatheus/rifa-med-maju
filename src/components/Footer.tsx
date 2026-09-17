@@ -102,7 +102,11 @@ export default function Footer({ whatsappNumber = "5537998427884" }: FooterProps
 
           {/* Créditos afetivos com link do autor */}
           <div className="text-center text-slate-400 flex items-center justify-center gap-1.5 flex-wrap">
-            <span>Criado com carinho para minha amiga MaJu,</span>
+            <span>Criado com carinho para minha amiga</span>
+            <span className="font-serif italic font-bold text-antique-300 text-sm tracking-wide">
+              MaJu
+            </span>
+            <span>,</span>
             <a
               href="https://www.erickmatheus.com.br/"
               target="_blank"

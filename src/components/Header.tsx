@@ -46,12 +46,17 @@ export default function Header({ whatsappNumber = "5537998427884" }: HeaderProps
                 />
               </div>
             </div>
-            <div>
-              <span className="text-xl sm:text-2xl font-serif font-bold tracking-tight text-pearl">
-                Rifa Solidária
-              </span>
-              <p className="text-[11px] uppercase tracking-widest text-antique-300/80 font-sans font-medium">
-                Medicina UNIFENAS • Maria Júlia
+            <div className="shrink-0 whitespace-nowrap">
+              <div className="flex items-baseline gap-2">
+                <span className="text-xl sm:text-2xl font-serif font-bold tracking-tight text-pearl">
+                  Rifa Solidária
+                </span>
+                <span className="text-antique-300 font-serif italic font-bold text-lg sm:text-2xl">
+                  Maria Júlia
+                </span>
+              </div>
+              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-antique-400/80 font-sans font-medium">
+                Medicina UNIFENAS
               </p>
             </div>
           </Link>
