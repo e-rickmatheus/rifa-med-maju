@@ -130,8 +130,8 @@ export default function AdminPage() {
           <div className="flex items-center justify-between h-16 sm:h-20">
             {/* Logo do Admin */}
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-navy-800 border border-navy-700 flex items-center justify-center text-white">
-                <GraduationCap className="w-5 h-5" />
+              <div className="w-10 h-10 rounded-xl bg-navy-800 border border-navy-700 flex items-center justify-center text-emerald-400">
+                <DollarSign className="w-5 h-5" />
               </div>
               <div>
                 <span className="text-base sm:text-lg font-bold font-display-luxury text-white">
