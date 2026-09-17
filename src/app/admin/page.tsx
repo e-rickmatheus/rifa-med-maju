@@ -44,9 +44,13 @@ export default function AdminPage() {
   const [copiedScript, setCopiedScript] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const auth = sessionStorage.getItem("rifa_admin_auth");
-      setIsAuthenticated(auth === "true");
+    try {
+      if (typeof window !== "undefined") {
+        const auth = sessionStorage.getItem("rifa_admin_auth");
+        setIsAuthenticated(auth === "true");
+      }
+    } catch {
+      setIsAuthenticated(false);
     }
 
     setFirebaseActive(isFirebaseConfigured());
@@ -65,10 +69,22 @@ export default function AdminPage() {
     };
   }, []);
 
+  const totalNumbers = settings.total_numbers || 1000;
+  const normalizedCotas = useMemo(
+    () => normalizeCotasMap(cotasMap, totalNumbers),
+    [cotasMap, totalNumbers]
+  );
+  const soldCount = Object.keys(normalizedCotas).length;
+  const availableCount = Math.max(0, totalNumbers - soldCount);
+  const totalRevenue = soldCount * (settings.price || 20);
+  const percent = totalNumbers > 0 ? ((soldCount / totalNumbers) * 100).toFixed(1) : "0.0";
+
   const handleLogout = () => {
-    if (typeof window !== "undefined") {
-      sessionStorage.removeItem("rifa_admin_auth");
-    }
+    try {
+      if (typeof window !== "undefined") {
+        sessionStorage.removeItem("rifa_admin_auth");
+      }
+    } catch {}
     setIsAuthenticated(false);
   };
 
@@ -87,9 +103,11 @@ export default function AdminPage() {
   };
 
   const handleCopyAppsScript = () => {
-    navigator.clipboard.writeText(APPS_SCRIPT_TEMPLATE);
-    setCopiedScript(true);
-    setTimeout(() => setCopiedScript(false), 3000);
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(APPS_SCRIPT_TEMPLATE);
+      setCopiedScript(true);
+      setTimeout(() => setCopiedScript(false), 3000);
+    }
   };
 
   if (isAuthenticated === null) {
@@ -103,16 +121,6 @@ export default function AdminPage() {
   if (!isAuthenticated) {
     return <AdminLogin onSuccess={() => setIsAuthenticated(true)} />;
   }
-
-  const totalNumbers = settings.total_numbers || 1000;
-  const normalizedCotas = useMemo(
-    () => normalizeCotasMap(cotasMap, totalNumbers),
-    [cotasMap, totalNumbers]
-  );
-  const soldCount = Object.keys(normalizedCotas).length;
-  const availableCount = Math.max(0, totalNumbers - soldCount);
-  const totalRevenue = soldCount * (settings.price || 20);
-  const percent = totalNumbers > 0 ? ((soldCount / totalNumbers) * 100).toFixed(1) : "0.0";
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col text-slate-900">

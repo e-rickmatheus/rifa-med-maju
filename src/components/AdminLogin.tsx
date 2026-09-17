@@ -22,9 +22,11 @@ export default function AdminLogin({ onSuccess }: AdminLoginProps) {
 
     setTimeout(() => {
       if (password.trim() === validPassword) {
-        if (typeof window !== "undefined") {
-          sessionStorage.setItem("rifa_admin_auth", "true");
-        }
+        try {
+          if (typeof window !== "undefined") {
+            sessionStorage.setItem("rifa_admin_auth", "true");
+          }
+        } catch {}
         onSuccess();
       } else {
         setError(true);
