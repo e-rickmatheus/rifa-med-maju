@@ -268,8 +268,8 @@ export default function PersonalAppPage() {
                   : "border-transparent text-slate-400 hover:text-white"
               }`}
             >
-              <Database className="w-4 h-4" />
-              <span>3. Hub de Contas & Google Maju</span>
+              <FolderOpen className="w-4 h-4" />
+              <span>3. Hub de Contas</span>
             </button>
 
             <button
@@ -459,183 +459,104 @@ export default function PersonalAppPage() {
           </div>
         )}
 
-        {/* ABA 3: HUB DE CONTAS & GOOGLE MAJU */}
+        {/* ABA 3: HUB DE CONTAS DA MAJU */}
         {activeTab === "servicos" && (
           <div className="space-y-6 animate-fadeIn">
             <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
               <div>
                 <h3 className="text-xl font-serif font-bold text-navy-950 flex items-center gap-2">
-                  <Database className="w-5 h-5 text-emerald-600" />
-                  <span>Hub de Contas & Serviços Google da Maju</span>
+                  <FolderOpen className="w-5 h-5 text-emerald-600" />
+                  <span>Hub de Contas da Maju</span>
                 </h3>
                 <p className="text-xs text-slate-500 mt-1">
-                  Centralização oficial na conta: <strong>mariajuliagomesgabriel@gmail.com</strong>
+                  Acessos diretos e organizados na conta: <strong>mariajuliagomesgabriel@gmail.com</strong>
                 </p>
               </div>
 
-              {/* Grid de Serviços */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {/* Grid de Serviços - Apenas o que a Maju precisa acessar */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 
-                {/* 1. Google Drive */}
-                <div className="p-5 rounded-2xl border border-slate-200 bg-slate-50 flex flex-col justify-between space-y-4">
+                {/* 1. Google Drive Oficial */}
+                <div className="p-6 rounded-2xl border border-slate-200 bg-slate-50 flex flex-col justify-between space-y-4 shadow-sm hover:shadow transition-shadow">
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
                         <FolderOpen className="w-5 h-5" />
                       </div>
                       <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">
-                        15 GB Grátis
+                        Pasta Oficial
                       </span>
                     </div>
                     <h4 className="font-bold text-sm text-navy-950">Google Drive da Maju</h4>
                     <p className="text-xs text-slate-500 leading-relaxed">
-                      Armazenamento de fotos de campanhas, comprovantes de PIX e relatórios em PDF.
+                      Pasta oficial com as fotos de campanha, comprovantes de PIX, documentos e arquivos do projeto.
                     </p>
                   </div>
                   <a
-                    href="https://drive.google.com/"
+                    href="https://drive.google.com/drive/folders/1xGAc-S68ut-lEGzgJq-afjr6_ZxO_5TW"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold transition-colors"
+                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold transition-colors"
                   >
-                    <span>Abrir Google Drive</span>
+                    <span>Abrir Pasta no Google Drive</span>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 </div>
 
-                {/* 2. Google Sheets */}
-                <div className="p-5 rounded-2xl border border-slate-200 bg-slate-50 flex flex-col justify-between space-y-4">
+                {/* 2. Google Planilhas Oficial */}
+                <div className="p-6 rounded-2xl border border-slate-200 bg-slate-50 flex flex-col justify-between space-y-4 shadow-sm hover:shadow transition-shadow">
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
                         <Table className="w-5 h-5" />
                       </div>
                       <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
-                        Conectado
+                        Ao Vivo
                       </span>
                     </div>
                     <h4 className="font-bold text-sm text-navy-950">Google Planilhas Oficial</h4>
                     <p className="text-xs text-slate-500 leading-relaxed">
-                      Planilha ao vivo de controle de cotas da rifa e webhook automático de vendas.
+                      Planilha ao vivo de controle de cotas da rifa da moto, lista de compradores e pagamentos.
                     </p>
                   </div>
                   <a
                     href={GOOGLE_SHEET_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-semibold transition-colors"
+                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-semibold transition-colors"
                   >
-                    <span>Abrir Planilha</span>
+                    <span>Abrir Planilha de Vendas</span>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 </div>
 
-                {/* 3. Firebase Console */}
-                <div className="p-5 rounded-2xl border border-slate-200 bg-slate-50 flex flex-col justify-between space-y-4">
+                {/* 3. Campanha Vakinha.com */}
+                <div className="p-6 rounded-2xl border border-slate-200 bg-slate-50 flex flex-col justify-between space-y-4 shadow-sm hover:shadow transition-shadow">
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
-                        🔥
+                      <div className="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold">
+                        <Heart className="w-5 h-5 fill-rose-500 text-rose-500" />
                       </div>
-                      <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">
-                        Plano Spark
+                      <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-rose-100 text-rose-800">
+                        Arrecadação
                       </span>
                     </div>
-                    <h4 className="font-bold text-sm text-navy-950">Firebase Firestore</h4>
+                    <h4 className="font-bold text-sm text-navy-950">Vakinha Solidária (Vakinha.com)</h4>
                     <p className="text-xs text-slate-500 leading-relaxed">
-                      Banco de dados em tempo real da rifa (50.000 leituras/dia gratuitas na conta dela).
+                      Acesso ao painel da Vakinha para acompanhar as doações recebidas via cartão de crédito e boleto bancário.
                     </p>
                   </div>
-                  <a
-                    href="https://console.firebase.google.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold transition-colors"
-                  >
-                    <span>Abrir Firebase Console</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-
-                {/* 4. Google AI Studio (Gemini) */}
-                <div className="p-5 rounded-2xl border border-slate-200 bg-slate-50 flex flex-col justify-between space-y-4">
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <div className="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold">
-                        ✨
-                      </div>
-                      <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">
-                        Cotas Gratuitas
-                      </span>
-                    </div>
-                    <h4 className="font-bold text-sm text-navy-950">Google AI Studio (Gemini)</h4>
-                    <p className="text-xs text-slate-500 leading-relaxed">
-                      Gerencie sua chave GEMINI_API_KEY gratuita criada com o Gmail da Maria Júlia.
-                    </p>
+                  <div className="flex flex-col gap-2">
+                    <a
+                      href={process.env.NEXT_PUBLIC_VAKINHA_URL || "https://www.vakinha.com.br/"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold transition-colors"
+                    >
+                      <span>Abrir Painel Vakinha.com</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
                   </div>
-                  <a
-                    href="https://aistudio.google.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold transition-colors"
-                  >
-                    <span>Abrir Google AI Studio</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-
-                {/* 5. Supabase */}
-                <div className="p-5 rounded-2xl border border-slate-200 bg-slate-50 flex flex-col justify-between space-y-4">
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
-                        ⚡
-                      </div>
-                      <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
-                        Free Tier
-                      </span>
-                    </div>
-                    <h4 className="font-bold text-sm text-navy-950">Supabase</h4>
-                    <p className="text-xs text-slate-500 leading-relaxed">
-                      Banco PostgreSQL e autenticação vinculados ao login do Google da Maria Júlia.
-                    </p>
-                  </div>
-                  <a
-                    href="https://supabase.com/dashboard"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white text-xs font-semibold transition-colors"
-                  >
-                    <span>Abrir Supabase</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-
-                {/* 6. Vercel Hosting & DNS */}
-                <div className="p-5 rounded-2xl border border-slate-200 bg-slate-50 flex flex-col justify-between space-y-4">
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <div className="w-10 h-10 rounded-xl bg-black text-white flex items-center justify-center font-bold">
-                        ▲
-                      </div>
-                      <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-800">
-                        mariajulia.med.br
-                      </span>
-                    </div>
-                    <h4 className="font-bold text-sm text-navy-950">Vercel Domínios & DNS</h4>
-                    <p className="text-xs text-slate-500 leading-relaxed">
-                      Gerenciamento de DNS para www, rifa, vaquinha e app.mariajulia.med.br.
-                    </p>
-                  </div>
-                  <a
-                    href="https://vercel.com/dashboard"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-black hover:bg-slate-800 text-white text-xs font-semibold transition-colors"
-                  >
-                    <span>Abrir Vercel</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
                 </div>
 
               </div>
