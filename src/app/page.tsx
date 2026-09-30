@@ -115,9 +115,9 @@ export default function HomePage() {
               <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                 <Link
                   href="/rifa"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-fuchsia-700 hover:bg-fuchsia-600 text-white font-semibold text-sm shadow-xl shadow-fuchsia-700/20 transition-all group"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-blue-700 hover:bg-blue-600 text-white font-semibold text-sm shadow-xl shadow-blue-700/20 transition-all group"
                 >
-                  <Gift className="w-4 h-4 text-fuchsia-200" />
+                  <Gift className="w-4 h-4 text-blue-200" />
                   <span>Acessar Rifa Solidária (Moto Pop)</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
@@ -192,19 +192,19 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             
             {/* Card 1: Rifa Oficial */}
-            <div className="bg-navy-900 rounded-3xl border border-navy-700 p-8 sm:p-10 flex flex-col justify-between hover:border-fuchsia-400/60 transition-all group relative overflow-hidden">
+            <div className="bg-navy-900 rounded-3xl border border-navy-700 p-8 sm:p-10 flex flex-col justify-between hover:border-blue-400/60 transition-all group relative overflow-hidden">
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-2xl bg-fuchsia-950/40 border border-fuchsia-800/40 text-fuchsia-300 flex items-center justify-center">
-                    <Gift className="w-6 h-6 text-fuchsia-300" />
+                  <div className="w-12 h-12 rounded-2xl bg-blue-950/40 border border-blue-800/40 text-blue-300 flex items-center justify-center">
+                    <Gift className="w-6 h-6 text-blue-300" />
                   </div>
-                  <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-fuchsia-950/60 text-fuchsia-300 border border-fuchsia-700/50">
+                  <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-blue-950/60 text-blue-300 border border-blue-700/50">
                     R$ 20 por cota
                   </span>
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-2xl font-serif font-bold text-white group-hover:text-fuchsia-200 transition-colors">
+                  <h3 className="text-2xl font-serif font-bold text-white group-hover:text-blue-200 transition-colors">
                     Rifa da Moto Honda Pop 0km
                   </h3>
                   <p className="text-slate-300 text-sm leading-relaxed">
@@ -215,15 +215,15 @@ export default function HomePage() {
 
                 <ul className="space-y-2.5 text-xs text-slate-300 pt-2 border-t border-navy-800">
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-400" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
                     <span>Grade de cotas interativa com reserva online</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-400" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
                     <span>Pagamento instantâneo via PIX com registro oficial</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-400" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
                     <span>Envio de bilhete nominal com foto para o WhatsApp</span>
                   </li>
                 </ul>
@@ -232,7 +232,7 @@ export default function HomePage() {
               <div className="pt-8">
                 <Link
                   href="/rifa"
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-fuchsia-700 hover:bg-fuchsia-600 text-white font-semibold text-xs uppercase tracking-wider transition-all"
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-blue-700 hover:bg-blue-600 text-white font-semibold text-xs uppercase tracking-wider transition-all"
                 >
                   <span>Ver Cotas da Rifa</span>
                   <ChevronRight className="w-4 h-4" />
@@ -422,3 +422,4 @@ export default function HomePage() {
     </main>
   );
 }
+
