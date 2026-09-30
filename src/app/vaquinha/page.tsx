@@ -40,7 +40,7 @@ export default function VaquinhaPage() {
   const vakinhaUrl =
     process.env.NEXT_PUBLIC_VAKINHA_URL && process.env.NEXT_PUBLIC_VAKINHA_URL.trim() !== ""
       ? process.env.NEXT_PUBLIC_VAKINHA_URL
-      : "https://www.vakinha.com.br/vaquinha/rumo-a-formacao-em-medicina-ajude-a-transformar-esse-sonho-em-realidade?utm_source=google-ads&utm_medium=cpc&utm_campaign=GA+-+%5BSearch%5D+%5BVakinhas%5D+Marca+%28Convers%C3%A3o%29+%28site%29&utm_campaign_id=22579434424";
+      : "https://www.vakinha.com.br/vaquinha/rumo-a-formacao-em-medicina-ajude-a-transformar-esse-sonho-em-realidade";
 
   React.useEffect(() => {
     document.title = "Vaquinha Solidária • Ajude a Maju a se Formar em Medicina";

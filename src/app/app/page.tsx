@@ -552,7 +552,7 @@ export default function PersonalAppPage() {
                   </div>
                   <div className="flex flex-col gap-2">
                     <a
-                      href={process.env.NEXT_PUBLIC_VAKINHA_URL || "https://www.vakinha.com.br/vaquinha/rumo-a-formacao-em-medicina-ajude-a-transformar-esse-sonho-em-realidade?utm_source=google-ads&utm_medium=cpc&utm_campaign=GA+-+%5BSearch%5D+%5BVakinhas%5D+Marca+%28Convers%C3%A3o%29+%28site%29&utm_campaign_id=22579434424"}
+                      href={process.env.NEXT_PUBLIC_VAKINHA_URL || "https://www.vakinha.com.br/vaquinha/rumo-a-formacao-em-medicina-ajude-a-transformar-esse-sonho-em-realidade"}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold transition-colors"
