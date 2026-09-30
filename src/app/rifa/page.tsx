@@ -28,6 +28,7 @@ export default function RifaPage() {
   const [firebaseActive, setFirebaseActive] = useState(false);
 
   useEffect(() => {
+    document.title = "Rifa Solidária Honda Pop • Medicina Maria Júlia";
     setFirebaseActive(isFirebaseConfigured());
 
     const unsubSettings = subscribeRaffleSettings((newSettings) => {
@@ -131,7 +132,7 @@ export default function RifaPage() {
       />
 
       {/* Rodapé com Agradecimento */}
-      <Footer whatsappNumber={settings.whatsapp} />
+      <Footer mode="rifa" whatsappNumber={settings.whatsapp} />
     </main>
   );
 }

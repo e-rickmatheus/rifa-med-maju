@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 import {
   Stethoscope,
   GraduationCap,
@@ -22,6 +23,10 @@ import {
 
 export default function HomePage() {
   const whatsappNumber = "5537998427884";
+
+  useEffect(() => {
+    document.title = "Maria Júlia Gomes Gabriel • Medicina UNIFENAS";
+  }, []);
 
   return (
     <main className="min-h-screen flex flex-col bg-[#0b1526] text-pearl font-sans selection:bg-antique-300 selection:text-navy-950">
@@ -70,14 +75,6 @@ export default function HomePage() {
               >
                 <MessageCircle className="w-3.5 h-3.5" />
                 <span>WhatsApp</span>
-              </a>
-
-              <a
-                href="https://app.mariajulia.med.br/"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-navy-700 text-slate-300 hover:text-white hover:border-slate-500 transition-colors"
-              >
-                <Lock className="w-3.5 h-3.5 text-antique-400" />
-                <span>app.mariajulia.med.br</span>
               </a>
             </nav>
           </div>
@@ -311,12 +308,12 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Foto 1: Infância na Farmácia */}
             <div className="bg-navy-900 rounded-2xl overflow-hidden border border-navy-700/80 space-y-4 pb-4 group">
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
+              <div className="relative aspect-[3/4] w-full overflow-hidden">
                 <Image
                   src="/images/maju-infancia-farmacia-balcao.jpeg"
                   alt="Maria Júlia na infância na farmácia da família em Biquinhas"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="px-5 space-y-1">
@@ -329,7 +326,7 @@ export default function HomePage() {
 
             {/* Foto 2: Com os Pais */}
             <div className="bg-navy-900 rounded-2xl overflow-hidden border border-navy-700/80 space-y-4 pb-4 group">
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
+              <div className="relative aspect-[3/4] w-full overflow-hidden">
                 <Image
                   src="/images/maju-infancia-pais-bolo.jpeg"
                   alt="Maria Júlia com a mãe e o pai na infância"
@@ -345,32 +342,32 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Foto 3: Com o Irmão */}
+            {/* Foto 3: Carinho & Afeto com Crianças (Rosto 100% Visível) */}
             <div className="bg-navy-900 rounded-2xl overflow-hidden border border-navy-700/80 space-y-4 pb-4 group">
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
+              <div className="relative aspect-[3/4] w-full overflow-hidden">
                 <Image
                   src="/images/maju-irmao-carinho.jpeg"
-                  alt="Maria Júlia com o irmão"
+                  alt="Maria Júlia em momento de carinho mútuo com criança"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover object-[center_12%] group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="px-5 space-y-1">
-                <span className="text-xs uppercase font-bold text-antique-400">3. Amor & Parceria</span>
+                <span className="text-xs uppercase font-bold text-antique-400">3. Carinho & Empatia</span>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Com meu irmão: a pessoa que divide todas as dores e alegrias nessa caminhada rumo ao diploma.
+                  A pureza do vínculo com as crianças: o carinho recíproco e a sensibilidade humana que acolhem e curam.
                 </p>
               </div>
             </div>
 
-            {/* Foto 4: Bloco Cirúrgico */}
+            {/* Foto 4: Bloco Cirúrgico (Rosto e Olhar Cirúrgico 100% Visíveis) */}
             <div className="bg-navy-900 rounded-2xl overflow-hidden border border-navy-700/80 space-y-4 pb-4 group">
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
+              <div className="relative aspect-[3/4] w-full overflow-hidden">
                 <Image
                   src="/images/maju-cirurgia-foco.jpeg"
                   alt="Maria Júlia no bloco cirúrgico UNIFENAS"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="px-5 space-y-1">
@@ -381,14 +378,14 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Foto 5: Pediatria */}
+            {/* Foto 5: Pediatria (Rosto da Maju e Bebê Visíveis) */}
             <div className="bg-navy-900 rounded-2xl overflow-hidden border border-navy-700/80 space-y-4 pb-4 group">
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
+              <div className="relative aspect-[3/4] w-full overflow-hidden">
                 <Image
                   src="/images/maju-pediatria-bebe-colo.jpeg"
                   alt="Maria Júlia em atendimento pediátrico"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="px-5 space-y-1">
@@ -399,14 +396,14 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Foto 6: Humanização e Idosos */}
+            {/* Foto 6: Humanização e Jaleco (Rosto e Jaleco 100% Visíveis) */}
             <div className="bg-navy-900 rounded-2xl overflow-hidden border border-navy-700/80 space-y-4 pb-4 group">
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
+              <div className="relative aspect-[3/4] w-full overflow-hidden">
                 <Image
                   src="/images/maju-pressao-idosa.jpeg"
-                  alt="Maria Júlia atendendo paciente idosa"
+                  alt="Maria Júlia com jaleco bordado em atendimento humanizado"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="px-5 space-y-1">
@@ -420,44 +417,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Rodapé Oficial da Maria Júlia */}
-      <footer className="py-12 bg-navy-950 text-slate-400 border-t border-navy-900">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-6 text-xs">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full border border-antique-400/40 flex items-center justify-center text-antique-400">
-              <Stethoscope className="w-4 h-4" />
-            </div>
-            <div>
-              <span className="text-slate-200 font-semibold block">
-                Maria Júlia Gomes Gabriel
-              </span>
-              <span className="text-[11px] text-slate-500">
-                mariajulia.med.br • Todos os direitos reservados
-              </span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-6">
-            <Link href="/rifa" className="hover:text-pearl transition-colors">
-              Rifa da Moto
-            </Link>
-            <Link href="/vaquinha" className="hover:text-pearl transition-colors">
-              Vaquinha Solidária
-            </Link>
-            <a
-              href={`https://wa.me/${whatsappNumber}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-emerald hover:text-emerald-400 transition-colors"
-            >
-              WhatsApp Oficial
-            </a>
-            <a href="https://app.mariajulia.med.br/" className="hover:text-pearl text-slate-500 transition-colors">
-              app.mariajulia.med.br
-            </a>
-          </div>
-        </div>
-      </footer>
+      {/* Rodapé Oficial da Maria Júlia (Idêntico ao da Rifa com Créditos Erick Matheus) */}
+      <Footer mode="home" whatsappNumber={whatsappNumber} />
     </main>
   );
 }

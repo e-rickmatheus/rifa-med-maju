@@ -2,10 +2,10 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Rifa Solidaria - Medicina - Maria Julia",
+  title: "Maria Júlia Gomes Gabriel • Medicina UNIFENAS",
   description:
-    "Ação Solidária para custeio da faculdade de Medicina da Maria Júlia Gomes Gabriel (UNIFENAS). Concorra a uma Moto Honda Pop por apenas R$ 20,00 a cota!",
-  keywords: ["rifa", "medicina", "maria julia", "unifenas", "moto honda pop", "ação solidária"],
+    "Conheça a história de vida e a trajetória da futura médica Maria Júlia Gomes Gabriel (UNIFENAS). Campanhas solidárias e formas de apoio.",
+  keywords: ["medicina", "maria julia", "unifenas", "vaquinha", "rifa solidária", "dra maju"],
   icons: {
     icon: [
       {
@@ -19,8 +19,8 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "Rifa Solidaria - Medicina - Maria Julia",
-    description: "Cada cota comprada é um passo a mais para a realização do sonho de ser médica na UNIFENAS. Concorra a 01 Moto Honda Pop por R$ 20,00!",
+    title: "Maria Júlia Gomes Gabriel • Medicina UNIFENAS",
+    description: "Conheça a história e trajetória da futura médica Maria Júlia Gomes Gabriel. Apoie a realização desse grande propósito!",
     type: "website",
     locale: "pt_BR",
   },

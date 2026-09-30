@@ -97,14 +97,6 @@ export default function Header({ whatsappNumber = "5537998427884" }: HeaderProps
               <MessageCircle className="w-4 h-4" />
               <span>WhatsApp</span>
             </a>
-
-            <a
-              href="https://app.mariajulia.med.br/"
-              className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-sans font-medium tracking-wide rounded-full border border-navy-700 text-pearl/70 hover:text-pearl hover:border-pearl/30 transition-colors"
-            >
-              <Lock className="w-3.5 h-3.5 text-antique-400/80" />
-              <span>app.mariajulia.med.br</span>
-            </a>
           </div>
 
           {/* Botão Mobile */}
@@ -165,14 +157,6 @@ export default function Header({ whatsappNumber = "5537998427884" }: HeaderProps
             >
               <MessageCircle className="w-4 h-4" />
               <span>Falar no WhatsApp ((37) 99842-7884)</span>
-            </a>
-            <a
-              href="https://app.mariajulia.med.br/"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-center gap-2 px-4 py-2.5 text-xs rounded-full border border-navy-700 text-pearl/80"
-            >
-              <Lock className="w-3.5 h-3.5" />
-              <span>app.mariajulia.med.br</span>
             </a>
           </div>
         </div>

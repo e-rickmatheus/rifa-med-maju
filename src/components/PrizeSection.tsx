@@ -47,14 +47,14 @@ export default function PrizeSection({
             <div className="relative w-full max-w-lg aspect-[4/3] flex items-center justify-center bg-pearl-50 rounded-3xl p-8 border border-pearl-200 transition-transform duration-500 hover:scale-[1.02]">
               <Image
                 src="/images/honda-pop-azul.png"
-                alt="Honda Pop 110i ES Azul - 0 km"
+                alt="Honda Pop 110i ES 0 km - Imagem Ilustrativa"
                 fill
                 sizes="(max-width: 768px) 100vw, 550px"
                 className="object-contain drop-shadow-md"
               />
             </div>
             <p className="text-xs text-slate-500 font-sans mt-4 text-center tracking-wide">
-              Honda Pop 110i ES • Cor Azul • Zero Quilômetro
+              Honda Pop 110i ES • Imagem Ilustrativa* • Zero Quilômetro
             </p>
           </div>
 

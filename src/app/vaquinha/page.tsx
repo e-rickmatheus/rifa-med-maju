@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import confetti from "canvas-confetti";
+import Footer from "@/components/Footer";
 import {
   Heart,
   Copy,
@@ -32,6 +33,7 @@ import {
 export default function VaquinhaPage() {
   const [copiedPix, setCopiedPix] = useState(false);
   const [selectedAmount, setSelectedAmount] = useState<number | null>(50);
+  const [customAmount, setCustomAmount] = useState<string>("");
 
   const pixKey = "37998427884";
   const whatsappNumber = "5537998427884";
@@ -39,6 +41,10 @@ export default function VaquinhaPage() {
     process.env.NEXT_PUBLIC_VAKINHA_URL && process.env.NEXT_PUBLIC_VAKINHA_URL.trim() !== ""
       ? process.env.NEXT_PUBLIC_VAKINHA_URL
       : "https://www.vakinha.com.br/";
+
+  React.useEffect(() => {
+    document.title = "Vaquinha Solidária • Ajude a Maju a se Formar em Medicina";
+  }, []);
 
   const handleCopyPix = () => {
     if (typeof navigator !== "undefined" && navigator.clipboard) {
@@ -77,35 +83,35 @@ export default function VaquinhaPage() {
     {
       value: 10,
       label: "R$ 10",
-      description: "Apoio com xerox, materiais e apostilas",
+      description: "Xerox, materiais e apostilas",
       badge: "Semente",
       popular: false,
     },
     {
       value: 25,
       label: "R$ 25",
-      description: "Transporte e alimentação nas aulas práticas",
+      description: "Transporte e alimentação",
       badge: "Incentivo",
       popular: false,
     },
     {
       value: 50,
       label: "R$ 50",
-      description: "Jaleco, luvas e insumos de laboratório",
+      description: "Jaleco e insumos de estágio",
       badge: "Mais Escolhido",
       popular: true,
     },
     {
       value: 100,
       label: "R$ 100",
-      description: "Auxílio vital para moradia estudantil em Alfenas",
+      description: "Auxílio moradia estudantil",
       badge: "Apoiador Fiel",
       popular: false,
     },
     {
       value: 200,
       label: "R$ 200",
-      description: "Cota Madrinha/Padrinho da futura Dra. Maria Júlia",
+      description: "Cota Padrinho da futura médica",
       badge: "Padrinho",
       popular: false,
     },
@@ -338,12 +344,12 @@ export default function VaquinhaPage() {
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-slate-100">
                   <Image
                     src="/images/maju-irmao-carinho.jpeg"
-                    alt="Maria Júlia de jaleco com o irmão"
+                    alt="Maria Júlia de jaleco em momento de carinho com criança"
                     fill
-                    className="object-cover object-center"
+                    className="object-cover object-[center_12%]"
                   />
                   <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-3 text-white text-xs">
-                    Com meu irmão: &ldquo;carrega todas as dores e alegrias comigo&rdquo;
+                    Afeto e empatia: a pureza do vínculo com cada criança atendida
                   </div>
                 </div>
               </div>
@@ -463,37 +469,76 @@ export default function VaquinhaPage() {
               </div>
             </div>
 
-            {/* SELEÇÃO DE VALORES RÁPIDOS */}
-            <div className="space-y-3">
-              <span className="text-xs uppercase font-bold tracking-wider text-slate-500">
-                Selecione um valor de apoio:
+            {/* SELEÇÃO DE VALORES RÁPIDOS & QUALQUER VALOR */}
+            <div className="space-y-4">
+              <span className="text-xs uppercase font-bold tracking-wider text-slate-500 block">
+                Selecione um valor de apoio ou digite qualquer quantia:
               </span>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
                 {donationTiers.map((tier) => {
-                  const isSelected = selectedAmount === tier.value;
+                  const isSelected = selectedAmount === tier.value && !customAmount;
                   return (
                     <button
                       key={tier.value}
                       type="button"
-                      onClick={() => setSelectedAmount(tier.value)}
-                      className={`relative p-3.5 rounded-2xl border text-center transition-all flex flex-col justify-between gap-1.5 ${
+                      onClick={() => {
+                        setSelectedAmount(tier.value);
+                        setCustomAmount("");
+                      }}
+                      className={`relative p-3.5 sm:p-4 rounded-2xl border text-center transition-all flex flex-col justify-between items-center gap-1.5 min-h-[115px] ${
                         isSelected
-                          ? "border-emerald-600 bg-emerald-50/70 ring-2 ring-emerald-500"
-                          : "border-slate-200 hover:border-slate-300 bg-slate-50/60"
+                          ? "border-emerald-600 bg-emerald-50/80 ring-2 ring-emerald-500 shadow-sm"
+                          : "border-slate-200 hover:border-slate-300 bg-slate-50/70"
                       }`}
                     >
-                      <span className="text-[10px] font-bold uppercase text-emerald-700">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-full">
                         {tier.badge}
                       </span>
-                      <span className="text-xl font-bold font-mono text-navy-950">
+                      <span className="text-xl sm:text-2xl font-black font-mono text-navy-950">
                         {tier.label}
                       </span>
-                      <span className="text-[11px] text-slate-500 leading-tight">
-                        {tier.description.split(" ")[0]} {tier.description.split(" ")[1]}
+                      <span className="text-xs text-slate-600 font-medium leading-snug">
+                        {tier.description}
                       </span>
                     </button>
                   );
                 })}
+              </div>
+
+              {/* OPÇÃO PARA PREENCHER QUALQUER VALOR */}
+              <div className="p-4 rounded-2xl border border-slate-200 bg-slate-50/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div>
+                  <span className="text-xs font-bold text-navy-950 block">
+                    Ou prefere contribuir com outro valor?
+                  </span>
+                  <span className="text-[11px] text-slate-500">
+                    Toda ajuda é bem-vinda de coração, qualquer quantia faz a diferença.
+                  </span>
+                </div>
+
+                <div className="relative w-full sm:w-64">
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-400">
+                    R$
+                  </span>
+                  <input
+                    type="number"
+                    min="1"
+                    step="1"
+                    placeholder="Digite qualquer valor (ex: 15, 35, 150...)"
+                    value={customAmount}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setCustomAmount(val);
+                      const num = Number(val);
+                      if (val && !isNaN(num) && num > 0) {
+                        setSelectedAmount(num);
+                      } else {
+                        setSelectedAmount(null);
+                      }
+                    }}
+                    className="w-full pl-11 pr-4 py-2.5 text-sm font-semibold rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white text-navy-950 placeholder:text-slate-400"
+                  />
+                </div>
               </div>
             </div>
 
@@ -625,17 +670,8 @@ export default function VaquinhaPage() {
         </div>
       </section>
 
-      {/* Rodapé Oficial */}
-      <footer className="py-8 bg-navy-950 text-slate-400 border-t border-navy-900 text-center text-xs">
-        <div className="max-w-7xl mx-auto px-6 space-y-2">
-          <p className="text-slate-300 font-medium">
-            Vaquinha Solidária Oficial • Maria Júlia Gomes Gabriel (Medicina UNIFENAS)
-          </p>
-          <p className="text-[11px] text-slate-500">
-            Chave PIX Celular: 37998427884 • WhatsApp: (37) 99842-7884 • mariajulia.med.br
-          </p>
-        </div>
-      </footer>
+      {/* Rodapé Oficial (Idêntico ao da Rifa com Créditos Erick Matheus) */}
+      <Footer mode="vaquinha" whatsappNumber={whatsappNumber} />
     </main>
   );
 }

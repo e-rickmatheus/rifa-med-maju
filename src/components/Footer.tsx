@@ -8,9 +8,31 @@ import RotatingQuotes from "@/components/RotatingQuotes";
 
 interface FooterProps {
   whatsappNumber?: string;
+  mode?: "home" | "rifa" | "vaquinha";
 }
 
-export default function Footer({ whatsappNumber = "5537998427884" }: FooterProps) {
+export default function Footer({
+  whatsappNumber = "5537998427884",
+  mode = "rifa",
+}: FooterProps) {
+  const quote = {
+    rifa: "“Mais do que uma rifa, essa é a prova de que sonhos se constroem juntos. Sua ajuda comprando uma cota me aproxima da realização do meu maior propósito!”",
+    vaquinha: "“Mais do que uma doação, esse gesto de carinho é a certeza de que não estou sozinha nesta reta final. Sua contribuição me aproxima do meu tão sonhado diploma de médica!”",
+    home: "“Cada gesto de apoio, oração ou compartilhamento fortalece a minha caminhada na Medicina. De coração, muito obrigada por fazer parte da realização do meu sonho!”",
+  }[mode];
+
+  const whatsappMsg = {
+    rifa: "Oi Maria Júlia, comprei cotas da sua rifa e estou torcendo muito por você e pelo seu sonho da medicina!",
+    vaquinha: "Oi Maria Júlia, acabei de contribuir com a sua vaquinha e estou na torcida pelo seu diploma de médica!",
+    home: "Oi Maria Júlia, conheci sua história pelo site e estou torcendo muito por você e pelo seu sonho da medicina!",
+  }[mode];
+
+  const badgeText = {
+    rifa: "Rifa Solidária • Medicina UNIFENAS",
+    vaquinha: "Vaquinha Solidária • Medicina UNIFENAS",
+    home: "Trajetória na Medicina • UNIFENAS",
+  }[mode];
+
   return (
     <footer className="bg-navy-950 text-pearl border-t border-navy-900 relative overflow-hidden">
       {/* Luz ambiente sutil de fundo */}
@@ -48,7 +70,7 @@ export default function Footer({ whatsappNumber = "5537998427884" }: FooterProps
               </h3>
 
               <blockquote className="text-base sm:text-lg text-pearl/85 font-serif italic leading-relaxed pl-0 md:pl-4 border-l-0 md:border-l-2 md:border-antique-400/60">
-                &ldquo;Mais do que uma rifa, essa é a prova de que sonhos se constroem juntos. Sua ajuda me aproxima da realização do meu maior propósito!&rdquo;
+                {quote}
               </blockquote>
 
               <div className="pt-2 flex flex-col sm:flex-row items-center md:items-start justify-between gap-4">
@@ -74,7 +96,7 @@ export default function Footer({ whatsappNumber = "5537998427884" }: FooterProps
 
               <div className="pt-2">
                 <a
-                  href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Oi Maria Júlia, estou torcendo por você e pelo seu sonho da medicina!")}`}
+                  href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMsg)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-emerald hover:bg-emerald-700 text-white font-sans font-semibold text-xs sm:text-sm transition-all duration-300 shadow-sm"
@@ -97,7 +119,7 @@ export default function Footer({ whatsappNumber = "5537998427884" }: FooterProps
         <div className="pt-8 border-t border-navy-850 flex flex-col md:flex-row items-center justify-between gap-5 text-xs text-slate-400 font-sans">
           <div className="flex items-center gap-2">
             <Stethoscope className="w-4 h-4 text-antique-400" />
-            <span className="font-medium text-slate-300">Rifa Solidária • Medicina UNIFENAS</span>
+            <span className="font-medium text-slate-300">{badgeText}</span>
           </div>
 
           {/* Créditos afetivos com link do autor */}
@@ -126,14 +148,6 @@ export default function Footer({ whatsappNumber = "5537998427884" }: FooterProps
             >
               <MessageCircle className="w-3.5 h-3.5 text-emerald" />
               <span>(37) 99842-7884</span>
-            </a>
-
-            <a
-              href="https://app.mariajulia.med.br/"
-              className="hover:text-pearl transition-colors flex items-center gap-1.5"
-            >
-              <Lock className="w-3.5 h-3.5 text-slate-400" />
-              <span>app.mariajulia.med.br</span>
             </a>
           </div>
         </div>
