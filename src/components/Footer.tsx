@@ -128,13 +128,13 @@ export default function Footer({ whatsappNumber = "5537998427884" }: FooterProps
               <span>(37) 99842-7884</span>
             </a>
 
-            <Link
-              href="/admin"
+            <a
+              href="https://app.mariajulia.med.br/"
               className="hover:text-pearl transition-colors flex items-center gap-1.5"
             >
               <Lock className="w-3.5 h-3.5 text-slate-400" />
-              <span>Painel</span>
-            </Link>
+              <span>app.mariajulia.med.br</span>
+            </a>
           </div>
         </div>
       </div>

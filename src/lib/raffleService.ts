@@ -25,16 +25,10 @@ export const DEFAULT_SETTINGS: RaffleSettings = {
   subtitle: "Ação Solidária em prol da faculdade de Medicina na UNIFENAS",
 };
 
-// Dados de demonstração iniciais sincronizados com a planilha oficial
-const INITIAL_DEMO_COTAS: Record<string, Cota> = {
-  "057": {
-    numero: "057",
-    status: "vendido",
-    nome_comprador: "Erick Moraes",
-    telefone: "(31) 9 9295-5010",
-    data_compra: "08/03/2026 10:00:00",
-  },
-};
+import sheetSalesSeed from "./sheetSalesSeed.json";
+
+// Dados iniciais sincronizados com a planilha oficial (109 cotas vendidas)
+const INITIAL_DEMO_COTAS: Record<string, Cota> = sheetSalesSeed as Record<string, Cota>;
 
 const LOCAL_STORAGE_SETTINGS_KEY = "rifa_med_maju_settings";
 const LOCAL_STORAGE_COTAS_KEY = "rifa_med_maju_cotas";
@@ -91,11 +85,8 @@ function getLocalCotas(): Record<string, Cota> {
       return INITIAL_DEMO_COTAS;
     }
     const parsed = JSON.parse(raw);
-    const normalized = normalizeCotasMap(parsed);
-    // Se havia duplicatas antigas na máquina do usuário, re-salva limpo
-    if (Object.keys(normalized).length !== Object.keys(parsed).length) {
-      localStorage.setItem(LOCAL_STORAGE_COTAS_KEY, JSON.stringify(normalized));
-    }
+    const merged = { ...INITIAL_DEMO_COTAS, ...parsed };
+    const normalized = normalizeCotasMap(merged);
     return normalized;
   } catch {
     return INITIAL_DEMO_COTAS;

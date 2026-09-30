@@ -320,6 +320,34 @@ export default function VaquinhaPage() {
               <p>
                 Eu cresci vendo minha mãe cuidar de todo mundo. Das irmãs, dos sobrinhos, dos conhecidos, filhos e de quem precisasse dela. Sempre foi uma pessoa que encontrava uma maneira de ajudar, mesmo quando não tinha muito para oferecer. Vi meu pai, à sua maneira, também cuidar de todo mundo, ajudar e se preocupar.
               </p>
+              
+              {/* FOTOS DE FAMÍLIA: OS PAIS E O IRMÃO */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-2">
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-slate-100">
+                  <Image
+                    src="/images/maju-infancia-pais-bolo.jpeg"
+                    alt="Maria Júlia na infância com a mãe e o pai"
+                    fill
+                    className="object-cover object-top"
+                  />
+                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-3 text-white text-xs">
+                    Com minha mãe e meu pai: o exemplo de cuidado nasceu aqui
+                  </div>
+                </div>
+
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-slate-100">
+                  <Image
+                    src="/images/maju-irmao-carinho.jpeg"
+                    alt="Maria Júlia de jaleco com o irmão"
+                    fill
+                    className="object-cover object-center"
+                  />
+                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-3 text-white text-xs">
+                    Com meu irmão: &ldquo;carrega todas as dores e alegrias comigo&rdquo;
+                  </div>
+                </div>
+              </div>
+
               <p className="font-serif italic text-xl text-navy-950 leading-snug">
                 &ldquo;Eles não eram médicos, mas me ensinaram algo que nenhum livro consegue ensinar: cuidar de alguém é uma das formas mais bonitas de amar.&rdquo;
               </p>
@@ -343,9 +371,46 @@ export default function VaquinhaPage() {
               <p>
                 A menina que cresceu em Biquinhas, que um dia terminou o ensino médio sem saber exatamente quantos caminhos teria que percorrer, talvez nunca imaginasse que estaria aqui hoje. A jovem que chegou em Belo Horizonte em 2017, cheia de sonhos e incertezas, também não sabia quantas vezes precisaria recomeçar.
               </p>
-              <p>
-                E agora chegou a minha vez de olhar para trás e perceber que, mesmo sem imaginar onde essa estrada me levaria, eu consegui chegar até aqui:
-              </p>
+
+              {/* FOTOS DE PRÁTICA MÉDICA REAL */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 py-3">
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-slate-200 shadow-md">
+                  <Image
+                    src="/images/maju-cirurgia-foco.jpeg"
+                    alt="Maria Júlia no bloco cirúrgico"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 to-transparent p-2.5 text-white text-[11px] leading-tight">
+                    Bloco Cirúrgico • Precisão e foco
+                  </div>
+                </div>
+
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-slate-200 shadow-md">
+                  <Image
+                    src="/images/maju-pediatria-bebe-colo.jpeg"
+                    alt="Maria Júlia com bebê no colo"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 to-transparent p-2.5 text-white text-[11px] leading-tight">
+                    Pediatria • Cuidado com a vida
+                  </div>
+                </div>
+
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-slate-200 shadow-md">
+                  <Image
+                    src="/images/maju-pressao-idosa.jpeg"
+                    alt="Maria Júlia atendendo idosa"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 to-transparent p-2.5 text-white text-[11px] leading-tight">
+                    Acolhimento • Escuta e respeito
+                  </div>
+                </div>
+              </div>
+
               <div className="p-5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-950 font-serif text-lg sm:text-xl font-bold text-center">
                 &ldquo;Mais perto do fim do que do começo. Já cheguei muito mais longe do que um dia imaginei.&rdquo;
               </div>

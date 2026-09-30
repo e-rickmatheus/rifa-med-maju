@@ -204,10 +204,10 @@ export default function PersonalAppPage() {
               </div>
               <div>
                 <span className="text-base sm:text-lg font-bold font-serif text-white tracking-wide">
-                  PORTAL PESSOAL • MAJU
+                  app.mariajulia.med.br
                 </span>
                 <span className="block text-[11px] text-slate-300">
-                  mariajulia.med.br • mariajuliagomesgabriel@gmail.com
+                  Portal Pessoal • mariajuliagomesgabriel@gmail.com
                 </span>
               </div>
             </div>

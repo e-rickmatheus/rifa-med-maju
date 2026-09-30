@@ -72,14 +72,13 @@ export default function HomePage() {
                 <span>WhatsApp</span>
               </a>
 
-              <Link
-                href="/app"
+              <a
+                href="https://app.mariajulia.med.br/"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-navy-700 text-slate-300 hover:text-white hover:border-slate-500 transition-colors"
-                title="Acesso Pessoal Maju"
               >
                 <Lock className="w-3.5 h-3.5 text-antique-400" />
-                <span className="hidden md:inline">Portal</span>
-              </Link>
+                <span>app.mariajulia.med.br</span>
+              </a>
             </nav>
           </div>
         </div>
@@ -309,54 +308,111 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-navy-900 rounded-2xl overflow-hidden border border-navy-700/80 space-y-4 pb-4">
-              <div className="relative aspect-square w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Foto 1: Infância na Farmácia */}
+            <div className="bg-navy-900 rounded-2xl overflow-hidden border border-navy-700/80 space-y-4 pb-4 group">
+              <div className="relative aspect-[4/3] w-full overflow-hidden">
                 <Image
-                  src="/images/maju-infancia-farmacia-1.jpg"
-                  alt="Maria Júlia na infância na farmácia da família"
+                  src="/images/maju-infancia-farmacia-balcao.jpeg"
+                  alt="Maria Júlia na infância na farmácia da família em Biquinhas"
                   fill
-                  className="object-cover"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="px-5 space-y-1">
-                <span className="text-xs uppercase font-bold text-antique-400">O Início</span>
+                <span className="text-xs uppercase font-bold text-antique-400">1. As Raízes em Biquinhas</span>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Crescendo entre balcões de farmácia, observando o alívio que o remédio e a palavra amiga traziam às pessoas.
+                  Crescendo entre as prateleiras de farmácia no interior, ouvindo e aprendendo que cuidar é uma forma de amar.
                 </p>
               </div>
             </div>
 
-            <div className="bg-navy-900 rounded-2xl overflow-hidden border border-navy-700/80 space-y-4 pb-4">
-              <div className="relative aspect-square w-full">
+            {/* Foto 2: Com os Pais */}
+            <div className="bg-navy-900 rounded-2xl overflow-hidden border border-navy-700/80 space-y-4 pb-4 group">
+              <div className="relative aspect-[4/3] w-full overflow-hidden">
                 <Image
-                  src="/images/maju-faculdade-bebe.jpg"
-                  alt="Maria Júlia e o carinho por pediatria e cuidado"
+                  src="/images/maju-infancia-pais-bolo.jpeg"
+                  alt="Maria Júlia com a mãe e o pai na infância"
                   fill
-                  className="object-cover"
+                  className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="px-5 space-y-1">
-                <span className="text-xs uppercase font-bold text-antique-400">A Vocação</span>
+                <span className="text-xs uppercase font-bold text-antique-400">2. O Exemplo Familiar</span>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  A certeza inabalável de que a medicina não é apenas uma carreira, mas uma missão de vida.
+                  Vendo minha mãe e meu pai ajudarem a quem precisasse, mesmo quando não tinham muito para oferecer.
                 </p>
               </div>
             </div>
 
-            <div className="bg-navy-900 rounded-2xl overflow-hidden border border-navy-700/80 space-y-4 pb-4">
-              <div className="relative aspect-square w-full">
+            {/* Foto 3: Com o Irmão */}
+            <div className="bg-navy-900 rounded-2xl overflow-hidden border border-navy-700/80 space-y-4 pb-4 group">
+              <div className="relative aspect-[4/3] w-full overflow-hidden">
                 <Image
-                  src="/images/foto-maju-0.jpg"
-                  alt="Maria Júlia de jaleco na UNIFENAS"
+                  src="/images/maju-irmao-carinho.jpeg"
+                  alt="Maria Júlia com o irmão"
                   fill
-                  className="object-cover"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="px-5 space-y-1">
-                <span className="text-xs uppercase font-bold text-antique-400">O Presente</span>
+                <span className="text-xs uppercase font-bold text-antique-400">3. Amor & Parceria</span>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Estudando incansavelmente na UNIFENAS e contando com o apoio de quem acredita no poder de um sonho.
+                  Com meu irmão: a pessoa que divide todas as dores e alegrias nessa caminhada rumo ao diploma.
+                </p>
+              </div>
+            </div>
+
+            {/* Foto 4: Bloco Cirúrgico */}
+            <div className="bg-navy-900 rounded-2xl overflow-hidden border border-navy-700/80 space-y-4 pb-4 group">
+              <div className="relative aspect-[4/3] w-full overflow-hidden">
+                <Image
+                  src="/images/maju-cirurgia-foco.jpeg"
+                  alt="Maria Júlia no bloco cirúrgico UNIFENAS"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="px-5 space-y-1">
+                <span className="text-xs uppercase font-bold text-emerald">4. Bloco Cirúrgico</span>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Dedicação técnica, precisão e foco intenso em procedimentos cirúrgicos e suturas no hospital-escola.
+                </p>
+              </div>
+            </div>
+
+            {/* Foto 5: Pediatria */}
+            <div className="bg-navy-900 rounded-2xl overflow-hidden border border-navy-700/80 space-y-4 pb-4 group">
+              <div className="relative aspect-[4/3] w-full overflow-hidden">
+                <Image
+                  src="/images/maju-pediatria-bebe-colo.jpeg"
+                  alt="Maria Júlia em atendimento pediátrico"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="px-5 space-y-1">
+                <span className="text-xs uppercase font-bold text-emerald">5. Pediatria & Vida</span>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Acolhendo os pequenos com carinho e delicadeza em consultas ambulatoriais e enfermarias.
+                </p>
+              </div>
+            </div>
+
+            {/* Foto 6: Humanização e Idosos */}
+            <div className="bg-navy-900 rounded-2xl overflow-hidden border border-navy-700/80 space-y-4 pb-4 group">
+              <div className="relative aspect-[4/3] w-full overflow-hidden">
+                <Image
+                  src="/images/maju-pressao-idosa.jpeg"
+                  alt="Maria Júlia atendendo paciente idosa"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="px-5 space-y-1">
+                <span className="text-xs uppercase font-bold text-emerald">6. Medicina Humanizada</span>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  O olhar nos olhos e a escuta ativa: a certeza de que a sensibilidade médica cura tanto quanto o remédio.
                 </p>
               </div>
             </div>
@@ -396,9 +452,9 @@ export default function HomePage() {
             >
               WhatsApp Oficial
             </a>
-            <Link href="/app" className="hover:text-pearl text-slate-500 transition-colors">
-              Acesso Pessoal
-            </Link>
+            <a href="https://app.mariajulia.med.br/" className="hover:text-pearl text-slate-500 transition-colors">
+              app.mariajulia.med.br
+            </a>
           </div>
         </div>
       </footer>

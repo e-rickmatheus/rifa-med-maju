@@ -12,6 +12,17 @@ export default function AdminLogin({ onSuccess }: AdminLoginProps) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [lockClicks, setLockClicks] = useState(0);
+  const [showSecretHint, setShowSecretHint] = useState(false);
+
+  const handleLockClick = () => {
+    const nextCount = lockClicks + 1;
+    if (nextCount >= 5) {
+      setShowSecretHint(true);
+    } else {
+      setLockClicks(nextCount);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,6 +36,7 @@ export default function AdminLogin({ onSuccess }: AdminLoginProps) {
         try {
           if (typeof window !== "undefined") {
             sessionStorage.setItem("rifa_admin_auth", "true");
+            sessionStorage.setItem("maju_app_auth", "true");
           }
         } catch {}
         onSuccess();
@@ -36,26 +48,29 @@ export default function AdminLogin({ onSuccess }: AdminLoginProps) {
   };
 
   return (
-    <div className="min-h-screen bg-navy-950 flex flex-col justify-center items-center px-4 sm:px-6 text-white">
+    <div className="min-h-screen bg-navy-950 flex flex-col justify-center items-center px-4 sm:px-6 text-white font-sans">
       <div className="max-w-md w-full">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-white mb-6 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Voltar para a Vitrine da Rifa</span>
+          <span>Voltar para a Página Oficial</span>
         </Link>
 
         <div className="bg-navy-900 border border-navy-800 rounded-2xl p-8 sm:p-10 shadow-xl">
           <div className="text-center mb-8">
-            <div className="w-12 h-12 rounded-xl bg-navy-800 border border-navy-700 flex items-center justify-center text-white mx-auto mb-4">
+            <div
+              onClick={handleLockClick}
+              className="w-12 h-12 rounded-xl bg-navy-800 border border-navy-700 flex items-center justify-center text-white mx-auto mb-4 select-none cursor-default"
+            >
               <Lock className="w-6 h-6" />
             </div>
             <h1 className="text-xl font-bold font-serif text-white">
-              Painel da Organizadora
+              Portal Pessoal da Maria Júlia
             </h1>
             <p className="text-xs text-slate-400 mt-1">
-              Acesso restrito para gestão da RIFA MED MAJU
+              Acesso restrito • app.mariajulia.med.br
             </p>
           </div>
 
@@ -93,15 +108,17 @@ export default function AdminLogin({ onSuccess }: AdminLoginProps) {
               disabled={loading}
               className="w-full py-3 rounded-xl bg-white hover:bg-slate-100 text-navy-950 font-bold text-sm transition-colors disabled:opacity-50"
             >
-              {loading ? "Verificando..." : "Entrar no Painel"}
+              {loading ? "Verificando..." : "Entrar no Portal"}
             </button>
           </form>
 
-          <div className="mt-6 pt-5 border-t border-navy-800 text-center">
-            <p className="text-[11px] text-slate-500">
-              Senha de acesso: <code className="text-slate-300 font-mono">Dra.MaJuGG</code>
-            </p>
-          </div>
+          {showSecretHint && (
+            <div className="mt-6 pt-4 border-t border-navy-800 text-center animate-fadeIn">
+              <p className="text-[11px] text-slate-400">
+                Dica de acesso: <code className="text-antique-300 font-mono">Dra.MaJuGG</code>
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
