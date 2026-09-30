@@ -1,116 +1,407 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
-import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
-import StorySection from "@/components/StorySection";
-import PrizeSection from "@/components/PrizeSection";
-import ProgressBar from "@/components/ProgressBar";
-import HowItWorks from "@/components/HowItWorks";
-import PixCard from "@/components/PixCard";
-import NumberGrid from "@/components/NumberGrid";
-import Footer from "@/components/Footer";
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 import {
-  subscribeRaffleSettings,
-  subscribeCotas,
-  DEFAULT_SETTINGS,
-  normalizeCotasMap,
-} from "@/lib/raffleService";
-import { isFirebaseConfigured } from "@/lib/firebase";
-import { RaffleSettings, Cota } from "@/types/raffle";
-import { CloudOff } from "lucide-react";
+  Stethoscope,
+  GraduationCap,
+  Heart,
+  Gift,
+  ArrowRight,
+  MessageCircle,
+  ExternalLink,
+  ShieldCheck,
+  Sparkles,
+  MapPin,
+  Lock,
+  ChevronRight,
+  Award,
+  BookOpen,
+} from "lucide-react";
 
-export default function LandingPage() {
-  const [settings, setSettings] = useState<RaffleSettings>(DEFAULT_SETTINGS);
-  const [cotasMap, setCotasMap] = useState<Record<string, Cota>>({});
-  const [loading, setLoading] = useState(true);
-  const [firebaseActive, setFirebaseActive] = useState(false);
-
-  useEffect(() => {
-    setFirebaseActive(isFirebaseConfigured());
-
-    const unsubSettings = subscribeRaffleSettings((newSettings) => {
-      setSettings(newSettings);
-      setLoading(false);
-    });
-
-    const unsubCotas = subscribeCotas((newCotas) => {
-      setCotasMap(newCotas);
-    });
-
-    return () => {
-      unsubSettings();
-      unsubCotas();
-    };
-  }, []);
-
-  const totalNumbers = settings.total_numbers || 1000;
-  const normalizedCotas = useMemo(
-    () => normalizeCotasMap(cotasMap, totalNumbers),
-    [cotasMap, totalNumbers]
-  );
-  const soldCount = Object.keys(normalizedCotas).length;
+export default function HomePage() {
+  const whatsappNumber = "5537998427884";
 
   return (
-    <main className="min-h-screen flex flex-col bg-pearl-50 text-navy font-sans selection:bg-antique-200 selection:text-navy">
-      {/* Banner Informativo sobre Status do Banco de Dados */}
-      {!firebaseActive && (
-        <div className="bg-slate-100 border-b border-slate-200 text-slate-700 px-4 py-2 text-center text-xs font-medium flex items-center justify-center gap-2">
-          <CloudOff className="w-4 h-4 text-slate-500" />
-          <span>
-            <strong>Modo Local de Testes:</strong> Para sincronizar na nuvem, adicione as credenciais do Firebase no <code>.env.local</code>.
-          </span>
+    <main className="min-h-screen flex flex-col bg-[#0b1526] text-pearl font-sans selection:bg-antique-300 selection:text-navy-950">
+      {/* Header Institucional */}
+      <header className="sticky top-0 z-40 bg-navy/90 backdrop-blur-md border-b border-navy-800">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="flex items-center justify-between h-20">
+            {/* Logo / Nome */}
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full border border-antique-400/40 bg-navy-900 flex items-center justify-center text-antique-400">
+                <Stethoscope className="w-5 h-5 text-antique-300" />
+              </div>
+              <div>
+                <span className="text-xl sm:text-2xl font-serif font-bold text-white block leading-tight">
+                  Maria Júlia
+                </span>
+                <span className="text-xs text-antique-300 block font-light">
+                  Futura Médica • UNIFENAS
+                </span>
+              </div>
+            </div>
+
+            {/* Menu de Acesso Rápido */}
+            <nav className="flex items-center gap-3 sm:gap-6 text-xs uppercase tracking-wider font-semibold">
+              <Link
+                href="/rifa"
+                className="hidden sm:inline-flex items-center gap-1.5 text-pearl/80 hover:text-pearl transition-colors"
+              >
+                <Gift className="w-3.5 h-3.5 text-antique-400" />
+                <span>Rifa da Moto</span>
+              </Link>
+
+              <Link
+                href="/vaquinha"
+                className="hidden sm:inline-flex items-center gap-1.5 text-red-300 hover:text-red-200 transition-colors"
+              >
+                <Heart className="w-3.5 h-3.5 fill-red-400 text-red-400" />
+                <span>Vaquinha</span>
+              </Link>
+
+              <a
+                href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Oi Maria Júlia, vim pelo seu site oficial!")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald hover:bg-emerald-700 text-white transition-colors"
+              >
+                <MessageCircle className="w-3.5 h-3.5" />
+                <span>WhatsApp</span>
+              </a>
+
+              <Link
+                href="/app"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-navy-700 text-slate-300 hover:text-white hover:border-slate-500 transition-colors"
+                title="Acesso Pessoal Maju"
+              >
+                <Lock className="w-3.5 h-3.5 text-antique-400" />
+                <span className="hidden md:inline">Portal</span>
+              </Link>
+            </nav>
+          </div>
         </div>
-      )}
+      </header>
 
-      {/* Header com Navegação */}
-      <Header whatsappNumber={settings.whatsapp} />
+      {/* Hero Principal - Foto e Nome com Design Editorial Luxuoso */}
+      <section className="relative overflow-hidden pt-12 pb-20 sm:pt-20 sm:pb-28">
+        {/* Luz de Fundo */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-antique-500/5 rounded-full blur-[140px] pointer-events-none" />
 
-      {/* Hero Section com Chamada Principal e Foto HD da Maju */}
-      <HeroSection
-        price={settings.price}
-        prize={settings.prize}
-        drawDate={settings.draw_date}
-      />
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            {/* Coluna 1: Apresentação e Vocação */}
+            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-navy-800/80 border border-antique-400/30 text-antique-300 text-xs font-semibold tracking-wider uppercase">
+                <Sparkles className="w-3.5 h-3.5 text-antique-400" />
+                <span>Portal Oficial • Medicina UNIFENAS</span>
+              </div>
 
-      {/* Seção de Storytelling Emocionante: A Trajetória da Maju */}
-      <StorySection />
+              <div className="space-y-3">
+                <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-bold text-white tracking-tight leading-[1.1]">
+                  Maria Júlia <br />
+                  <span className="font-light italic text-antique-300">Gomes Gabriel</span>
+                </h1>
+                <p className="text-lg sm:text-xl text-slate-300 font-sans font-light max-w-xl mx-auto lg:mx-0">
+                  Estudante de Medicina apaixonada pelo cuidado humanizado e pela ciência médica.
+                </p>
+              </div>
 
-      {/* Barra de Progresso Dinâmica */}
-      <ProgressBar
-        total={totalNumbers}
-        sold={soldCount}
-        price={settings.price}
-      />
+              <blockquote className="border-l-2 border-antique-400/50 pl-4 py-1 text-base sm:text-lg text-pearl/80 italic font-serif max-w-xl mx-auto lg:mx-0 text-left">
+                &ldquo;Cada dia na faculdade de medicina é a concretização de um chamado: aprender a curar,
+                aliviar a dor e dedicar minha vida a quem mais precisa.&rdquo;
+              </blockquote>
 
-      {/* Seção do Prêmio (Honda Pop Azul e Ficha Técnica) */}
-      <PrizeSection
-        price={settings.price}
-        drawDate={settings.draw_date}
-      />
+              {/* Botões de Ação Imediata */}
+              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                <Link
+                  href="/rifa"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-primaryBlue hover:bg-primaryBlue-hover text-white font-semibold text-sm shadow-xl shadow-primaryBlue/20 transition-all group"
+                >
+                  <Gift className="w-4 h-4 text-antique-300" />
+                  <span>Acessar Rifa Solidária (Moto Pop)</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
 
-      {/* 4 Passos Como Funciona */}
-      <HowItWorks />
+                <Link
+                  href="/vaquinha"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-navy-800 hover:bg-navy-700 border border-navy-700 text-pearl font-semibold text-sm transition-all"
+                >
+                  <Heart className="w-4 h-4 text-red-400 fill-red-400" />
+                  <span>Doar na Vaquinha Livre</span>
+                </Link>
+              </div>
 
-      {/* Card da Chave PIX */}
-      <PixCard
-        pixKey={settings.pix_key}
-        pixName="MARIA JULIA GOMES GABRIEL"
-        pixBank="Itaú Unibanco S.A."
-        pixCpf="***.198.986-**"
-        price={settings.price}
-        whatsapp={settings.whatsapp}
-      />
+              {/* Badges de Confiança */}
+              <div className="pt-6 border-t border-navy-800 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-400">
+                <div className="flex items-center gap-2">
+                  <GraduationCap className="w-4 h-4 text-antique-400" />
+                  <span>Aluna UNIFENAS • Alfenas/MG</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-emerald" />
+                  <span>Chave PIX Oficial Verificada</span>
+                </div>
+              </div>
+            </div>
 
-      {/* Grade Interativa de Cotas */}
-      <NumberGrid
-        totalNumbers={totalNumbers}
-        cotasMap={cotasMap}
-        whatsappNumber={settings.whatsapp}
-      />
+            {/* Coluna 2: Foto Oficial da Maria Júlia */}
+            <div className="lg:col-span-5 flex justify-center">
+              <div className="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden border border-antique-400/30 shadow-2xl shadow-navy-950/80 bg-navy-900 group">
+                <Image
+                  src="/images/maju-hero-hd.png"
+                  alt="Maria Júlia Gomes Gabriel - Estudante de Medicina"
+                  fill
+                  priority
+                  className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 768px) 100vw, 450px"
+                />
+                
+                {/* Degradê e Legenda Sobreposta */}
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-transparent opacity-80" />
+                
+                <div className="absolute bottom-0 inset-x-0 p-6 text-center space-y-1">
+                  <span className="text-xs uppercase tracking-widest text-antique-300 font-semibold block">
+                    Maria Júlia Gomes Gabriel
+                  </span>
+                  <p className="text-sm font-serif italic text-pearl/90">
+                    &ldquo;Cuidar de vidas com amor e dedicação&rdquo;
+                  </p>
+                </div>
+              </div>
+            </div>
 
-      {/* Rodapé com Agradecimento */}
-      <Footer whatsappNumber={settings.whatsapp} />
+          </div>
+        </div>
+      </section>
+
+      {/* Os 2 Pilares de Apoio: Rifa vs. Vaquinha */}
+      <section className="py-20 bg-[#070e1c] border-t border-navy-800">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 space-y-12">
+          <div className="text-center space-y-3">
+            <span className="text-xs uppercase tracking-widest text-antique-400 font-bold">
+              Como você pode fazer parte desta jornada
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-white">
+              Escolha Como Participar
+            </h2>
+            <p className="text-slate-400 text-sm max-w-xl mx-auto">
+              Cada número comprado ou cada doação voluntária aproxima Maria Júlia do jaleco branco e do diploma médico.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            {/* Card 1: Rifa Oficial */}
+            <div className="bg-navy-900 rounded-3xl border border-navy-700 p-8 sm:p-10 flex flex-col justify-between hover:border-antique-400/60 transition-all group relative overflow-hidden">
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <div className="w-12 h-12 rounded-2xl bg-primaryBlue/20 border border-primaryBlue/30 text-antique-300 flex items-center justify-center">
+                    <Gift className="w-6 h-6 text-antique-300" />
+                  </div>
+                  <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-antique-500/20 text-antique-300 border border-antique-400/30">
+                    R$ 20 por cota
+                  </span>
+                </div>
+
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-serif font-bold text-white group-hover:text-antique-200 transition-colors">
+                    Rifa da Moto Honda Pop 0km
+                  </h3>
+                  <p className="text-slate-300 text-sm leading-relaxed">
+                    Compre uma ou mais cotas da nossa rifa oficial, escolha seus números da sorte e concorra a
+                    uma moto 0km! Sorteio confirmado em <strong>24/07/2027</strong>.
+                  </p>
+                </div>
+
+                <ul className="space-y-2.5 text-xs text-slate-300 pt-2 border-t border-navy-800">
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald" />
+                    <span>Grade de cotas interativa com reserva online</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald" />
+                    <span>Pagamento instantâneo via PIX com registro oficial</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald" />
+                    <span>Envio de bilhete nominal com foto para o WhatsApp</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="pt-8">
+                <Link
+                  href="/rifa"
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-primaryBlue hover:bg-primaryBlue-hover text-white font-semibold text-xs uppercase tracking-wider transition-all"
+                >
+                  <span>Ver Cotas da Rifa</span>
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Card 2: Vaquinha Solidária */}
+            <div className="bg-navy-900 rounded-3xl border border-navy-700 p-8 sm:p-10 flex flex-col justify-between hover:border-red-400/60 transition-all group relative overflow-hidden">
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <div className="w-12 h-12 rounded-2xl bg-red-950/40 border border-red-800/40 text-red-400 flex items-center justify-center">
+                    <Heart className="w-6 h-6 fill-red-400 text-red-400" />
+                  </div>
+                  <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-red-950 text-red-300 border border-red-800">
+                    Qualquer Valor Livre
+                  </span>
+                </div>
+
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-serif font-bold text-white group-hover:text-red-300 transition-colors">
+                    Vaquinha Solidária da Maju
+                  </h3>
+                  <p className="text-slate-300 text-sm leading-relaxed">
+                    Prefere doar diretamente sem participar do sorteio? Toda quantia é bem-vinda e vai diretamente
+                    para o fundo de custeio dos estudos e materiais de medicina.
+                  </p>
+                </div>
+
+                <ul className="space-y-2.5 text-xs text-slate-300 pt-2 border-t border-navy-800">
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
+                    <span>Doação a partir de R$ 5,00, R$ 20,00 ou livre</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
+                    <span>Ajuda direta com livros anatômicos e estetoscópio</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
+                    <span>Agradecimento pessoal da Maria Júlia no WhatsApp</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="pt-8">
+                <Link
+                  href="/vaquinha"
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-red-800 hover:bg-red-700 text-white font-semibold text-xs uppercase tracking-wider transition-all"
+                >
+                  <span>Doar na Vaquinha</span>
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* Trajetória & Sonho em Fotos */}
+      <section className="py-20 bg-navy border-t border-navy-800">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 space-y-12">
+          <div className="text-center space-y-3">
+            <span className="text-xs uppercase tracking-widest text-antique-400 font-bold">
+              Vocação desde a Infância
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-white">
+              A História por Trás da Futura Médica
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-navy-900 rounded-2xl overflow-hidden border border-navy-700/80 space-y-4 pb-4">
+              <div className="relative aspect-square w-full">
+                <Image
+                  src="/images/maju-infancia-farmacia-1.jpg"
+                  alt="Maria Júlia na infância na farmácia da família"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="px-5 space-y-1">
+                <span className="text-xs uppercase font-bold text-antique-400">O Início</span>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Crescendo entre balcões de farmácia, observando o alívio que o remédio e a palavra amiga traziam às pessoas.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-navy-900 rounded-2xl overflow-hidden border border-navy-700/80 space-y-4 pb-4">
+              <div className="relative aspect-square w-full">
+                <Image
+                  src="/images/maju-faculdade-bebe.jpg"
+                  alt="Maria Júlia e o carinho por pediatria e cuidado"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="px-5 space-y-1">
+                <span className="text-xs uppercase font-bold text-antique-400">A Vocação</span>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  A certeza inabalável de que a medicina não é apenas uma carreira, mas uma missão de vida.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-navy-900 rounded-2xl overflow-hidden border border-navy-700/80 space-y-4 pb-4">
+              <div className="relative aspect-square w-full">
+                <Image
+                  src="/images/foto-maju-0.jpg"
+                  alt="Maria Júlia de jaleco na UNIFENAS"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="px-5 space-y-1">
+                <span className="text-xs uppercase font-bold text-antique-400">O Presente</span>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Estudando incansavelmente na UNIFENAS e contando com o apoio de quem acredita no poder de um sonho.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Rodapé Oficial da Maria Júlia */}
+      <footer className="py-12 bg-navy-950 text-slate-400 border-t border-navy-900">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-6 text-xs">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full border border-antique-400/40 flex items-center justify-center text-antique-400">
+              <Stethoscope className="w-4 h-4" />
+            </div>
+            <div>
+              <span className="text-slate-200 font-semibold block">
+                Maria Júlia Gomes Gabriel
+              </span>
+              <span className="text-[11px] text-slate-500">
+                mariajulia.med.br • Todos os direitos reservados
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-6">
+            <Link href="/rifa" className="hover:text-pearl transition-colors">
+              Rifa da Moto
+            </Link>
+            <Link href="/vaquinha" className="hover:text-pearl transition-colors">
+              Vaquinha Solidária
+            </Link>
+            <a
+              href={`https://wa.me/${whatsappNumber}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-emerald hover:text-emerald-400 transition-colors"
+            >
+              WhatsApp Oficial
+            </a>
+            <Link href="/app" className="hover:text-pearl text-slate-500 transition-colors">
+              Acesso Pessoal
+            </Link>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }

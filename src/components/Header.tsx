@@ -63,47 +63,48 @@ export default function Header({ whatsappNumber = "5537998427884" }: HeaderProps
           </Link>
 
           {/* Navegação Desktop */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-xs uppercase tracking-widest font-sans font-medium text-pearl/80">
-            <a href="#historia" className="hover:text-pearl transition-colors text-antique-300">
-              Minha História
-            </a>
-            <a href="#premio" className="hover:text-pearl transition-colors">
-              O Prêmio
-            </a>
-            <a href="#como-funciona" className="hover:text-pearl transition-colors">
+          <nav className="hidden md:flex items-center gap-5 lg:gap-7 text-xs uppercase tracking-widest font-sans font-medium text-pearl/80">
+            <Link href="/" className="hover:text-pearl transition-colors">
+              Início
+            </Link>
+            <Link href="/rifa" className="hover:text-pearl transition-colors text-antique-300 font-semibold">
+              Rifa da Moto
+            </Link>
+            <Link href="/vaquinha" className="text-red-300 hover:text-red-200 transition-colors flex items-center gap-1 font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
+              Vaquinha
+            </Link>
+            <Link href="/rifa#como-funciona" className="hover:text-pearl transition-colors">
               Como Funciona
-            </a>
-            <a href="#pix" className="hover:text-pearl transition-colors">
-              Chave PIX
-            </a>
-            <a
-              href="#numeros"
-              className="text-pearl font-semibold hover:text-antique-300 transition-colors flex items-center gap-2"
+            </Link>
+            <Link
+              href="/rifa#numeros"
+              className="text-pearl font-semibold hover:text-antique-300 transition-colors flex items-center gap-1.5"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-emerald" />
               Escolher Cota
-            </a>
+            </Link>
           </nav>
 
           {/* Ações Direitas */}
-          <div className="hidden sm:flex items-center gap-4">
+          <div className="hidden sm:flex items-center gap-3">
             <a
               href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Oi Maria Júlia, tenho dúvidas sobre a sua ação solidária!")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-sans font-semibold tracking-wide rounded-full bg-emerald hover:bg-emerald-700 text-white transition-all shadow-sm"
+              className="inline-flex items-center gap-2 px-4 py-2 text-xs font-sans font-semibold tracking-wide rounded-full bg-emerald hover:bg-emerald-700 text-white transition-all shadow-sm"
             >
               <MessageCircle className="w-4 h-4" />
               <span>WhatsApp</span>
             </a>
 
             <Link
-              href="/admin"
-              className="flex items-center gap-1.5 px-4 py-2 text-xs font-sans font-medium tracking-wide rounded-full border border-navy-700 text-pearl/70 hover:text-pearl hover:border-pearl/30 transition-colors"
-              title="Acesso Administrativo"
+              href="/app"
+              className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-sans font-medium tracking-wide rounded-full border border-navy-700 text-pearl/70 hover:text-pearl hover:border-pearl/30 transition-colors"
+              title="Acesso Pessoal Maju"
             >
               <Lock className="w-3.5 h-3.5 text-antique-400/80" />
-              <span>Painel</span>
+              <span>Portal</span>
             </Link>
           </div>
 
@@ -121,41 +122,41 @@ export default function Header({ whatsappNumber = "5537998427884" }: HeaderProps
       {/* Menu Mobile */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-navy-950 border-b border-navy-800 px-6 py-6 space-y-4 text-sm font-sans">
-          <a
-            href="#historia"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block text-antique-300 font-medium py-1"
-          >
-            Minha História
-          </a>
-          <a
-            href="#premio"
+          <Link
+            href="/"
             onClick={() => setMobileMenuOpen(false)}
             className="block text-pearl/80 hover:text-pearl py-1"
           >
-            O Prêmio
-          </a>
-          <a
-            href="#como-funciona"
+            Início (Apresentação Oficial)
+          </Link>
+          <Link
+            href="/rifa"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block text-antique-300 font-semibold py-1"
+          >
+            Rifa Solidária da Moto (R$ 20)
+          </Link>
+          <Link
+            href="/vaquinha"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block text-red-300 font-semibold py-1"
+          >
+            Vaquinha Solidária (Doação Livre)
+          </Link>
+          <Link
+            href="/rifa#como-funciona"
             onClick={() => setMobileMenuOpen(false)}
             className="block text-pearl/80 hover:text-pearl py-1"
           >
-            Como Funciona
-          </a>
-          <a
-            href="#pix"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block text-pearl/80 hover:text-pearl py-1"
-          >
-            Chave PIX
-          </a>
-          <a
-            href="#numeros"
+            Como Funciona a Rifa
+          </Link>
+          <Link
+            href="/rifa#numeros"
             onClick={() => setMobileMenuOpen(false)}
             className="block text-pearl font-semibold py-1"
           >
-            Escolher Cota
-          </a>
+            Escolher Cota da Rifa
+          </Link>
           <div className="pt-4 border-t border-navy-800 flex flex-col gap-3">
             <a
               href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Oi Maria Júlia, tenho dúvidas sobre a sua ação solidária!")}`}
@@ -167,12 +168,12 @@ export default function Header({ whatsappNumber = "5537998427884" }: HeaderProps
               <span>Falar no WhatsApp ((37) 99842-7884)</span>
             </a>
             <Link
-              href="/admin"
+              href="/app"
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center justify-center gap-2 px-4 py-2.5 text-xs rounded-full border border-navy-700 text-pearl/80"
             >
               <Lock className="w-4 h-4" />
-              <span>Painel Administrativo</span>
+              <span>Acesso Pessoal (Portal Maju)</span>
             </Link>
           </div>
         </div>

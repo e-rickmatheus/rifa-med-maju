@@ -1,130 +1,91 @@
-# 🩺 RIFA MED MAJU | Ação Solidária Oficial
+# 🩺 MARIA JÚLIA GOMES GABRIEL | Plataforma Oficial (mariajulia.med.br)
 
-> **"Cada número comprado é um passo a mais para a realização de um sonho: me tornar médica e cuidar de vidas com amor e dedicação."**
+> **"Cada número comprado e cada doação é um passo a mais para a realização de um sonho: me tornar médica e cuidar de vidas com amor e dedicação."**
 
-Aplicação web moderna, responsiva e de alta performance desenvolvida para gerenciar a Ação Solidária de **Maria Júlia Gomes Gabriel** em prol do custeio de sua faculdade de Medicina.
-
----
-
-## 🏍️ O Prêmio & A Rifa
-
-- **Prêmio:** 01 Moto Honda Pop
-- **Valor por Cota:** R$ 20,00
-- **Data do Sorteio:** 24/07/2027
-- **Chave PIX Oficial (Celular):** `37998427884` (Maria Júlia Gomes Gabriel)
-- **WhatsApp Oficial:** `(37) 99842-7884`
+Plataforma web integrada para a estudante de Medicina **Maria Júlia Gomes Gabriel** (UNIFENAS), estruturada para gerenciar sua imagem oficial, sua ação solidária com sorteio de uma moto 0km, sua campanha de vaquinha solidária e um portal de gestão pessoal integrado à sua conta Google oficial: `mariajuliagomesgabriel@gmail.com`.
 
 ---
 
-## ✨ Funcionalidades
+## 🌐 Arquitetura dos 4 Propósitos do Domínio
 
-### 1. Vitrine Pública (Landing Page `/`)
-- **Hero Section Humanizada:** Apresentação elegante com foto oficial de Maria Júlia de jaleco e estetoscópio, destaque do prêmio e botões de ação rápida.
-- **Barra de Progresso Dinâmica:** Cálculo em tempo real da meta alcançada (`%`), total de cotas vendidas, cotas disponíveis e valor arrecadado (`R$`).
-- **Como Funciona (4 Passos Ilustrados):**
-  1. *Escolha seu número*
-  2. *Passe seus dados*
-  3. *Envio do comprovante via PIX*
-  4. *Receba sua rifa registrada com foto oficial*
-- **Card PIX com 1 Clique:** Cópia instantânea da chave celular com animação comemorativa de confetes e botão direto para envio do comprovante.
-- **Grade Interativa de Cotas:**
-  - Renderização dinâmica do total de cotas (ex: `000` a `999` para 1.000 cotas; `0000` a `1499` ao expandir).
-  - Campo de busca instantânea por número.
-  - Filtros rápidos: *Todos*, *Apenas Livres*, *Apenas Vendidos*.
-  - Navegação fluida em blocos de 100 cotas para garantir máxima velocidade em smartphones.
-  - **Cotas Livres:** Destaque dourado; ao clicar, abre mensagem pré-formatada no WhatsApp:
-    > *"Oi Maria Júlia, quero a cota número [XXX] da sua Ação Solidária!"*
-  - **Cotas Vendidas:** Indicação cinza e bloqueada. Ao passar o mouse (ou clicar), exibe tooltip com máscara de privacidade:
-    > *"Comprado por Maria S. (Tel: ****-7884)"*
+| # | Propósito | URL | Descrição |
+|---|---|---|---|
+| **0** | **Foto / Nome / Bio** | `https://www.mariajulia.med.br/` | Vitrine institucional e humanizada com foto em alta definição de Maria Júlia, história da vocação médica na UNIFENAS e links nobres para a Rifa, Vaquinha e Contato. |
+| **1** | **Rifa Solidária** | `https://www.mariajulia.med.br/rifa` | Aplicação completa da rifa: grade de cotas interativa, chave PIX, barra de progresso em tempo real, prêmio da Moto Honda Pop e reserva via WhatsApp. |
+| **2** | **Vaquinha Solidária** | `https://www.mariajulia.med.br/vaquinha` | Página de doação livre (R$ 10, R$ 25, R$ 50, R$ 100 ou qualquer valor) para custeio de mensalidades, livros anatômicos, instrumentos e moradia estudantil. |
+| **3** | **Acesso Geral Pessoal** | `https://app.mariajulia.med.br/` (ou `/app`) | Hub pessoal protegido por senha com 4 módulos: Gestão da Rifa, Gestão da Vaquinha, Central de Serviços Google da Maju e Assistente Inteligente Google Gemini. |
 
-### 2. Painel Administrativo (`/admin`)
-- **Acesso Protegido por Senha:** Autenticação simples (senha padrão: `maju2027`).
-- **Gestão de Escalabilidade de Cotas:**
-  - Visualização do limite atual.
-  - Botões rápidos de expansão: `+100`, `+500`, `+1000` cotas.
-  - Campo customizado para definir qualquer total desejado. A vitrine reflete a expansão imediatamente.
-- **Gestão Completa de Vendas:**
-  - Registro de venda com Nome Completo, Telefone (WhatsApp) e Data.
-  - Edição de dados do comprador a qualquer momento.
-  - Liberação / cancelamento de cota vendida (retorna imediatamente ao status livre).
-- **Exportação de Dados (.CSV):**
-  - Botão *"Exportar Planilha de Vendas"*.
-  - Gera arquivo CSV formatado em UTF-8 com BOM (100% compatível com acentuação no Microsoft Excel e Google Planilhas).
-  - Colunas: `Número da Cota`, `Status`, `Nome do Comprador`, `Telefone de Contato`, `Data de Aquisição`.
+---
+
+## ☁️ Centralização na Conta: `mariajuliagomesgabriel@gmail.com`
+
+Todos os serviços foram desenhados para operar sob a conta Google da Maria Júlia, aproveitando os limites e cotas gratuitas (Free Tier) de cada plataforma:
+
+### 1. Google Drive & Planilhas (Google Sheets)
+- **Finalidade:** Armazenamento seguro de comprovantes de PIX, documentos universitários e controle ao vivo de cotas vendidas.
+- **Planilha Oficial:** Vinculada à conta dela. As vendas realizadas no portal podem ser sincronizadas automaticamente via Google Apps Script Webhook.
+
+### 2. Firebase Firestore (Plano Spark Gratuito)
+- **Finalidade:** Banco de dados em tempo real para sincronização instantânea das cotas entre a vitrine pública e o portal administrativo.
+- **Cota Gratuita:** 50.000 leituras/dia e 20.000 gravações/dia no plano gratuito do Firebase.
+- **Como Configurar:**
+  1. Acesse [Firebase Console](https://console.firebase.google.com/) logado como `mariajuliagomesgabriel@gmail.com`.
+  2. Crie o projeto `rifa-med-maju`.
+  3. Ative o **Cloud Firestore** em modo de produção (ou teste) e crie um Web App para obter as credenciais.
+  4. Preencha as chaves no arquivo `.env.local`.
+
+### 3. Google Gemini AI Studio (Tokens & Cotas Gratuitas)
+- **Finalidade:** Assistente inteligente integrado no portal (`/app`) para ajudar a Maju a redigir mensagens calorosas de agradecimento para compradores da rifa e doadores da vaquinha, criar textos para stories do Instagram e revisar conceitos médicos.
+- **Como Ativar a Chave Gratuita:**
+  1. Acesse [Google AI Studio](https://aistudio.google.com/) logado como `mariajuliagomesgabriel@gmail.com`.
+  2. Clique em **Get API Key** e copie sua chave.
+  3. Cole na variável `GEMINI_API_KEY=""` no `.env.local`.
+
+### 4. Supabase (Opcional - Free Tier)
+- **Finalidade:** Banco de dados PostgreSQL e autenticação vinculados ao login do Google da Maria Júlia.
+- Acesse [Supabase Dashboard](https://supabase.com/dashboard) com login Google de `mariajuliagomesgabriel@gmail.com`.
+
+### 5. Vercel Hosting & DNS
+- Os nameservers do domínio `mariajulia.med.br` já estão apontados para a Vercel (`ns1.vercel-dns.com` / `ns2.vercel-dns.com`).
+- No painel da Vercel (aba **Settings > Domains**), adicione:
+  1. `mariajulia.med.br` (redireciona para www ou produção)
+  2. `www.mariajulia.med.br` (produção)
+  3. `app.mariajulia.med.br` (o middleware interno do Next.js reescreve automaticamente para `/app`)
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **Framework:** [Next.js 14](https://nextjs.org/) (App Router)
-- **Linguagem:** [TypeScript](https://www.typescriptlang.org/)
-- **Estilização:** [Tailwind CSS](https://tailwindcss.com/) com paleta personalizada inspirada na arte original (Azul Marinho Nobre, Branco e Dourado/Bege)
-- **Banco de Dados:** [Firebase Firestore](https://firebase.google.com/)
-- **Ícones:** [Lucide React](https://lucide.dev/)
-- **Animações:** [Canvas Confetti](https://www.npmjs.com/package/canvas-confetti)
+- **Framework:** Next.js 14 (App Router) com TypeScript
+- **Estilização:** Tailwind CSS (Paleta Editorial Luxury Navy, Antique Gold e Emerald)
+- **Banco de Dados:** Firebase Firestore & Google Sheets API
+- **Inteligência Artificial:** Google Gemini API (1.5 Flash)
+- **Ícones & Animações:** Lucide React & Canvas Confetti
 
 ---
 
-## 🗄️ Arquitetura do Banco de Dados (Firestore)
+## 💻 Execução Local
 
-Estruturado para máxima economia de cotas no plano Spark (gratuito) do Firebase:
-1. `config/raffle_settings`: Contém as configurações globais da rifa:
-   - `total_numbers`: Número total de cotas ativas (inicia em 1000).
-   - `prize`, `price`, `draw_date`, `pix_key`, `pix_name`, `whatsapp`.
-2. `cotas/{numero}`: Armazena **apenas** os números que tiveram venda:
-   - `status`: `"vendido"`
-   - `nome_comprador`: string
-   - `telefone`: string
-   - `data_compra`: ISO string / timestamp
-   - Números não existentes nesta coleção são considerados automaticamente como **livres**, dispensando gravações desnecessárias.
-
----
-
-## 🚀 Como Executar Localmente
-
-1. Clone o repositório:
-```bash
-git clone https://github.com/e-rickmatheus/rifa-med-maju.git
-cd rifa-med-maju
-```
-
-2. Instale as dependências:
+1. Instale as dependências:
 ```bash
 npm install
 ```
 
-3. Inicie o servidor de desenvolvimento:
+2. Execute o servidor de desenvolvimento:
 ```bash
 npm run dev
 ```
 
-4. Abra [http://localhost:3000](http://localhost:3000) no seu navegador.
-   - Para acessar o painel administrativo: [http://localhost:3000/admin](http://localhost:3000/admin) (senha: `maju2027`).
-
----
-
-## ☁️ Conectando ao Firebase Firestore
-
-O projeto possui um **Modo Local Resiliente** nativo, o que significa que ele funciona imediatamente para testes no navegador mesmo sem chaves de API.
-
-Para sincronizar na nuvem com o Firebase:
-1. Acesse o [Firebase Console](https://console.firebase.google.com/) e crie um novo projeto.
-2. Ative o **Cloud Firestore** em modo de teste ou configure as regras de leitura/escrita.
-3. Obtenha as chaves do seu Web App no Firebase.
-4. Crie ou edite o arquivo `.env.local` na raiz:
-```env
-NEXT_PUBLIC_FIREBASE_API_KEY="seu_api_key"
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="seu_auth_domain"
-NEXT_PUBLIC_FIREBASE_PROJECT_ID="seu_project_id"
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="seu_storage_bucket"
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="seu_sender_id"
-NEXT_PUBLIC_FIREBASE_APP_ID="seu_app_id"
-NEXT_PUBLIC_ADMIN_PASSWORD="maju2027"
-```
-5. Reinicie a aplicação (`npm run dev`). O sistema passará a sincronizar todas as cotas e limites na nuvem em tempo real!
+3. Acesse os propósitos no navegador:
+- **Foto / Nome / Bio:** [http://localhost:3000/](http://localhost:3000/)
+- **Rifa Solidária:** [http://localhost:3000/rifa](http://localhost:3000/rifa)
+- **Vaquinha Solidária:** [http://localhost:3000/vaquinha](http://localhost:3000/vaquinha)
+- **Portal Pessoal da Maju:** [http://localhost:3000/app](http://localhost:3000/app) (Senha padrão: `Dra.MaJuGG`)
 
 ---
 
 ## 👩‍⚕️ Sobre a Causa
 
-Esta rifa foi organizada com muito carinho por familiares e amigos para apoiar a formação médica de **Maria Júlia Gomes Gabriel**. Cada contribuição faz uma enorme diferença!
+Apoio direto à formação médica de **Maria Júlia Gomes Gabriel** na **UNIFENAS**.
+- **Chave PIX Oficial (Celular):** `37998427884` (Itaú Unibanco S.A.)
+- **WhatsApp Oficial:** `(37) 99842-7884`
