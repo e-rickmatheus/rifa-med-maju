@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     if (!apiKey || apiKey.trim() === "") {
       return NextResponse.json({
         success: false,
-        error: "Chave GEMINI_API_KEY não configurada no .env.local. Obtenha a chave gratuita em aistudio.google.com logado com mariajuliagomesgabriel@gmail.com.",
+        error: "Chave GEMINI_API_KEY não configurada na Vercel ou no .env.local. Adicione a variável GEMINI_API_KEY nas configurações de ambiente.",
       }, { status: 400 });
     }
 
