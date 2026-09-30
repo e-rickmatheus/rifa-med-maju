@@ -7,7 +7,16 @@ export const metadata: Metadata = {
     "Ação Solidária para custeio da faculdade de Medicina da Maria Júlia Gomes Gabriel (UNIFENAS). Concorra a uma Moto Honda Pop por apenas R$ 20,00 a cota!",
   keywords: ["rifa", "medicina", "maria julia", "unifenas", "moto honda pop", "ação solidária"],
   icons: {
-    icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>",
+    icon: [
+      {
+        url: "/icon.svg",
+        type: "image/svg+xml",
+      },
+      {
+        url: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><text x='60' y='66' font-size='74' text-anchor='middle' dominant-baseline='central'>🎓</text></svg>",
+        type: "image/svg+xml",
+      },
+    ],
   },
   openGraph: {
     title: "Rifa Solidaria - Medicina - Maria Julia",

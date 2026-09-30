@@ -20,9 +20,6 @@ export async function POST(request: Request) {
       }, { status: 400 });
     }
 
-    // Chamada à API oficial do Google Gemini (utilizando o modelo mais rápido e econômico gemini-1.5-flash / gemini-2.0-flash)
-    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-
     const payload = {
       contents: [
         {
@@ -43,26 +40,44 @@ export async function POST(request: Request) {
           },
     };
 
-    const response = await fetch(geminiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
+    // Chamada à API oficial do Google Gemini com fallback automático entre modelos
+    const candidateModels = ["gemini-3.5-flash", "gemini-3.8-flash", "gemini-flash-latest"];
+    let lastError: any = null;
+    let data: any = null;
 
-    if (!response.ok) {
-      const errData = await response.json().catch(() => ({}));
+    for (const model of candidateModels) {
+      try {
+        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+        const response = await fetch(geminiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (response.ok) {
+          data = await response.json();
+          break;
+        } else {
+          const errData = await response.json().catch(() => ({}));
+          lastError = errData?.error?.message || `HTTP ${response.status}`;
+        }
+      } catch (err: any) {
+        lastError = err?.message;
+      }
+    }
+
+    if (!data) {
       return NextResponse.json(
         {
           success: false,
-          error: errData?.error?.message || `Erro da API Gemini: HTTP ${response.status}`,
+          error: lastError || "Não foi possível obter resposta da API do Gemini.",
         },
-        { status: response.status }
+        { status: 502 }
       );
     }
 
-    const data = await response.json();
     const candidateText =
       data?.candidates?.[0]?.content?.parts?.[0]?.text || "Nenhuma resposta gerada.";
 

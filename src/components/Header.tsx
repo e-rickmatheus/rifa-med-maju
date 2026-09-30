@@ -26,7 +26,7 @@ export default function Header({ whatsappNumber = "5537998427884" }: HeaderProps
         <div className="flex items-center justify-between h-20 sm:h-24">
           {/* Identificação Editorial */}
           <Link href="/" className="flex items-center gap-3.5 group shrink-0 mr-4 lg:mr-8">
-            <div className="w-10 h-10 rounded-full border border-antique-400/40 flex items-center justify-center text-antique-400 group-hover:border-antique-300 transition-colors relative overflow-hidden shrink-0">
+            <div className="w-10 h-10 rounded-full border border-antique-400/40 flex items-center justify-center text-antique-400 group-hover:border-antique-300 transition-colors relative shrink-0">
               <div className="relative w-5 h-5 flex items-center justify-center">
                 {/* Chapéu de Formando (Beca) */}
                 <GraduationCap
