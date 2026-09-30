@@ -40,7 +40,7 @@ export default function VaquinhaPage() {
   const vakinhaUrl =
     process.env.NEXT_PUBLIC_VAKINHA_URL && process.env.NEXT_PUBLIC_VAKINHA_URL.trim() !== ""
       ? process.env.NEXT_PUBLIC_VAKINHA_URL
-      : "https://www.vakinha.com.br/";
+      : "https://www.vakinha.com.br/vaquinha/rumo-a-formacao-em-medicina-ajude-a-transformar-esse-sonho-em-realidade?utm_source=google-ads&utm_medium=cpc&utm_campaign=GA+-+%5BSearch%5D+%5BVakinhas%5D+Marca+%28Convers%C3%A3o%29+%28site%29&utm_campaign_id=22579434424";
 
   React.useEffect(() => {
     document.title = "Vaquinha Solidária • Ajude a Maju a se Formar em Medicina";
@@ -132,8 +132,8 @@ export default function VaquinhaPage() {
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex items-center justify-between h-20">
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded-full border border-red-500/40 bg-navy-900 flex items-center justify-center text-red-400 group-hover:border-red-400 transition-colors">
-                <Heart className="w-5 h-5 text-red-400 fill-red-400" />
+              <div className="w-10 h-10 rounded-full border border-green-500/40 bg-navy-900 flex items-center justify-center text-green-400 group-hover:border-green-400 transition-colors">
+                <Heart className="w-5 h-5 text-green-400 fill-green-400" />
               </div>
               <div>
                 <span className="text-xl font-serif font-bold text-white block leading-tight">
@@ -176,11 +176,11 @@ export default function VaquinhaPage() {
 
       {/* Hero Emocional da Vaquinha */}
       <section className="relative overflow-hidden pt-12 pb-20 sm:pt-20 sm:pb-28 border-b border-navy-800">
-        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-red-500/10 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-green-500/10 rounded-full blur-[140px] pointer-events-none" />
 
         <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center space-y-6 relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-950/80 border border-red-800/60 text-red-300 text-xs font-semibold tracking-wide">
-            <Heart className="w-3.5 h-3.5 fill-red-400 text-red-400" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-950/80 border border-green-800/60 text-green-300 text-xs font-semibold tracking-wide">
+            <Heart className="w-3.5 h-3.5 fill-green-400 text-green-400" />
             <span>Ação Solidária Oficial de Maria Júlia</span>
           </div>
 
@@ -192,7 +192,7 @@ export default function VaquinhaPage() {
           </h1>
 
           <p className="text-base sm:text-xl text-slate-300 font-light leading-relaxed max-w-2xl mx-auto">
-            A menina que cresceu em Biquinhas e enfrentou recomeços, trabalho e a doença da mãe hoje
+            A menina que cresceu em Biquinhas e enfrentou recomeços e incertezas, hoje
             está no <strong>8º período de Medicina na UNIFENAS</strong>. Faltam poucos passos para o diploma.
             Ajude Maria Júlia a não desistir na reta final.
           </p>
@@ -200,17 +200,27 @@ export default function VaquinhaPage() {
           <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
             <a
               href="#doar"
-              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-emerald hover:bg-emerald-700 text-white font-semibold text-sm shadow-xl shadow-emerald/20 transition-all"
+              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-green-700 hover:bg-green-600 text-white font-semibold text-sm shadow-xl shadow-green-700/20 transition-all"
             >
               <Heart className="w-4 h-4 fill-white" />
-              <span>Apoiar Agora (Doação Livre)</span>
+              <span>Apoiar via PIX</span>
+            </a>
+
+            <a
+              href={vakinhaUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-emerald hover:bg-emerald-700 text-white font-semibold text-sm shadow-xl shadow-emerald/20 transition-all"
+            >
+              <ExternalLink className="w-4 h-4" />
+              <span>Apoiar via Vakinha.com</span>
             </a>
 
             <a
               href="#historia"
               className="inline-flex items-center gap-2 px-6 py-4 rounded-full bg-navy-800 hover:bg-navy-700 border border-navy-700 text-slate-200 text-sm font-semibold transition-all"
             >
-              <span>Ler a História Completa</span>
+              <span>Ler História</span>
               <ChevronRight className="w-4 h-4" />
             </a>
           </div>
@@ -316,8 +326,8 @@ export default function VaquinhaPage() {
 
             {/* CAPÍTULO 3: ONDE A MEDICINA REALMENTE NASCEU */}
             <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
-              <div className="flex items-center gap-2 text-xs uppercase tracking-wider font-bold text-red-600">
-                <Heart className="w-4 h-4 fill-red-500 text-red-500" />
+              <div className="flex items-center gap-2 text-xs uppercase tracking-wider font-bold text-green-600">
+                <Heart className="w-4 h-4 fill-green-500 text-green-500" />
                 <span>A Verdadeira Lição: Começou Dentro de Casa</span>
               </div>
               <p>
@@ -606,7 +616,7 @@ export default function VaquinhaPage() {
             {/* Opção 2: Pela Vakinha.com (Cartão de Crédito ou Boleto) */}
             <div className="p-8 rounded-3xl bg-navy-900 border border-navy-700 flex flex-col justify-between space-y-4">
               <div className="space-y-3">
-                <span className="text-[11px] uppercase tracking-wider font-bold text-red-300 bg-red-950 px-3 py-1 rounded-full border border-red-800">
+                <span className="text-[11px] uppercase tracking-wider font-bold text-green-300 bg-green-950 px-3 py-1 rounded-full border border-green-800">
                   Cartão de Crédito ou Boleto
                 </span>
                 <h4 className="text-xl font-serif font-bold text-white">
@@ -622,7 +632,7 @@ export default function VaquinhaPage() {
                   href={vakinhaUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-red-700 hover:bg-red-600 text-white font-semibold text-xs transition-colors"
+                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-green-700 hover:bg-green-600 text-white font-semibold text-xs transition-colors"
                 >
                   <span>Ir para Vakinha.com</span>
                   <ExternalLink className="w-3.5 h-3.5" />

@@ -121,7 +121,7 @@ export default function StorySection() {
                 Eu nasci em Belo Horizonte, mas foi no interior, em <strong className="font-semibold text-navy">Biquinhas</strong> e depois em <strong className="font-semibold text-navy">Abaeté</strong>, que grande parte da minha história começou a ser construída. Foi nessa cidadezinha tão acolhedora onde aprendi as coisas mais simples e, talvez por isso mesmo, as mais valiosas da vida.
               </p>
               <p>
-                Eu cresci vendo minha mãe cuidar de todo mundo: das irmãs, dos sobrinhos, dos conhecidos, dos filhos e de quem precisasse dela. Mesmo quando não tinha muito a oferecer, ela sempre encontrava um jeito de amparar. Ao lado dela, meu pai também, com seu jeito protetor, sempre se preocupava e estendia a mão a quem precisasse.
+                Eu cresci vendo minha mãe cuidar de todo mundo: das irmãs, dos sobrinhos, dos conhecidos, dos filhos e de quem precisasse dela. Mesmo quando não tinha muito a oferecer, ela sempre encontrava um jeito de amparar.
               </p>
               <p className="italic font-serif text-navy-900 border-l-2 border-antique-400 pl-4 py-1 text-base sm:text-lg bg-antique-50/50 rounded-r-lg">
                 &ldquo;Eles não eram médicos, mas me ensinaram algo que nenhum livro de medicina consegue ensinar: <strong>cuidar de alguém é uma das formas mais bonitas de amar.</strong>&rdquo;
@@ -145,7 +145,7 @@ export default function StorySection() {
                 Em 2017, após concluir o ensino médio, tomei a decisão mais desafiadora da minha vida: vim para Belo Horizonte com o peito cheio de sonhos e muitas incertezas. Enfrentei anos intensos de cursinho, conciliei trabalho e estudos, e vivi as incertezas da pandemia. Mais tarde, precisei voltar para casa quando minha mãe adoeceu.
               </p>
               <p className="text-slate-700 font-sans font-light leading-relaxed text-base sm:text-lg">
-                Houve momentos em que o cansaço fazia parecer que o sonho precisaria ficar para trás. Mas em 2007 havia nascido outro propósito na minha vida: meu irmão caçula, que tem o dom de me irritar, mas que me faz ser a irmã mais orgulhosa do mundo ao carregar cada dor e alegria comigo.
+                Houve momentos em que o cansaço fazia parecer que o sonho precisaria ficar para trás. Mas em 2007 havia nascido outro propósito na minha vida: meu irmão caçula, que tem o dom de me irritar, mas que me faz ser a irmã mais orgulhosa do mundo ao carregar cada dor e alegria comigo. Ao meu melhor amigo, quero poder devolver, em dobro, todo amor, apoio e todos os sacrifícios que ele fez para me ver chegar até aqui.
               </p>
             </div>
 

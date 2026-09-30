@@ -61,9 +61,9 @@ export default function HomePage() {
 
               <Link
                 href="/vaquinha"
-                className="hidden sm:inline-flex items-center gap-1.5 text-red-300 hover:text-red-200 transition-colors"
+                className="hidden sm:inline-flex items-center gap-1.5 text-green-300 hover:text-green-200 transition-colors"
               >
-                <Heart className="w-3.5 h-3.5 fill-red-400 text-red-400" />
+                <Heart className="w-3.5 h-3.5 fill-green-400 text-green-400" />
                 <span>Vaquinha</span>
               </Link>
 
@@ -115,9 +115,9 @@ export default function HomePage() {
               <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                 <Link
                   href="/rifa"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-primaryBlue hover:bg-primaryBlue-hover text-white font-semibold text-sm shadow-xl shadow-primaryBlue/20 transition-all group"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-fuchsia-700 hover:bg-fuchsia-600 text-white font-semibold text-sm shadow-xl shadow-fuchsia-700/20 transition-all group"
                 >
-                  <Gift className="w-4 h-4 text-antique-300" />
+                  <Gift className="w-4 h-4 text-fuchsia-200" />
                   <span>Acessar Rifa Solidária (Moto Pop)</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
@@ -126,7 +126,7 @@ export default function HomePage() {
                   href="/vaquinha"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-navy-800 hover:bg-navy-700 border border-navy-700 text-pearl font-semibold text-sm transition-all"
                 >
-                  <Heart className="w-4 h-4 text-red-400 fill-red-400" />
+                  <Heart className="w-4 h-4 text-green-400 fill-green-400" />
                   <span>Doar na Vaquinha Livre</span>
                 </Link>
               </div>
@@ -192,19 +192,19 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             
             {/* Card 1: Rifa Oficial */}
-            <div className="bg-navy-900 rounded-3xl border border-navy-700 p-8 sm:p-10 flex flex-col justify-between hover:border-antique-400/60 transition-all group relative overflow-hidden">
+            <div className="bg-navy-900 rounded-3xl border border-navy-700 p-8 sm:p-10 flex flex-col justify-between hover:border-fuchsia-400/60 transition-all group relative overflow-hidden">
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-2xl bg-primaryBlue/20 border border-primaryBlue/30 text-antique-300 flex items-center justify-center">
-                    <Gift className="w-6 h-6 text-antique-300" />
+                  <div className="w-12 h-12 rounded-2xl bg-fuchsia-950/40 border border-fuchsia-800/40 text-fuchsia-300 flex items-center justify-center">
+                    <Gift className="w-6 h-6 text-fuchsia-300" />
                   </div>
-                  <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-antique-500/20 text-antique-300 border border-antique-400/30">
+                  <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-fuchsia-950/60 text-fuchsia-300 border border-fuchsia-700/50">
                     R$ 20 por cota
                   </span>
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-2xl font-serif font-bold text-white group-hover:text-antique-200 transition-colors">
+                  <h3 className="text-2xl font-serif font-bold text-white group-hover:text-fuchsia-200 transition-colors">
                     Rifa da Moto Honda Pop 0km
                   </h3>
                   <p className="text-slate-300 text-sm leading-relaxed">
@@ -215,15 +215,15 @@ export default function HomePage() {
 
                 <ul className="space-y-2.5 text-xs text-slate-300 pt-2 border-t border-navy-800">
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-400" />
                     <span>Grade de cotas interativa com reserva online</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-400" />
                     <span>Pagamento instantâneo via PIX com registro oficial</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-400" />
                     <span>Envio de bilhete nominal com foto para o WhatsApp</span>
                   </li>
                 </ul>
@@ -232,7 +232,7 @@ export default function HomePage() {
               <div className="pt-8">
                 <Link
                   href="/rifa"
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-primaryBlue hover:bg-primaryBlue-hover text-white font-semibold text-xs uppercase tracking-wider transition-all"
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-fuchsia-700 hover:bg-fuchsia-600 text-white font-semibold text-xs uppercase tracking-wider transition-all"
                 >
                   <span>Ver Cotas da Rifa</span>
                   <ChevronRight className="w-4 h-4" />
@@ -241,19 +241,19 @@ export default function HomePage() {
             </div>
 
             {/* Card 2: Vaquinha Solidária */}
-            <div className="bg-navy-900 rounded-3xl border border-navy-700 p-8 sm:p-10 flex flex-col justify-between hover:border-red-400/60 transition-all group relative overflow-hidden">
+            <div className="bg-navy-900 rounded-3xl border border-navy-700 p-8 sm:p-10 flex flex-col justify-between hover:border-green-400/60 transition-all group relative overflow-hidden">
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-2xl bg-red-950/40 border border-red-800/40 text-red-400 flex items-center justify-center">
-                    <Heart className="w-6 h-6 fill-red-400 text-red-400" />
+                  <div className="w-12 h-12 rounded-2xl bg-green-950/40 border border-green-800/40 text-green-400 flex items-center justify-center">
+                    <Heart className="w-6 h-6 fill-green-400 text-green-400" />
                   </div>
-                  <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-red-950 text-red-300 border border-red-800">
+                  <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-green-950 text-green-300 border border-green-800">
                     Qualquer Valor Livre
                   </span>
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-2xl font-serif font-bold text-white group-hover:text-red-300 transition-colors">
+                  <h3 className="text-2xl font-serif font-bold text-white group-hover:text-green-300 transition-colors">
                     Vaquinha Solidária da Maju
                   </h3>
                   <p className="text-slate-300 text-sm leading-relaxed">
@@ -264,15 +264,15 @@ export default function HomePage() {
 
                 <ul className="space-y-2.5 text-xs text-slate-300 pt-2 border-t border-navy-800">
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
                     <span>Doação a partir de R$ 5,00, R$ 20,00 ou livre</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
-                    <span>Ajuda direta com livros anatômicos e estetoscópio</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                    <span>Ajuda para os custos da faculdade</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
                     <span>Agradecimento pessoal da Maria Júlia no WhatsApp</span>
                   </li>
                 </ul>
@@ -281,7 +281,7 @@ export default function HomePage() {
               <div className="pt-8">
                 <Link
                   href="/vaquinha"
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-red-800 hover:bg-red-700 text-white font-semibold text-xs uppercase tracking-wider transition-all"
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-green-700 hover:bg-green-600 text-white font-semibold text-xs uppercase tracking-wider transition-all"
                 >
                   <span>Doar na Vaquinha</span>
                   <ChevronRight className="w-4 h-4" />

@@ -14,7 +14,7 @@ import {
 } from "./googleSheetService";
 
 export const DEFAULT_SETTINGS: RaffleSettings = {
-  total_numbers: 1000,
+  total_numbers: 2000,
   prize: "01 MOTO HONDA POP",
   price: 20.0,
   draw_date: "24/07/2027",
@@ -47,7 +47,7 @@ function triggerLocalUpdate() {
  */
 export function normalizeCotasMap(
   rawMap: Record<string, Cota>,
-  totalNumbers: number = 1000
+  totalNumbers: number = 2000
 ): Record<string, Cota> {
   const normalized: Record<string, Cota> = {};
   for (const [key, cota] of Object.entries(rawMap || {})) {
@@ -228,7 +228,7 @@ export async function saveCotaSale(
   nome_comprador: string,
   telefone: string,
   customDate?: string,
-  totalNumbers: number = 1000
+  totalNumbers: number = 2000
 ): Promise<void> {
   const numInt = parseInt(numero, 10);
   const canonical = !isNaN(numInt) ? formatCotaNumber(numInt, totalNumbers) : numero.trim();
@@ -277,7 +277,7 @@ export async function saveCotaSale(
 // -------------------------------------------------------------
 // Liberação / Cancelamento de Cota
 // -------------------------------------------------------------
-export async function releaseCota(numero: string, totalNumbers: number = 1000): Promise<void> {
+export async function releaseCota(numero: string, totalNumbers: number = 2000): Promise<void> {
   const numInt = parseInt(numero, 10);
   const canonical = !isNaN(numInt) ? formatCotaNumber(numInt, totalNumbers) : numero.trim();
 
@@ -309,7 +309,7 @@ export async function releaseCota(numero: string, totalNumbers: number = 1000): 
 // -------------------------------------------------------------
 // Sincronização Manual com Google Sheets
 // -------------------------------------------------------------
-export async function syncFromGoogleSheetsNow(totalNumbers: number = 1000): Promise<number> {
+export async function syncFromGoogleSheetsNow(totalNumbers: number = 2000): Promise<number> {
   const sheetCotas = await fetchGoogleSheetSales(totalNumbers);
   const keys = Object.keys(sheetCotas);
   if (keys.length === 0) return 0;

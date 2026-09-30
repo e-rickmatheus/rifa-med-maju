@@ -52,7 +52,7 @@ function doPost(e) {
 /**
  * Lê diretamente os dados da planilha pública do Google Sheets
  */
-export async function fetchGoogleSheetSales(totalNumbers: number = 1000): Promise<Record<string, Cota>> {
+export async function fetchGoogleSheetSales(totalNumbers: number = 2000): Promise<Record<string, Cota>> {
   try {
     const res = await fetch(GOOGLE_SHEET_CSV_URL, {
       cache: "no-store",

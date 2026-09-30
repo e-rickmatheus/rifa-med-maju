@@ -5,6 +5,7 @@ import Link from "next/link";
 import AdminLogin from "@/components/AdminLogin";
 import AdminQuotaManager from "@/components/AdminQuotaManager";
 import AdminSalesManager from "@/components/AdminSalesManager";
+import AdminDonationManager from "@/components/AdminDonationManager";
 import {
   subscribeRaffleSettings,
   subscribeCotas,
@@ -159,7 +160,7 @@ export default function PersonalAppPage() {
       const data = await res.json();
       if (!res.ok || !data.success) {
         setAiError(
-          data.error || "Não foi possível gerar a resposta. Verifique a GEMINI_API_KEY no .env.local."
+          data.error || "Não foi possível gerar a resposta. Tente novamente em alguns instantes."
         );
       } else {
         setAiResponse(data.text);
@@ -252,7 +253,7 @@ export default function PersonalAppPage() {
               onClick={() => setActiveTab("vaquinha")}
               className={`px-4 py-2.5 text-xs font-semibold uppercase tracking-wider border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${
                 activeTab === "vaquinha"
-                  ? "border-red-400 text-red-300"
+                  ? "border-green-400 text-green-300"
                   : "border-transparent text-slate-400 hover:text-white"
               }`}
             >
@@ -281,7 +282,7 @@ export default function PersonalAppPage() {
               }`}
             >
               <Bot className="w-4 h-4" />
-              <span>4. Assistente Gemini AI</span>
+              <span>4. Assistente IA</span>
             </button>
           </div>
         </div>
@@ -407,18 +408,18 @@ export default function PersonalAppPage() {
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
                 <div>
                   <h3 className="text-xl font-serif font-bold text-navy-950 flex items-center gap-2">
-                    <Heart className="w-5 h-5 text-red-500 fill-red-500" />
+                    <Heart className="w-5 h-5 text-green-500 fill-green-500" />
                     <span>Controle da Vaquinha Solidária</span>
                   </h3>
                   <p className="text-xs text-slate-500 mt-1">
-                    Acompanhe as doações livres recebidas via PIX para o custeio da faculdade de Medicina.
+                    Registre e acompanhe todas as doações recebidas via PIX para o custeio da faculdade de Medicina.
                   </p>
                 </div>
 
                 <Link
                   href="/vaquinha"
                   target="_blank"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-red-700 hover:bg-red-600 text-white text-xs font-semibold transition-colors"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-green-700 hover:bg-green-600 text-white text-xs font-semibold transition-colors"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
                   <span>Ver Página da Vaquinha</span>
@@ -453,9 +454,12 @@ export default function PersonalAppPage() {
               </div>
 
               <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 leading-relaxed">
-                <strong>Dica para a Maju:</strong> Cada pessoa que enviar comprovante de doação da vaquinha no WhatsApp pode receber uma mensagem de agradecimento carinhosa. Você pode usar a aba <strong>&ldquo;Assistente Gemini AI&rdquo;</strong> para criar agradecimentos únicos e personalizados para cada padrinho/madrinha!
+                <strong>Dica para a Maju:</strong> Cada pessoa que enviar comprovante de doação da vaquinha no WhatsApp pode receber uma mensagem de agradecimento carinhosa. Registre todas as doações abaixo para ter o controle completo de quem doou, quanto doou e poder agradecer cada padrinho/madrinha!
               </div>
             </div>
+
+            {/* Painel Completo de Gestão de Doações */}
+            <AdminDonationManager />
           </div>
         )}
 
@@ -548,7 +552,7 @@ export default function PersonalAppPage() {
                   </div>
                   <div className="flex flex-col gap-2">
                     <a
-                      href={process.env.NEXT_PUBLIC_VAKINHA_URL || "https://www.vakinha.com.br/"}
+                      href={process.env.NEXT_PUBLIC_VAKINHA_URL || "https://www.vakinha.com.br/vaquinha/rumo-a-formacao-em-medicina-ajude-a-transformar-esse-sonho-em-realidade?utm_source=google-ads&utm_medium=cpc&utm_campaign=GA+-+%5BSearch%5D+%5BVakinhas%5D+Marca+%28Convers%C3%A3o%29+%28site%29&utm_campaign_id=22579434424"}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold transition-colors"
@@ -564,7 +568,7 @@ export default function PersonalAppPage() {
           </div>
         )}
 
-        {/* ABA 4: ASSISTENTE GEMINI AI */}
+        {/* ABA 4: ASSISTENTE IA */}
         {activeTab === "gemini" && (
           <div className="space-y-6 animate-fadeIn">
             <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
@@ -572,22 +576,12 @@ export default function PersonalAppPage() {
                 <div>
                   <h3 className="text-xl font-serif font-bold text-navy-950 flex items-center gap-2">
                     <Bot className="w-5 h-5 text-purple-600" />
-                    <span>Maju AI Assistant • Google Gemini</span>
+                    <span>Assistente IA da Maju</span>
                   </h3>
                   <p className="text-xs text-slate-500 mt-1">
-                    Assistente com IA que consome os tokens e limites gratuitos da conta <strong>mariajuliagomesgabriel@gmail.com</strong>.
+                    Assistente inteligente para criar textos, agradecimentos e conteúdos para suas campanhas.
                   </p>
                 </div>
-
-                <a
-                  href="https://aistudio.google.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-purple-700 hover:text-purple-800 underline font-semibold flex items-center gap-1"
-                >
-                  <span>Obter ou Ver Chave no Google AI Studio</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
               </div>
 
               {/* Botões Rápidos de Ação */}
@@ -647,14 +641,14 @@ export default function PersonalAppPage() {
                 <textarea
                   value={aiPrompt}
                   onChange={(e) => setAiPrompt(e.target.value)}
-                  placeholder="Digite o que deseja que o Gemini faça (ex: 'Escreva um texto avisando que faltam apenas 50 números na rifa...')"
+                  placeholder="Digite o que deseja que o assistente faça (ex: 'Escreva um texto avisando que faltam apenas 50 números na rifa...')"
                   rows={3}
                   className="w-full p-4 rounded-2xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm font-sans"
                 />
 
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] text-slate-400">
-                    Alimentado por Gemini 1.5 Flash • Rápido e Gratuito
+                    Assistente IA • Rápido e Gratuito
                   </span>
 
                   <button
@@ -667,7 +661,7 @@ export default function PersonalAppPage() {
                     ) : (
                       <Send className="w-4 h-4" />
                     )}
-                    <span>{aiLoading ? "Gerando..." : "Enviar para Gemini"}</span>
+                    <span>{aiLoading ? "Gerando..." : "Enviar"}</span>
                   </button>
                 </div>
               </div>
@@ -685,7 +679,7 @@ export default function PersonalAppPage() {
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold uppercase tracking-wider text-purple-900 flex items-center gap-1.5">
                       <Sparkles className="w-4 h-4 text-purple-700" />
-                      Resposta do Gemini:
+                      Resposta do Assistente:
                     </span>
 
                     <button

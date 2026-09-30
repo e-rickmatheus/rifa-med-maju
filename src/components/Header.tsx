@@ -70,8 +70,8 @@ export default function Header({ whatsappNumber = "5537998427884" }: HeaderProps
             <Link href="/rifa" className="hover:text-pearl transition-colors text-antique-300 font-semibold">
               Rifa da Moto
             </Link>
-            <Link href="/vaquinha" className="text-red-300 hover:text-red-200 transition-colors flex items-center gap-1 font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
+            <Link href="/vaquinha" className="text-green-300 hover:text-green-200 transition-colors flex items-center gap-1 font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
               Vaquinha
             </Link>
             <Link href="/rifa#como-funciona" className="hover:text-pearl transition-colors">
@@ -130,7 +130,7 @@ export default function Header({ whatsappNumber = "5537998427884" }: HeaderProps
           <Link
             href="/vaquinha"
             onClick={() => setMobileMenuOpen(false)}
-            className="block text-red-300 font-semibold py-1"
+            className="block text-green-300 font-semibold py-1"
           >
             Vaquinha Solidária (Doação Livre)
           </Link>

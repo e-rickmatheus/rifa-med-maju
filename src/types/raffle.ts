@@ -28,3 +28,19 @@ export interface RaffleStats {
   percent: number;
   totalRevenue: number;
 }
+
+export interface Donation {
+  id: string;
+  nome_doador: string;
+  valor: number;
+  telefone?: string;
+  mensagem?: string;
+  data_doacao: string;
+  updated_at?: string;
+}
+
+export interface VaquinhaStats {
+  totalDonations: number;
+  totalAmount: number;
+  averageDonation: number;
+}
