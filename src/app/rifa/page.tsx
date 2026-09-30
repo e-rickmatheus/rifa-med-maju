@@ -55,15 +55,7 @@ export default function RifaPage() {
 
   return (
     <main className="min-h-screen flex flex-col bg-pearl-50 text-navy font-sans selection:bg-antique-200 selection:text-navy">
-      {/* Banner Informativo sobre Status do Banco de Dados */}
-      {!firebaseActive && (
-        <div className="bg-slate-100 border-b border-slate-200 text-slate-700 px-4 py-2 text-center text-xs font-medium flex items-center justify-center gap-2">
-          <CloudOff className="w-4 h-4 text-slate-500" />
-          <span>
-            <strong>Modo Local de Testes:</strong> Para sincronizar na nuvem, adicione as credenciais do Firebase da Maju no <code>.env.local</code>.
-          </span>
-        </div>
-      )}
+
 
       {/* Faixa superior de navegação rápida entre projetos */}
       <div className="bg-navy-950 text-pearl/80 border-b border-navy-800 py-2 px-4 text-xs font-sans">
