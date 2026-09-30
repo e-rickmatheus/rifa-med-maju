@@ -57,6 +57,7 @@ export default function PersonalAppPage() {
 
   // Estados do Assistente Gemini
   const [aiPrompt, setAiPrompt] = useState("");
+  const [aiRecipientName, setAiRecipientName] = useState("");
   const [aiResponse, setAiResponse] = useState<string | null>(null);
   const [aiLoading, setAiLoading] = useState(false);
   const [copiedAiText, setCopiedAiText] = useState(false);
@@ -143,8 +144,12 @@ export default function PersonalAppPage() {
   };
 
   const handleSendAiPrompt = async (customText?: string) => {
-    const textToSend = customText || aiPrompt;
+    let textToSend = customText || aiPrompt;
     if (!textToSend.trim()) return;
+
+    if (aiRecipientName.trim()) {
+      textToSend = `Esta mensagem será enviada para a pessoa chamada "${aiRecipientName.trim()}". Personalize a mensagem focando nela.\nA solicitação é:\n` + textToSend;
+    }
 
     setAiLoading(true);
     setAiError(null);
@@ -576,7 +581,7 @@ export default function PersonalAppPage() {
                 <div>
                   <h3 className="text-xl font-serif font-bold text-navy-950 flex items-center gap-2">
                     <Bot className="w-5 h-5 text-purple-600" />
-                    <span>Assistente IA da Maju</span>
+                    <span>Assistente AI</span>
                   </h3>
                   <p className="text-xs text-slate-500 mt-1">
                     Assistente inteligente para criar textos, agradecimentos e conteúdos para suas campanhas.
@@ -638,6 +643,17 @@ export default function PersonalAppPage() {
 
               {/* Campo de Entrada de Prompt */}
               <div className="space-y-3 pt-2">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Nome da pessoa (opcional)</label>
+                  <input
+                    type="text"
+                    value={aiRecipientName}
+                    onChange={(e) => setAiRecipientName(e.target.value)}
+                    placeholder="Para quem é a mensagem? Ex: João da Silva"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm font-sans"
+                  />
+                </div>
+                
                 <textarea
                   value={aiPrompt}
                   onChange={(e) => setAiPrompt(e.target.value)}
@@ -648,7 +664,7 @@ export default function PersonalAppPage() {
 
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] text-slate-400">
-                    Assistente IA • Rápido e Gratuito
+                    Alimentado por Gemini 1.5 Flash • Rápido e Gratuito
                   </span>
 
                   <button
@@ -713,3 +729,4 @@ export default function PersonalAppPage() {
     </div>
   );
 }
+

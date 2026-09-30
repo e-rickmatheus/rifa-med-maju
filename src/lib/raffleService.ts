@@ -70,7 +70,9 @@ function getLocalSettings(): RaffleSettings {
       localStorage.setItem(LOCAL_STORAGE_SETTINGS_KEY, JSON.stringify(DEFAULT_SETTINGS));
       return DEFAULT_SETTINGS;
     }
-    return { ...DEFAULT_SETTINGS, ...JSON.parse(raw) };
+    const parsed = JSON.parse(raw);
+    parsed.total_numbers = 2000; // Forçando 2000 cotas
+    return { ...DEFAULT_SETTINGS, ...parsed };
   } catch {
     return DEFAULT_SETTINGS;
   }
@@ -106,6 +108,7 @@ export function subscribeRaffleSettings(
       (snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.data() as Partial<RaffleSettings>;
+          data.total_numbers = 2000;
           callback({ ...DEFAULT_SETTINGS, ...data });
         } else {
           setDoc(docRef, DEFAULT_SETTINGS, { merge: true }).catch(console.error);
