@@ -123,6 +123,9 @@ export default function StorySection() {
               <p>
                 Eu cresci vendo minha mãe cuidar de todo mundo: das irmãs, dos sobrinhos, dos conhecidos, dos filhos e de quem precisasse dela. Mesmo quando não tinha muito a oferecer, ela sempre encontrava um jeito de amparar.
               </p>
+              <p>
+                Meu pai, com seu jeito protetor, sempre se preocupava e estendia a mão a quem precisasse.
+              </p>
               <p className="italic font-serif text-navy-900 border-l-2 border-antique-400 pl-4 py-1 text-base sm:text-lg bg-antique-50/50 rounded-r-lg">
                 &ldquo;Eles não eram médicos, mas me ensinaram algo que nenhum livro de medicina consegue ensinar: <strong>cuidar de alguém é uma das formas mais bonitas de amar.</strong>&rdquo;
               </p>
@@ -149,16 +152,13 @@ export default function StorySection() {
               </p>
             </div>
 
-            <div className="lg:col-span-4 bg-white rounded-2xl p-6 border border-antique-200/70 shadow-sm text-center space-y-3">
-              <div className="w-12 h-12 rounded-full bg-antique-100 text-antique-600 flex items-center justify-center mx-auto">
-                <ShieldCheck className="w-6 h-6" />
-              </div>
-              <p className="font-serif italic text-navy-900 text-sm leading-relaxed">
-                &ldquo;Eles não apenas me dizem para continuar; eles criam as condições para que eu possa seguir em frente.&rdquo;
-              </p>
-              <span className="text-[11px] font-sans font-semibold uppercase tracking-wider text-slate-500 block">
-                O apoio incondicional da família
-              </span>
+            <div className="lg:col-span-4 rounded-2xl overflow-hidden relative aspect-[3/4] sm:aspect-square lg:aspect-[3/4] border border-antique-200/70 shadow-sm">
+              <Image
+                src="/images/maju-irmao.jfif"
+                alt="Maria Júlia e seu irmão"
+                fill
+                className="object-cover object-[center_30%] hover:scale-105 transition-transform duration-700"
+              />
             </div>
 
           </div>
