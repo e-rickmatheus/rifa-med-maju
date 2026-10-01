@@ -1,10 +1,9 @@
-import type { Metadata, Viewport } from "next";
+﻿import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Maria Júlia Gomes Gabriel • Medicina UNIFENAS",
-  description:
-    "Conheça a história de vida e a trajetória da futura médica Maria Júlia Gomes Gabriel (UNIFENAS). Campanhas solidárias e formas de apoio.",
+  title: "Maria Júlia - Futura Médica",
+  description: "Conheça minha jornada na medicina e ajude a realizar esse sonho. Faça parte dessa história e contribua com a Rifa ou a Vaquinha!",
   keywords: ["medicina", "maria julia", "unifenas", "vaquinha", "rifa solidária", "dra maju"],
   icons: {
     icon: [
@@ -13,14 +12,15 @@ export const metadata: Metadata = {
         type: "image/svg+xml",
       },
       {
-        url: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><text x='60' y='66' font-size='74' text-anchor='middle' dominant-baseline='central'>🎓</text></svg>",
+        url: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><text x='60' y='66' font-size='74' text-anchor='middle' dominant-baseline='central'>👩🏽‍⚕️</text></svg>",
         type: "image/svg+xml",
       },
     ],
   },
   openGraph: {
-    title: "Maria Júlia Gomes Gabriel • Medicina UNIFENAS",
-    description: "Conheça a história e trajetória da futura médica Maria Júlia Gomes Gabriel. Apoie a realização desse grande propósito!",
+    title: "Maria Júlia - Futura Médica",
+    description: "Conheça minha jornada na medicina e ajude a realizar esse sonho. Faça parte dessa história e contribua com a Rifa ou a Vaquinha!",
+    images: [{ url: "/images/maju-hero-hd.png", width: 1200, height: 630 }],
     type: "website",
     locale: "pt_BR",
   },
@@ -46,3 +46,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+

@@ -1,13 +1,12 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Vaquinha Solidária • Ajude a Maju a se Formar em Medicina",
-  description:
-    "Contribua com a vaquinha solidária da Maria Júlia Gomes Gabriel. Cada doação é um passo decisivo rumo ao tão sonhado diploma de médica na UNIFENAS.",
+  title: "Apoie a Maria Júlia rumo ao Jaleco Branco",
+  description: "Faça sua doação de qualquer valor e participe de uma história de resiliência, superação e muito amor ao cuidado do próximo.",
   openGraph: {
-    title: "Vaquinha Solidária • Ajude a Maju a se Formar em Medicina",
-    description:
-      "Faça sua doação de qualquer valor e ajude a custear os períodos finais de Medicina da Maria Júlia Gomes Gabriel na UNIFENAS.",
+    title: "Apoie a Maria Júlia rumo ao Jaleco Branco",
+    description: "Faça sua doação de qualquer valor e participe de uma história de resiliência, superação e muito amor ao cuidado do próximo.",
+    images: [{ url: "/images/maju-pediatria-bebe-colo.jpeg", width: 1200, height: 630 }],
     type: "website",
     locale: "pt_BR",
   },
