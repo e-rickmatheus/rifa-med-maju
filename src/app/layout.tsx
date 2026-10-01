@@ -2,6 +2,7 @@
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://mariajulia.med.br'),
   title: "Maria Júlia - Futura Médica",
   description: "Conheça minha jornada na medicina e ajude a realizar esse sonho. Faça parte dessa história e contribua com a Rifa ou a Vaquinha!",
   keywords: ["medicina", "maria julia", "unifenas", "vaquinha", "rifa solidária", "dra maju"],
@@ -46,5 +47,6 @@ export default function RootLayout({
     </html>
   );
 }
+
 
 
