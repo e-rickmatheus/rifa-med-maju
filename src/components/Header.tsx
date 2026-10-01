@@ -1,14 +1,15 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Stethoscope, GraduationCap, Lock, Menu, X, MessageCircle } from "lucide-react";
 
 interface HeaderProps {
+  title?: string;
   whatsappNumber?: string;
 }
 
-export default function Header({ whatsappNumber = "5537998427884" }: HeaderProps) {
+export default function Header({ whatsappNumber = "5537998427884", title = "Rifa Solidária" }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showStethoscope, setShowStethoscope] = useState(false);
 
@@ -48,7 +49,7 @@ export default function Header({ whatsappNumber = "5537998427884" }: HeaderProps
             </div>
             <div className="shrink-0 whitespace-nowrap">
               <span className="text-xl sm:text-2xl font-serif font-bold tracking-tight text-pearl block leading-tight">
-                Rifa Solidária
+                {title}
               </span>
               <p className="text-xs sm:text-sm font-sans text-antique-300 flex items-center gap-1.5 mt-0.5">
                 <strong className="font-serif italic font-bold text-antique-300 text-sm sm:text-base tracking-wide">
@@ -164,3 +165,6 @@ export default function Header({ whatsappNumber = "5537998427884" }: HeaderProps
     </header>
   );
 }
+
+
+

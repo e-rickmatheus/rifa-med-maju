@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect } from "react";
 import Header from "@/components/Header";
@@ -12,7 +12,7 @@ export default function HistoriaPage() {
 
   return (
     <main className="min-h-screen flex flex-col bg-[#0b1526] text-pearl font-sans selection:bg-antique-300 selection:text-navy-950">
-      <Header />
+      <Header title="Minha Trajetória" />
       <div className="flex-1 mt-10">
         <StorySection />
       </div>
@@ -20,3 +20,4 @@ export default function HistoriaPage() {
     </main>
   );
 }
+
