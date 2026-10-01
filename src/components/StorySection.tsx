@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import Image from "next/image";
@@ -145,7 +145,7 @@ export default function StorySection() {
                 Cursinho, trabalho, pandemia e a coragem de não desistir
               </h3>
               <p className="text-slate-700 font-sans font-light leading-relaxed text-base sm:text-lg">
-                Em 2017, após concluir o ensino médio, tomei a decisão mais desafiadora da minha vida: vim para Belo Horizonte com o peito cheio de sonhos e muitas incertezas. Enfrentei anos intensos de cursinho, conciliei trabalho e estudos, e vivi as incertezas da pandemia. Mais tarde, precisei voltar para casa quando minha mãe adoeceu.
+                Em 2017, após concluir o ensino médio, tomei a decisão mais desafiadora da minha vida: vim para Belo Horizonte com o peito cheio de sonhos e muitas incertezas. Enfrentei anos intensos de cursinho, conciliei trabalho e estudos, e vivi as incertezas da pandemia. Apesar de todos os obstáculos, a fé no meu propósito de ser médica me manteve firme e dedicada a essa caminhada.
               </p>
               <p className="text-slate-700 font-sans font-light leading-relaxed text-base sm:text-lg">
                 Houve momentos em que o cansaço fazia parecer que o sonho precisaria ficar para trás. Mas em 2007 havia nascido outro propósito na minha vida: meu irmão caçula, que tem o dom de me irritar, mas que me faz ser a irmã mais orgulhosa do mundo ao carregar cada dor e alegria comigo. Ao meu melhor amigo, quero poder devolver, em dobro, todo amor, apoio e todos os sacrifícios que ele fez para me ver chegar até aqui.
@@ -257,3 +257,4 @@ export default function StorySection() {
     </section>
   );
 }
+

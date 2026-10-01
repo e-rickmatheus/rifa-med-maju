@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect } from "react";
 import Image from "next/image";
@@ -129,13 +129,21 @@ export default function HomePage() {
                   <Heart className="w-4 h-4 text-green-400 fill-green-400" />
                   <span>Doar na Vaquinha Livre</span>
                 </Link>
+
+                <Link
+                  href="/historia"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-transparent border border-antique-400/50 hover:bg-antique-400/10 text-antique-300 font-semibold text-sm transition-all"
+                >
+                  <BookOpen className="w-4 h-4 text-antique-400" />
+                  <span>Conheça minha História</span>
+                </Link>
               </div>
 
               {/* Badges de Confiança */}
               <div className="pt-6 border-t border-navy-800 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-400">
                 <div className="flex items-center gap-2">
                   <GraduationCap className="w-4 h-4 text-antique-400" />
-                  <span>Aluna UNIFENAS • Alfenas/MG</span>
+                  <span>Aluna UNIFENAS • Belo Horizonte/MG</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-emerald" />
@@ -422,4 +430,5 @@ export default function HomePage() {
     </main>
   );
 }
+
 

@@ -145,25 +145,48 @@ export function subscribeRaffleSettings(
 export function subscribeCotas(
   callback: (cotasMap: Record<string, Cota>) => void
 ): () => void {
+  let firebaseCotas: Record<string, Cota> = {};
+  let sheetCotas: Record<string, Cota> = {};
+  let isFirebaseActive = isFirebaseConfigured() && db;
+
+  const triggerUpdate = () => {
+    // Mescla os dados do Firebase/Local Storage com os da Planilha Google (priorizando a planilha em caso de divergncia ou simplesmente garantindo que as da planilha estejam aqui)
+    callback({ ...firebaseCotas, ...sheetCotas });
+  };
+
   // Dispara busca na planilha Google em segundo plano para complementar
-  fetchGoogleSheetSales().then((sheetCotas) => {
-    if (Object.keys(sheetCotas).length > 0 && typeof window !== "undefined") {
-      const local = getLocalCotas();
-      let changed = false;
-      Object.keys(sheetCotas).forEach((k) => {
-        if (!local[k]) {
-          local[k] = sheetCotas[k];
-          changed = true;
-        }
-      });
-      if (changed) {
-        localStorage.setItem(LOCAL_STORAGE_COTAS_KEY, JSON.stringify(local));
-        triggerLocalUpdate();
+  fetchGoogleSheetSales().then((fetchedCotas) => {
+    if (Object.keys(fetchedCotas).length > 0) {
+      sheetCotas = fetchedCotas;
+
+      if (isFirebaseActive && db) {
+        Object.keys(fetchedCotas).forEach((k) => {
+          if (!firebaseCotas[k]) {
+            const docRef = doc(db as any, "cotas", k);
+            setDoc(docRef, fetchedCotas[k], { merge: true }).catch(() => {});
+          }
+        });
       }
+
+      if (typeof window !== "undefined") {
+        const local = getLocalCotas();
+        let changed = false;
+        Object.keys(fetchedCotas).forEach((k) => {
+          if (!local[k]) {
+            local[k] = fetchedCotas[k];
+            changed = true;
+          }
+        });
+        if (changed) {
+          localStorage.setItem(LOCAL_STORAGE_COTAS_KEY, JSON.stringify(local));
+          triggerLocalUpdate();
+        }
+      }
+      triggerUpdate();
     }
   }).catch(() => {});
 
-  if (isFirebaseConfigured() && db) {
+  if (isFirebaseActive && db) {
     const cotasCol = collection(db, "cotas");
     const unsubscribe = onSnapshot(
       cotasCol,
@@ -177,11 +200,13 @@ export function subscribeCotas(
             numero: data.numero || numero,
           };
         });
-        callback(cotasMap);
+        firebaseCotas = cotasMap;
+        triggerUpdate();
       },
       (error) => {
         console.warn("Firestore snapshot error em cotas, usando fallback local:", error);
-        callback(getLocalCotas());
+        firebaseCotas = getLocalCotas();
+        triggerUpdate();
       }
     );
     return unsubscribe;
@@ -189,7 +214,8 @@ export function subscribeCotas(
 
   // Fallback Local Storage
   const handleUpdate = () => {
-    callback(getLocalCotas());
+    firebaseCotas = getLocalCotas();
+    triggerUpdate();
   };
   handleUpdate();
   if (typeof window !== "undefined") {
