@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import Image from "next/image";
@@ -154,10 +154,10 @@ export default function StorySection() {
 
             <div className="lg:col-span-4 rounded-2xl overflow-hidden relative aspect-[3/4] sm:aspect-square lg:aspect-[3/4] border border-antique-200/70 shadow-sm">
               <Image
-                src="/images/maju-irmao.jfif"
-                alt="Maria Júlia e seu irmão"
+                src="/images/maju-familia-irmao.png"
+                alt="Maria Júlia, seu irmão e sua mãe"
                 fill
-                className="object-cover object-[center_30%] hover:scale-105 transition-transform duration-700"
+                className="object-cover object-[center_20%] hover:scale-105 transition-transform duration-700"
               />
             </div>
 
