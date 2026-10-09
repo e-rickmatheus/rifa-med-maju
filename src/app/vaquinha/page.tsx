@@ -19,7 +19,6 @@ import {
   ExternalLink,
   ChevronRight,
   ArrowRight,
-  Gift,
   Award,
   MapPin,
   Clock,
@@ -148,7 +147,7 @@ export default function VaquinhaPage() {
             <nav className="flex items-center gap-3 sm:gap-5 text-xs font-semibold">
               <button
                 onClick={handleShareStory}
-                className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-navy-700 text-slate-300 hover:text-white transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-navy-700 text-slate-300 hover:text-white transition-colors"
                 title="Compartilhar história"
               >
                 <Share2 className="w-3.5 h-3.5" />
@@ -156,18 +155,10 @@ export default function VaquinhaPage() {
               </button>
 
               <Link
-                href="/rifa"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primaryBlue/20 border border-primaryBlue/40 text-antique-300 hover:text-white transition-colors"
-              >
-                <Gift className="w-3.5 h-3.5 text-antique-400" />
-                <span>Rifa da Moto (R$ 20)</span>
-              </Link>
-
-              <Link
                 href="/"
-                className="hidden md:inline-flex px-3.5 py-2 rounded-full bg-navy-800 hover:bg-navy-700 text-pearl transition-colors"
+                className="inline-flex items-center px-4 py-2 rounded-full bg-navy-800 hover:bg-navy-700 text-pearl transition-colors"
               >
-                Início
+                ← Início
               </Link>
             </nav>
           </div>
@@ -311,7 +302,7 @@ export default function VaquinhaPage() {
             <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
               <div className="flex items-center gap-2 text-xs uppercase tracking-wider font-bold text-navy-800">
                 <Clock className="w-4 h-4" />
-                <span>2016 a 2020: Luta, Trabalho e a Doença da Mãe</span>
+                <span>2016 a 2020: Luta, Trabalho e Recomeços</span>
               </div>
               <p>
                 Até que, em 2016, terminei o ensino médio. E, no ano seguinte, em 2017, tomei a decisão que mudou completamente a minha trajetória: <strong>vim para Belo Horizonte correr atrás do meu sonho</strong>. Mas a caminhada nunca foi simples.
@@ -320,7 +311,7 @@ export default function VaquinhaPage() {
                 Em BH, fiz cursinho, trabalhei, tentei conciliar responsabilidades, sonhos, diversões. Em alguns momentos, precisei voltar. A vida me levou por caminhos que eu não tinha planejado.
               </p>
               <blockquote className="border-l-4 border-amber-500 pl-4 py-1 italic font-serif text-slate-800 bg-amber-50/50 rounded-r-xl">
-                Veio a pandemia, vieram incertezas, dificuldades e, depois, precisei voltar novamente quando minha mãe adoeceu. Houve momentos em que talvez fosse mais fácil acreditar que aquele sonho precisava ficar para trás. <strong className="text-navy-950 font-bold not-italic">Mas ele nunca ficou.</strong>
+                Veio a pandemia, vieram incertezas, desafios e a necessidade de me reorganizar. Houve momentos em que talvez fosse mais fácil acreditar que aquele sonho precisava ficar para trás. <strong className="text-navy-950 font-bold not-italic">Mas ele nunca ficou.</strong>
               </blockquote>
             </div>
 
@@ -610,61 +601,33 @@ export default function VaquinhaPage() {
             </div>
           </div>
 
-          {/* OPÇÃO 2 & 3: VAKINHA.COM & RIFA DA MOTO */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-            
-            {/* Opção 2: Pela Vakinha.com (Cartão de Crédito ou Boleto) */}
-            <div className="p-8 rounded-3xl bg-navy-900 border border-navy-700 flex flex-col justify-between space-y-4">
-              <div className="space-y-3">
-                <span className="text-[11px] uppercase tracking-wider font-bold text-green-300 bg-green-950 px-3 py-1 rounded-full border border-green-800">
+          {/* OPÇÃO ALTERNATIVA: VAKINHA.COM (CARTÃO DE CRÉDITO OU BOLETO) */}
+          <div className="max-w-2xl mx-auto pt-4">
+            <div className="p-8 rounded-3xl bg-navy-900 border border-navy-700 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+              <div className="space-y-2 text-center sm:text-left">
+                <span className="text-[11px] uppercase tracking-wider font-bold text-green-300 bg-green-950 px-3 py-1 rounded-full border border-green-800 inline-block">
                   Cartão de Crédito ou Boleto
                 </span>
                 <h4 className="text-xl font-serif font-bold text-white">
                   Contribuir via Vakinha.com
                 </h4>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  Se você prefere parcelar no cartão de crédito ou emitir boleto bancário através da plataforma da Vakinha.
+                <p className="text-xs text-slate-300 leading-relaxed max-w-md">
+                  Se você prefere parcelar no cartão de crédito ou emitir boleto bancário através da plataforma oficial da Vakinha.
                 </p>
               </div>
 
-              <div className="pt-4">
+              <div className="shrink-0 w-full sm:w-auto">
                 <a
                   href={vakinhaUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-green-700 hover:bg-green-600 text-white font-semibold text-xs transition-colors"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-green-700 hover:bg-green-600 text-white font-semibold text-xs transition-colors shadow-sm"
                 >
                   <span>Ir para Vakinha.com</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </div>
             </div>
-
-            {/* Opção 3: Rifa da Moto Honda Pop por R$ 20 */}
-            <div className="p-8 rounded-3xl bg-navy-900 border border-navy-700 flex flex-col justify-between space-y-4">
-              <div className="space-y-3">
-                <span className="text-[11px] uppercase tracking-wider font-bold text-antique-300 bg-antique-500/20 px-3 py-1 rounded-full border border-antique-400/40">
-                  Concorra a 01 Moto 0km
-                </span>
-                <h4 className="text-xl font-serif font-bold text-white">
-                  Participar da Rifa da Moto (R$ 20)
-                </h4>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  Adquira uma cota na Rifa Solidária da Maria Júlia, escolha seu número da sorte e concorra a uma Honda Pop!
-                </p>
-              </div>
-
-              <div className="pt-4">
-                <Link
-                  href="/rifa"
-                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-primaryBlue hover:bg-primaryBlue-hover text-white font-semibold text-xs transition-colors"
-                >
-                  <span>Ver Números da Rifa</span>
-                  <ChevronRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-            </div>
-
           </div>
 
           {/* MENSAGEM FINAL DE GRATIDÃO */}
@@ -680,7 +643,7 @@ export default function VaquinhaPage() {
         </div>
       </section>
 
-      {/* Rodapé Oficial (Idêntico ao da Rifa com Créditos Erick Matheus) */}
+      {/* Rodapé Oficial com Créditos Erick Matheus */}
       <Footer mode="vaquinha" whatsappNumber={whatsappNumber} />
     </main>
   );

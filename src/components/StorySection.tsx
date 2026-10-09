@@ -154,8 +154,8 @@ export default function StorySection() {
 
             <div className="lg:col-span-4 rounded-2xl overflow-hidden relative aspect-[3/4] sm:aspect-square lg:aspect-[3/4] border border-antique-200/70 shadow-sm">
               <Image
-                src="/images/maju-familia-irmao.png"
-                alt="Maria Júlia, seu irmão e sua mãe"
+                src="/images/maju-irmao.jpg"
+                alt="Maria Júlia e seu irmão"
                 fill
                 className="object-cover object-[center_20%] hover:scale-105 transition-transform duration-700"
               />

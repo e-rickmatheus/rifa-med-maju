@@ -18,7 +18,7 @@ import {
 } from "@/lib/raffleService";
 import { isFirebaseConfigured } from "@/lib/firebase";
 import { RaffleSettings, Cota } from "@/types/raffle";
-import { CloudOff, Heart, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import Link from "next/link";
 
 export default function RifaPage() {
@@ -57,21 +57,16 @@ export default function RifaPage() {
     <main className="min-h-screen flex flex-col bg-pearl-50 text-navy font-sans selection:bg-antique-200 selection:text-navy">
 
 
-      {/* Faixa superior de navegação rápida entre projetos */}
+      {/* Faixa superior de navegação */}
       <div className="bg-navy-950 text-pearl/80 border-b border-navy-800 py-2 px-4 text-xs font-sans">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <Sparkles className="w-3.5 h-3.5 text-antique-400" />
-            <span>Ação Oficial • Maria Júlia Medicina UNIFENAS</span>
+            <span>Rifa Solidária Oficial • Maria Júlia Medicina UNIFENAS</span>
           </div>
           <div className="flex items-center gap-4 text-[11px] uppercase tracking-wider">
             <Link href="/" className="hover:text-pearl transition-colors">
-              ← Perfil Oficial
-            </Link>
-            <span className="text-navy-700">•</span>
-            <Link href="/vaquinha" className="text-antique-300 hover:text-pearl transition-colors flex items-center gap-1 font-semibold">
-              <Heart className="w-3 h-3 text-red-400 fill-red-400" />
-              Doar na Vaquinha
+              ← Início
             </Link>
           </div>
         </div>

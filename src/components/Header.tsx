@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -71,10 +71,6 @@ export default function Header({ whatsappNumber = "5537998427884", title = "Rifa
             <Link href="/rifa" className="hover:text-pearl transition-colors text-antique-300 font-semibold">
               Rifa da Moto
             </Link>
-            <Link href="/vaquinha" className="text-green-300 hover:text-green-200 transition-colors flex items-center gap-1 font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
-              Vaquinha
-            </Link>
             <Link href="/rifa#como-funciona" className="hover:text-pearl transition-colors">
               Como Funciona
             </Link>
@@ -127,13 +123,6 @@ export default function Header({ whatsappNumber = "5537998427884", title = "Rifa
             className="block text-antique-300 font-semibold py-1"
           >
             Rifa Solidária da Moto (R$ 20)
-          </Link>
-          <Link
-            href="/vaquinha"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block text-green-300 font-semibold py-1"
-          >
-            Vaquinha Solidária (Doação Livre)
           </Link>
           <Link
             href="/rifa#como-funciona"
