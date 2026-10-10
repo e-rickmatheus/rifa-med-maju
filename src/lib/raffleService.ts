@@ -53,7 +53,9 @@ export function normalizeCotasMap(
   for (const [key, cota] of Object.entries(rawMap || {})) {
     if (!cota || cota.status !== "vendido") continue;
     const numInt = parseInt(cota.numero || key, 10);
-    const canonicalKey = !isNaN(numInt) ? formatCotaNumber(numInt, totalNumbers) : key;
+    // Cotas começam estritamente em 1 até totalNumbers. A cota 0 / 0000 não existe na rifa
+    if (isNaN(numInt) || numInt <= 0 || numInt > totalNumbers) continue;
+    const canonicalKey = formatCotaNumber(numInt, totalNumbers);
     normalized[canonicalKey] = {
       ...cota,
       numero: canonicalKey,
@@ -88,6 +90,10 @@ function getLocalCotas(): Record<string, Cota> {
     }
     const parsed = JSON.parse(raw);
     const merged = { ...INITIAL_DEMO_COTAS, ...parsed };
+    delete merged["0"];
+    delete merged["00"];
+    delete merged["000"];
+    delete merged["0000"];
     const normalized = normalizeCotasMap(merged);
     return normalized;
   } catch {
@@ -260,7 +266,10 @@ export async function saveCotaSale(
   totalNumbers: number = 2000
 ): Promise<void> {
   const numInt = parseInt(numero, 10);
-  const canonical = !isNaN(numInt) ? formatCotaNumber(numInt, totalNumbers) : numero.trim();
+  if (isNaN(numInt) || numInt <= 0 || numInt > totalNumbers) {
+    throw new Error(`Número inválido. A rifa aceita apenas cotas de 1 a ${totalNumbers}. A cota 0 não existe.`);
+  }
+  const canonical = formatCotaNumber(numInt, totalNumbers);
 
   const cotaData: Cota = {
     numero: canonical,

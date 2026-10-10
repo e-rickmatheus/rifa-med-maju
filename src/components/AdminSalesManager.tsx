@@ -40,6 +40,7 @@ export default function AdminSalesManager({
     Object.values(cotasMap).forEach((c) => {
       if (c && c.status === "vendido") {
         const numInt = parseInt(c.numero, 10);
+        if (numInt <= 0) return;
         const canonicalKey = !isNaN(numInt) ? formatCotaNumber(numInt, totalNumbers) : c.numero;
         if (!unique.has(canonicalKey)) {
           unique.set(canonicalKey, { ...c, numero: canonicalKey });
@@ -107,11 +108,17 @@ export default function AdminSalesManager({
 
     setSaving(true);
     try {
-      // Formata com zeros à esquerda
+      // Valida e formata com zeros à esquerda
       const numInt = parseInt(editingNumero, 10);
-      const formattedNum = isNaN(numInt)
-        ? editingNumero.trim()
-        : formatCotaNumber(numInt, totalNumbers);
+      if (isNaN(numInt) || numInt <= 0 || numInt > totalNumbers) {
+        setFeedback({
+          type: "error",
+          message: `O número da cota deve ser entre 1 e ${totalNumbers}. A cota 0 não existe na rifa.`,
+        });
+        setSaving(false);
+        return;
+      }
+      const formattedNum = formatCotaNumber(numInt, totalNumbers);
 
       await saveCotaSale(formattedNum, nomeComprador, telefone, undefined, totalNumbers);
       setFeedback({

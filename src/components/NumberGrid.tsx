@@ -42,11 +42,12 @@ export default function NumberGrid({
 
   const allNumbers = useMemo(() => {
     return Array.from({ length: totalNumbers }, (_, i) => {
-      const numStr = formatCotaNumber(i, totalNumbers);
-      const cota = cotasMap[numStr] || cotasMap[String(i)];
+      const cotaNum = i + 1; // Cotas começam em 1 (ex: 0001 até 2000), não existe cota 0000
+      const numStr = formatCotaNumber(cotaNum, totalNumbers);
+      const cota = cotasMap[numStr] || cotasMap[String(cotaNum)];
       const isSold = cota?.status === "vendido";
       return {
-        index: i,
+        index: cotaNum,
         numero: numStr,
         isSold,
         cota,
@@ -59,8 +60,10 @@ export default function NumberGrid({
     Object.values(cotasMap).forEach((c) => {
       if (c?.status === "vendido") {
         const numInt = parseInt(c.numero, 10);
-        const canonical = !isNaN(numInt) ? formatCotaNumber(numInt, totalNumbers) : c.numero;
-        set.add(canonical);
+        if (!isNaN(numInt) && numInt >= 1 && numInt <= totalNumbers) {
+          const canonical = formatCotaNumber(numInt, totalNumbers);
+          set.add(canonical);
+        }
       }
     });
     return set.size;
@@ -203,9 +206,9 @@ export default function NumberGrid({
               <span className="text-xs text-slate-500 font-sans">Visualizar bloco de 100 cotas:</span>
               <div className="flex flex-wrap items-center gap-1.5">
                 {Array.from({ length: totalBlocks }, (_, blockIdx) => {
-                  const startNum = formatCotaNumber(blockIdx * blockSize, totalNumbers);
+                  const startNum = formatCotaNumber(blockIdx * blockSize + 1, totalNumbers);
                   const endNum = formatCotaNumber(
-                    Math.min((blockIdx + 1) * blockSize - 1, totalNumbers - 1),
+                    Math.min((blockIdx + 1) * blockSize, totalNumbers),
                     totalNumbers
                   );
                   const isActive = selectedBlock === blockIdx;

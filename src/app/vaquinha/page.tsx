@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import confetti from "canvas-confetti";
 import Footer from "@/components/Footer";
+import { trackEvent } from "@/lib/analytics";
 import {
   Heart,
   Copy,
@@ -49,6 +50,11 @@ export default function VaquinhaPage() {
     if (typeof navigator !== "undefined" && navigator.clipboard) {
       navigator.clipboard.writeText(pixKey);
       setCopiedPix(true);
+      trackEvent({
+        action: "copiar_chave_pix",
+        category: "conversao",
+        label: "Chave Pix Vaquinha",
+      });
       confetti({
         particleCount: 80,
         spread: 70,
@@ -59,6 +65,11 @@ export default function VaquinhaPage() {
   };
 
   const handleShareStory = () => {
+    trackEvent({
+      action: "compartilhar_historia",
+      category: "engajamento",
+      label: "Compartilhar Vaquinha",
+    });
     if (typeof window !== "undefined") {
       const shareUrl = window.location.href;
       const text =

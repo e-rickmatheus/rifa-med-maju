@@ -74,7 +74,7 @@ export async function fetchGoogleSheetSales(totalNumbers: number = 2000): Promis
 
       const rawCota = cleanCols[0];
       const cotaNumInt = parseInt(rawCota, 10);
-      if (isNaN(cotaNumInt)) continue;
+      if (isNaN(cotaNumInt) || cotaNumInt <= 0) continue;
 
       const status = cleanCols[1] ? cleanCols[1].toLowerCase() : "";
       const nome = cleanCols[2] || "";

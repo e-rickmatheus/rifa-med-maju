@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Copy, Check, Phone, User, DollarSign, MessageCircle, ShieldCheck, Building2 } from "lucide-react";
 import confetti from "canvas-confetti";
 import { formatCurrency } from "@/lib/utils";
+import { trackEvent } from "@/lib/analytics";
 
 // Componente da Logo Oficial do Banco Itaú em SVG
 function ItauLogo({ className = "w-7 h-7" }: { className?: string }) {
@@ -54,6 +55,11 @@ export default function PixCard({
   const handleCopy = () => {
     navigator.clipboard.writeText(pixKey);
     setCopied(true);
+    trackEvent({
+      action: "copiar_chave_pix",
+      category: "conversao",
+      label: "Chave Pix Rifa Honda Pop",
+    });
 
     try {
       confetti({
@@ -210,6 +216,13 @@ export default function PixCard({
               href={whatsappConfirmationUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => {
+                trackEvent({
+                  action: "clique_whatsapp",
+                  category: "contato",
+                  label: "Envio de Comprovante Rifa",
+                });
+              }}
               className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-emerald hover:bg-emerald-700 text-white font-sans font-semibold text-sm transition-all duration-300 w-full sm:w-auto shadow-sm"
             >
               <MessageCircle className="w-4 h-4" />

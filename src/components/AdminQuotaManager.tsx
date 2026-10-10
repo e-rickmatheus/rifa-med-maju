@@ -142,7 +142,7 @@ export default function AdminQuotaManager({ currentTotal }: AdminQuotaManagerPro
             </button>
           </form>
           <p className="text-[11px] text-slate-400 mt-1.5">
-            Ao expandir, a vitrine pública passa a exibir imediatamente os novos números (ex: se definir 1500, renderiza de 0000 a 1499).
+            Ao expandir, a vitrine pública passa a exibir imediatamente os novos números (ex: se definir 1500, renderiza de 0001 a 1500).
           </p>
         </div>
       </div>
